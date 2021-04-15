@@ -1,13 +1,12 @@
 package cs5004.animator;
 
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import cs5004.animator.view.TextView;
+
 import cs5004.animator.model.IModelImpl;
-import cs5004.animator.util.AnimationBuilder;
 import cs5004.animator.util.AnimationReader;
+import cs5004.animator.view.TextView;
 
 public final class EasyAnimator {
 
@@ -17,7 +16,7 @@ public final class EasyAnimator {
     File output = null;
     int speedValue;
     AnimationReader reader = new AnimationReader();
-    AnimationBuilder<IModelImpl> builder = new Builder();
+    IModelImpl.Builder builder = new IModelImpl.Builder();
 
     for (int i = 0; i < args.length; i++) {
       if (args[i].equalsIgnoreCase("-in")) {
@@ -56,7 +55,7 @@ public final class EasyAnimator {
 
 
 
-    IModelImpl model = reader.parseFile(input, reader);
+    IModelImpl model = reader.parseFile(, builder);
 
 
     if (viewType.equals("text")) {

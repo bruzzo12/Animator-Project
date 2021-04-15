@@ -2,6 +2,8 @@ package cs5004.animator.view;
 
 import java.awt.event.ActionListener;
 
+import cs5004.animator.model.IModelImpl;
+
 public class SVGView implements IView {
   @Override
   public void makeVisible() {
@@ -22,4 +24,20 @@ public class SVGView implements IView {
   public void refresh() {
 
   }
+
+  @Override
+  public void setShapes() {
+
+  }
+
+  @Override
+  public void getShapeType() {
+
+  }
+
+  @Override
+  public String getText(IModelImpl model) {
+    return null;
+  }
+
 }

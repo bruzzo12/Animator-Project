@@ -1,7 +1,5 @@
 package cs5004.animator.model;
 
-import java.util.ArrayList;
-
 /**
  * This interface contains all operations that all types of shapes should support.
  */
@@ -122,5 +120,4 @@ public interface Shape {
    */
   AbstractShape.ShapeType getShapeType();
 
-public ArrayList<Transformation> getTransformationList();
 }

@@ -1,6 +1,5 @@
 package cs5004.animator.view;
 
-import java.awt.*;
 import java.awt.event.ActionListener;
 
 import cs5004.animator.model.IModelImpl;
@@ -22,7 +21,6 @@ public class TextView implements IView {
 
   @Override
   public String getText(IModelImpl model) {
-
     return model.toString();
   }
 
@@ -53,9 +51,10 @@ public class TextView implements IView {
   }
 
   @Override
-  public void getType() {
+  public void getShapeType() {
 
   }
+
 
 }
 

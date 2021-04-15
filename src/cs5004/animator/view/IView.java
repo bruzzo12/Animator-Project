@@ -2,6 +2,8 @@ package cs5004.animator.view;
 
 import java.awt.event.ActionListener;
 
+import cs5004.animator.model.IModelImpl;
+
 
 /**
  * The view interface. To motivate the methods here
@@ -45,7 +47,7 @@ public interface IView {
   /**
    * Gets the type of the shape so the view can draw it.
    */
-  void getType();
+  void getShapeType();
 
   /**
    * Gets the text of the animation.
