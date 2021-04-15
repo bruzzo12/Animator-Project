@@ -245,7 +245,7 @@ public final class IModelImpl implements IModel {
         if (shape.getName().equals(name)
                 && !shape.getDeclared()) {
           switch (shape.getType().toUpperCase()) {
-            case "OVAL":
+            case "ELLIPSE":
               Shape o = new Oval(w1 / 2, h1 / 2, x1, y1, r1, g1, b1, t1, t2, name);
               shape.addShape(o);
               model.addShape(o);
