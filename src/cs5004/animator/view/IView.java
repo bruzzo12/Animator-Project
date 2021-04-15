@@ -48,7 +48,8 @@ public interface IView {
   void getType();
 
   /**
-   * Sets the text of the animation.
+   * Gets the text of the animation.
+   * @param model is the model who is being represented as text
    */
   void setText();
 
