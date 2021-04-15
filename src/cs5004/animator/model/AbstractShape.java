@@ -131,10 +131,6 @@ public abstract class AbstractShape implements Shape {
 
   @Override
   public Transformation move(double newX, double newY, int timeStart, int timeEnd) {
-    if (newX < 0 || newY < 0 || (this.reference.getX() == newX && this.reference.getY() == newY)) {
-      throw new IllegalArgumentException("Invalid location or time period for movement. "
-              + "Time span must be within shape's time span!");
-    }
     Transformation moveTransformation = new Transformation(this, TransformationType.MOVE,
             newX, newY, timeStart, timeEnd);
 

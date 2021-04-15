@@ -160,5 +160,5 @@ public interface IModel {
    * @param width  the width of the convas.
    * @param height the height of the canvas.
    */
-  void setBounds(int x, int y, int width, int height)
+  void setBounds(int x, int y, int width, int height);
 }

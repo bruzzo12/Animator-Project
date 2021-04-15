@@ -15,7 +15,7 @@ public final class IModelImpl implements IModel {
   protected ArrayList<Shape> shapes;
   protected ArrayList<Transformation> transformationList;
   protected int shapeCount;
-  protected Point2D upperleft;
+  protected Point2D upperLeft;
   protected int width;
   protected int height;
   /**
@@ -25,6 +25,7 @@ public final class IModelImpl implements IModel {
     this.shapes = new ArrayList<>();
     this.transformationList = new ArrayList<>();
     this.shapeCount = 0;
+    this.upperLeft = new Point2D(0,0);
   }
 
   @Override
@@ -148,7 +149,7 @@ public final class IModelImpl implements IModel {
   }
 
   public void setBounds(int x, int y, int width, int height) {
-    this.upperleft.setXandY((double) x, (double) y);
+    this.upperLeft.setXandY((double) x, (double) y);
     this.width = width;
     this.height = height;
   }

@@ -2,6 +2,8 @@ package cs5004.animator;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 
 import cs5004.animator.model.IModelImpl;
@@ -10,24 +12,25 @@ import cs5004.animator.view.TextView;
 
 public final class EasyAnimator {
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws FileNotFoundException {
     String viewType = "";
     File input = null;
     File output = null;
-    int speedValue;
+    int speedValue = 1;
     AnimationReader reader = new AnimationReader();
     IModelImpl.Builder builder = new IModelImpl.Builder();
 
     for (int i = 0; i < args.length; i++) {
       if (args[i].equalsIgnoreCase("-in")) {
-        input = new File(args[i++]);
+        input = new File(args[++i]);
+        System.out.println(input);
         if (!input.isFile()) {
           throw new IllegalArgumentException("No readable input file.");
         }
       }
 
       if (args[i].equalsIgnoreCase("-view")) {
-        switch (args[i++]) {
+        switch (args[++i]) {
           case "visual":
             viewType = "visual";
             break;
@@ -43,20 +46,19 @@ public final class EasyAnimator {
       }
       if (args[i].equalsIgnoreCase("-speed")) {
         try {
-          speedValue = Integer.parseInt(args[i++]);
+          speedValue = Integer.parseInt(args[++i]);
         } catch (NumberFormatException e) {
           System.out.println("Speed must be an integer.");
         }
       }
       if (args[i].equalsIgnoreCase("-out")) {
-        output = new File(args[i++]);
+        output = new File(args[++i]);
       }
     }
 
 
-
-    IModelImpl model = reader.parseFile(, builder);
-
+    Readable readable = new FileReader(input);
+    IModelImpl model = (IModelImpl) reader.parseFile(readable, builder);
 
     if (viewType.equals("text")) {
       TextView view = new TextView();
