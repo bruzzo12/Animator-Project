@@ -58,16 +58,6 @@ public class Rectangle extends AbstractShape {
     return this.height;
   }
 
-  @Override
-  public double area() {
-    return this.width * this.height;
-  }
-
-  @Override
-  public double perimeter() {
-    return 2 * (this.width + this.height);
-  }
-
   /**
    * Transforms the rectangle by giving it new width and/or height values. An
    * IllegalArgumentException is thrown if the width or height is less than zero or if both values
@@ -82,7 +72,8 @@ public class Rectangle extends AbstractShape {
    *                                  than zero.
    */
   public Transformation changeSize(double newWidth, double newHeight, int timeStart, int timeEnd) {
-    if (newHeight == this.getHeight() && newWidth == this.getWidth()) {
+    if (newHeight == this.getHeight() && newWidth == this.getWidth()
+            && this.getDisappearance() == timeEnd) {
       throw new IllegalArgumentException("Height and Width of transformation cannot be "
               + "the same as original shape!");
     }

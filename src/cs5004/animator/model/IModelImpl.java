@@ -262,10 +262,10 @@ public final class IModelImpl implements IModel {
           if (r1 != r2 || b1 != b2 || g1 != g2) {
             model.addColorTransformation(animatedShape, 2, b2, g2, t1, t2);
           }
-          if (y1 != y2 || x1 != x2) {
+          if (y1 != y2 || x1 != x2 ) {
             model.addMoveTransformation(animatedShape, x2, y2, t1, t2);
           }
-          if (w1 != w2 || h1 != h2) {
+          if (w1 != w2 || h1 != h2 ) {
             if (animatedShape.getShapeType() == ShapeType.RECTANGLE) {
               model.addRectangleSizeTransformation(((Rectangle) animatedShape), w2, h2, t1, t2);
             }
@@ -273,6 +273,8 @@ public final class IModelImpl implements IModel {
               model.addOvalSizeTransformation(((Oval) animatedShape), w2 / 2,
                       h2 / 2, t1, t2);
             }
+          } else if (t1 != t2) {
+            animatedShape.setDisappearance(t2);
           }
         }
     }

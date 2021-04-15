@@ -55,6 +55,12 @@ public interface Shape {
   int getDisappearance();
 
   /**
+   * Sets the disappearance time of the shape.
+   * @param newEnd time shape disappears.
+   */
+  void setDisappearance(int newEnd);
+
+  /**
    * Get string shape of the shape.
    *
    * @return shape of the shape as string
@@ -62,27 +68,7 @@ public interface Shape {
   String getName();
 
 
-  /**
-   * Returns the distance of this shape from the origin. The distance is measured from whatever
-   * reference position a shape is (e.g. a center for a circle)
-   *
-   * @return the distance from the origin
-   */
-  double distanceFromOrigin();
 
-  /**
-   * Computes and returns the area of this shape.
-   *
-   * @return the area of the shape
-   */
-  double area();
-
-  /**
-   * Computes and returns the perimeter of this shape.
-   *
-   * @return the perimeter of the shape
-   */
-  double perimeter();
 
   /**
    * Changes the color of the shape by adjusting the integer values of red, green and blue. Throws

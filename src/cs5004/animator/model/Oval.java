@@ -39,16 +39,6 @@ public class Oval extends AbstractShape {
     this.transformationList = new ArrayList<>();
   }
 
-  @Override
-  public double area() {
-    return radiusX * radiusY * Math.PI;
-  }
-
-  @Override
-  public double perimeter() {
-    return 2 * Math.PI * Math.sqrt((radiusX * radiusX + radiusY * radiusY) / 2);
-  }
-
   /**
    * Creates a transformation that changes the Oval's size. An IllegalArgumentException is thrown if
    * the radius is equal to the original value or if it's less than zero.
@@ -63,7 +53,7 @@ public class Oval extends AbstractShape {
    */
   public Transformation changeSize(double radiusX, double radiusY, int timeStart, int timeEnd) {
     if (radiusX < 0 || radiusY < 0 || radiusX == radiusY || this.radiusX == radiusX
-            && this.radiusY == radiusY) {
+            && this.radiusY == radiusY && this.getDisappearance() == timeEnd) {
       throw new IllegalArgumentException("RadiusX and radiusY must be positive and not the same as"
               + "original values!");
     }

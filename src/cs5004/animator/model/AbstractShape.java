@@ -8,6 +8,8 @@ import java.util.ArrayList;
 public abstract class AbstractShape implements Shape {
   protected Point2D reference;
   protected Color color;
+  protected int timeAppears;
+  protected int timeDisappears;
   protected Ticker time;
   protected String name;
   protected ShapeType shapeType;
@@ -61,6 +63,8 @@ public abstract class AbstractShape implements Shape {
                        String name) {
     this.reference = new Point2D(startXCoordinate, startYCoordinate);
     this.color = new Color(red, green, blue);
+    this.timeAppears = timeAppears;
+    this.timeDisappears = timeDisappears;
     this.time = new Ticker(timeAppears, timeDisappears);
     this.name = name;
   }
@@ -101,6 +105,9 @@ public abstract class AbstractShape implements Shape {
   }
 
   @Override
+  public void setDisappearance(int newEnd) { this.time = new Ticker(timeAppears, newEnd); }
+
+  @Override
   public String getName() {
     return this.name;
   }
@@ -111,14 +118,9 @@ public abstract class AbstractShape implements Shape {
   }
 
   @Override
-  public double distanceFromOrigin() {
-    return reference.distToOrigin();
-  }
-
-  @Override
   public Transformation changeColor(int red, int green, int blue, int timeStart, int timeEnd) {
     if (this.color.red == red && this.color.green == green
-            && this.color.blue == blue) {
+            && this.color.blue == blue && this.getDisappearance() == timeEnd) {
       throw new IllegalArgumentException("Color values can't be less than zero or all the same as"
               + "original values! Time span must be within shape's time span!");
     }
