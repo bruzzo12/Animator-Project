@@ -23,15 +23,14 @@ public class Oval extends AbstractShape {
    * @param timeAppears      The time the object is set to appear on the display.
    * @param timeDisappears   The time the object is set to disappear on the display.
    * @param name             string shape of the shape.
-   * @throws IllegalArgumentException for radiusX and radiusY values less than zero or equal to each
-   *                                  other.
+   * @throws IllegalArgumentException if radiusX or radiusY are less than or equal to zero.
+   *
    */
   public Oval(double radiusX, double radiusY, double startXCoordinate, double startYCoordinate,
               int red, int green, int blue, int timeAppears, int timeDisappears, String name) {
     super(startXCoordinate, startYCoordinate, red, green, blue, timeAppears, timeDisappears, name);
-    if (radiusX < 0 || radiusY < 0 || radiusX == radiusY) {
-      throw new IllegalArgumentException("RadiusX and radiusY must be positive and not the same as"
-              + "each other!");
+    if (radiusX <= 0 || radiusY <= 0) {
+      throw new IllegalArgumentException("Radius cant be less than or equal to zero.");
     }
     this.radiusX = radiusX;
     this.radiusY = radiusY;

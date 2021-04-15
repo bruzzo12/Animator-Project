@@ -249,11 +249,13 @@ public final class IModelImpl implements IModel {
               Shape o = new Oval(w1 / 2, h1 / 2, x1, y1, r1, g1, b1, t1, t2, name);
               shape.addShape(o);
               model.addShape(o);
+              break;
             case "RECTANGLE":
               Shape r = new Rectangle(w1, h1, x1, y1,
                       r1, g1, b1, t1, t2, name);
               shape.addShape(r);
               model.addShape(r);
+              break;
           }
         }
         if (shape.getName().equals(name)
