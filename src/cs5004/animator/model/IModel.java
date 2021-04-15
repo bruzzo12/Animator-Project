@@ -151,4 +151,14 @@ public interface IModel {
    * @return count of shapes in the animation.
    */
   int getShapeCount();
+
+  /**
+   * Sets the bounds of the animation canvas.
+   *
+   * @param x      the x coordinate of the topleft corner.
+   * @param y      the y coordinate of the topleft corner.
+   * @param width  the width of the convas.
+   * @param height the height of the canvas.
+   */
+  void setBounds(int x, int y, int width, int height)
 }

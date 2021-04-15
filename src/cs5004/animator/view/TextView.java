@@ -1,5 +1,6 @@
 package cs5004.animator.view;
 
+import java.awt.*;
 import java.awt.event.ActionListener;
 
 import cs5004.animator.model.IModelImpl;
@@ -24,6 +25,8 @@ public class TextView implements IView {
 
     return model.toString();
   }
+
+
 
   @Override
   public void makeVisible() {

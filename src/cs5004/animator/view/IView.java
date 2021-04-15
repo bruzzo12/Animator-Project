@@ -51,6 +51,6 @@ public interface IView {
    * Gets the text of the animation.
    * @param model is the model who is being represented as text
    */
-  void setText();
+  String getText(IModelImpl model);
 
 }

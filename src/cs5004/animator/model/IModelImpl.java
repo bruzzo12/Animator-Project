@@ -15,7 +15,9 @@ public final class IModelImpl implements IModel {
   protected ArrayList<Shape> shapes;
   protected ArrayList<Transformation> transformationList;
   protected int shapeCount;
-
+  protected Point2D upperleft;
+  protected int width;
+  protected int height;
   /**
    * Constructs an animation cs5004.animator.model that starts with an empty animation screen.
    */
@@ -145,6 +147,11 @@ public final class IModelImpl implements IModel {
     return shapes.size();
   }
 
+  public void setBounds(int x, int y, int width, int height) {
+    this.upperleft.setXandY((double) x, (double) y);
+    this.width = width;
+    this.height = height;
+  }
 
 
   /**
@@ -195,12 +202,8 @@ public final class IModelImpl implements IModel {
    * Builder class for ModelImpl.
    */
   public static final class Builder implements AnimationBuilder<IModel> {
-    private IModelImpl model;
-    private ArrayList<DeclaredShape> declaredShapeList;
-    private Point2D topLeft;
-    private Point2D bottomLeft;
-    private Point2D topRight;
-    private Point2D bottomRight;
+    private final IModelImpl model;
+    private final ArrayList<DeclaredShape> declaredShapeList;
 
     /**
      * Constructs a Builder object that contains an IModelImpl and list of declared shapes.
@@ -209,6 +212,7 @@ public final class IModelImpl implements IModel {
       this.model = new IModelImpl();
       this.declaredShapeList = new ArrayList<DeclaredShape>();
     }
+
     @Override
     public IModel build() {
       return this.model;
@@ -219,10 +223,7 @@ public final class IModelImpl implements IModel {
       if (x < 0 || y < 0 || width < 0 || height < 0) {
         throw new IllegalArgumentException("All values must be greater than 0.");
       }
-      topLeft = new Point2D(x, y);
-      bottomLeft = new Point2D(x, y + height);
-      topRight = new Point2D(x + width, y);
-      bottomRight = new Point2D(x + width, y + height);
+      this.model.setBounds(x,y,width,height);
       return this;
     }
 
@@ -239,7 +240,6 @@ public final class IModelImpl implements IModel {
     public AnimationBuilder<IModel> addMotion(String name, int t1, int x1, int y1, int w1, int h1,
                                               int r1, int g1, int b1, int t2, int x2, int y2,
                                               int w2, int h2, int r2, int g2, int b2) {
-
       for (DeclaredShape shape:declaredShapeList) {
         if (shape.getName().equals(name)
                 && !shape.getDeclared()) {
