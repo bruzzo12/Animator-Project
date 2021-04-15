@@ -1,7 +1,9 @@
 package cs5004.animator.view;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.*;
 
@@ -11,17 +13,20 @@ public class VisualView extends JFrame implements IView {
   private DrawPanel drawPanel;
   private JTextField input;
   private JLabel display;
+  private Timer timer;
+  private IView view;
 
 
   public VisualView() {
     super();
+    view = this;
     this.setTitle("ModelAnimator!");
     this.setSize(500, 500);
     this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
     this.setLayout(new BorderLayout());
     drawPanel = new DrawPanel();
-    drawPanel.setPreferredSize(500,500);
+    drawPanel.setPreferredSize(500, 500);
     this.add(drawPanel, BorderLayout.CENTER);
 
     buttonPanel = new JPanel();
@@ -31,7 +36,21 @@ public class VisualView extends JFrame implements IView {
     input = new JTextField(15);
     buttonPanel.add(input);
 
-    commandButton = new JButton("Execute Operation");
+    timer = new Timer(1000, new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        view.refresh();
+      }
+    });
+
+    commandButton = new JButton("Start Animation");
+    setCommandButtonListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        timer.start();
+        // Code/methods that loads and run the animations.
+      }
+    });
   }
 
   @Override
@@ -51,7 +70,7 @@ public class VisualView extends JFrame implements IView {
 
   @Override
   public void refresh() {
-
+    this.repaint();
   }
 
   @Override
