@@ -284,9 +284,12 @@ public class Transformation {
 
     if (this.type == TransformationType.SIZE
             && this.shape.getShapeType() == AbstractShape.ShapeType.RECTANGLE) {
+      Rectangle shape = (Rectangle)this.shape;
       string = string + String.format("Shape %s scales from Width: %.1f, Height: %.1f to "
-                      + "from t=%d to t=%d\n", this.shape.getName(), newWidth,
-              newHeight, sizeChangePeriod.getRangeStart(), sizeChangePeriod.getRangeEnd());
+                      + "Width: %.1f, Height: %.1f "
+                      + "from t=%d to t=%d\n", this.shape.getName(),shape.getWidth(),
+              shape.getHeight(), newWidth, newHeight, sizeChangePeriod.getRangeStart(),
+              sizeChangePeriod.getRangeEnd());
     }
 
     if (this.type == TransformationType.SIZE
