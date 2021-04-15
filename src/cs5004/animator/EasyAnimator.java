@@ -8,6 +8,7 @@ import java.io.FileWriter;
 
 import cs5004.animator.model.IModelImpl;
 import cs5004.animator.util.AnimationReader;
+import cs5004.animator.view.SVGView;
 import cs5004.animator.view.TextView;
 
 public final class EasyAnimator {
@@ -79,6 +80,27 @@ public final class EasyAnimator {
           }
         }
        }
+    }
+
+    if (viewType.equals("svg")) {
+      SVGView view = new SVGView();
+      if (output == null) {
+        System.out.println("Must specify output file");
+      } else {
+        BufferedWriter writer = null;
+        try {
+          writer = new BufferedWriter(new FileWriter(output,true));
+          writer.write(view.getText(model));
+        } catch (Exception e) {
+          e.printStackTrace();
+        } finally {
+          try {
+            writer.close();
+          } catch (Exception e) {
+            System.err.println(e);
+          }
+        }
+      }
     }
   }
 }
