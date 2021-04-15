@@ -12,12 +12,8 @@ public class Point2D {
    *
    * @param x the x-coordinate of this point
    * @param y the y-coordinate of this point
-   * @throws IllegalArgumentException if coordinate values are less than zero.
    */
   public Point2D(double x, double y) throws IllegalArgumentException {
-    if (x < 0 || y < 0) {
-      throw new IllegalArgumentException("Parameters for coordinates may not be negative");
-    }
     this.x = x;
     this.y = y;
   }
