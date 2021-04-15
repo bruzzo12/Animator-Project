@@ -16,8 +16,8 @@ public class Ticker {
    * @throws IllegalArgumentException when either time is less than zero or are equal to each other
    */
   public Ticker(int rangeStart, int rangeEnd) {
-    if (rangeStart < 0 || rangeEnd < 0 || rangeStart == rangeEnd) {
-      throw new IllegalArgumentException("Parameters may not be less than zero or equal.");
+    if (rangeStart < 0 || rangeEnd < 0 ) {
+      throw new IllegalArgumentException("Parameters may not be less than zero.");
     }
     this.rangeStart = rangeStart;
     this.rangeEnd = rangeEnd;
