@@ -65,4 +65,4 @@ public class VisualView extends JFrame implements IView {
 
   }
 }
-//test
+///test
