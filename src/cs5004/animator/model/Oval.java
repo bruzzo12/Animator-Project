@@ -64,6 +64,22 @@ public class Oval extends AbstractShape {
     return sizeTransformation;
   }
 
+  /**
+   * Returns radius X
+   * @return radius x
+   */
+  public double getRX() {
+    return this.radiusX;
+  }
+
+  /**
+   * Returns radius Y
+   * @return radius Y
+   */
+  public double getRY() {
+    return this.radiusY;
+  }
+
   @Override
   public String toString() {
     return String.format("Name: %s\nType: oval\nCenter (%.1f,%.1f), X radius: %.1f, "
