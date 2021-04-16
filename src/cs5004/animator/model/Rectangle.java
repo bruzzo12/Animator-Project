@@ -8,8 +8,9 @@ import java.util.ArrayList;
  * interface
  */
 public class Rectangle extends AbstractShape {
-  protected final double width;
-  protected final double height;
+  protected double width;
+  protected double height;
+  protected Rectangle copy;
 
   /**
    * Constructs a rectangle object with the given location of it's upper-left corner and dimensions.
@@ -40,6 +41,12 @@ public class Rectangle extends AbstractShape {
     this.transformationList = new ArrayList<>();
   }
 
+  @Override
+  public void copy() {
+    this.copy = new Rectangle(this.width, this.height, this.getX(), this.getY(), this.getRed(),
+            this.getGreen(), this.getBlue(), this.timeAppears, this.timeDisappears,name);
+  }
+
   /**
    * Returns the width of the rectangle.
    *
@@ -59,6 +66,22 @@ public class Rectangle extends AbstractShape {
   }
 
   /**
+   * Sets the width of the rectangle.
+   * @param width the height value
+   */
+  public void setWidth(double width) {
+    this.width = width;
+  }
+
+  /**
+   * Sets the height of the rectangle.
+   * @param height the height value
+   */
+  public void setHeight(double height) {
+    this.height = height;
+  }
+
+  /**
    * Transforms the rectangle by giving it new width and/or height values. An
    * IllegalArgumentException is thrown if the width or height is less than zero or if both values
    * are the same as the original rectangle.
@@ -72,17 +95,47 @@ public class Rectangle extends AbstractShape {
    *                                  than zero.
    */
   public Transformation changeSize(double newWidth, double newHeight, int timeStart, int timeEnd) {
-    if (newHeight == this.getHeight() && newWidth == this.getWidth()
-            && this.getDisappearance() == timeEnd) {
-      throw new IllegalArgumentException("Height and Width of transformation cannot be "
+    if ((newHeight < 0 || newWidth < 0) || newHeight == this.copy.height
+            && newWidth == this.copy.width) {
+      throw new IllegalArgumentException("Height and Width must be positive and cannot be "
               + "the same as original shape!");
     }
     Transformation sizeTransformation = new Transformation(this, TransformationType.SIZE,
-            newHeight, newWidth, null, null, new Ticker(timeStart, timeEnd),
-            null, null, null);
-
+            this.copy.height, this.copy.width, newHeight, newWidth, new Ticker(timeStart, timeEnd));
+    this.copy.setHeight(newHeight);
+    this.copy.setWidth(newWidth);
+    this.copy.setTimeAppears(timeStart);
+    this.copy.setTimeDisappears(timeEnd);
     this.transformationList.add(sizeTransformation);
     return sizeTransformation;
+  }
+
+  @Override
+  public Transformation changeColor(int newRed, int newGreen, int newBlue, int timeStart, int timeEnd) {
+    if (this.copy.getRed() == newRed && this.copy.getGreen() == newGreen
+            && this.copy.getBlue() == newBlue || newRed < 0 || newGreen < 0 || newBlue < 0) {
+      throw new IllegalArgumentException("Color values can't be less than zero or all the same as"
+              + "original values!");
+    }
+    Transformation colorTransformation = new Transformation(this, TransformationType.COLOR,
+            this.copy.getRed(), this.copy.getGreen(), this.copy.getBlue(), newRed, newGreen,
+            newBlue, timeStart, timeEnd);
+    this.copy.setColor(newRed, newGreen, newBlue);
+    this.copy.setTimeAppears(timeStart);
+    this.copy.setTimeDisappears(timeEnd);
+    this.transformationList.add(colorTransformation);
+    return colorTransformation;
+  }
+
+  @Override
+  public Transformation move(double newX, double newY, int timeStart, int timeEnd) {
+    Transformation moveTransformation = new Transformation(this, TransformationType.MOVE,
+            this.copy.getX(), this.copy.getY(),newX, newY, timeStart, timeEnd);
+    this.copy.setReference(newX, newY);
+    this.copy.setTimeAppears(timeStart);
+    this.copy.setTimeDisappears(timeEnd);
+    this.transformationList.add(moveTransformation);
+    return moveTransformation;
   }
 
   /**

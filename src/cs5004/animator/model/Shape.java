@@ -69,8 +69,37 @@ public interface Shape {
    */
   String getName();
 
+  /**
+   * Sets the reference point.
+   * @param x coordinate value
+   * @param y coordinate value
+   */
+  void setReference(double x, double y);
 
+  /**
+   * Sets the time appears.
+   * @param appears time it appears
+   */
+  void setTimeAppears(int appears);
 
+  /**
+   * Sets the time disappears.
+   * @param disappears time it appears
+   */
+  void setTimeDisappears(int disappears);
+
+  /**
+   * Sets the color values.
+   * @param red color value
+   * @param green color value
+   * @param blue color value
+   */
+  void setColor(int red, int green, int blue);
+
+  /**
+   * Creates a copy of the original shape.
+   */
+  void copy();
 
   /**
    * Changes the color of the shape by adjusting the integer values of red, green and blue. Throws

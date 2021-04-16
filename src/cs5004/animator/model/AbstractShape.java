@@ -14,6 +14,7 @@ public abstract class AbstractShape implements Shape {
   protected String name;
   protected ShapeType shapeType;
   protected ArrayList<Transformation> transformationList;
+  protected Shape copy;
 
   /**
    * Enum class used to identify Shape type for concrete instances of AbstractShape.
@@ -113,31 +114,28 @@ public abstract class AbstractShape implements Shape {
   }
 
   @Override
+  public void setReference(double x, double y) {
+    this.reference = new Point2D(x, y);
+  }
+
+  @Override
+  public void setTimeAppears(int appears) {
+    this.timeAppears = appears;
+  }
+
+  @Override
+  public void setTimeDisappears(int disappears) {
+    this.timeDisappears = disappears;
+  }
+
+  @Override
+  public void setColor(int red, int green, int blue) {
+    this.color = new Color(red, green, blue);
+  }
+
+  @Override
   public ShapeType getShapeType() {
     return this.shapeType;
-  }
-
-  @Override
-  public Transformation changeColor(int red, int green, int blue, int timeStart, int timeEnd) {
-    if (this.color.red == red && this.color.green == green
-            && this.color.blue == blue && this.getDisappearance() == timeEnd) {
-      throw new IllegalArgumentException("Color values can't be less than zero or all the same as"
-              + "original values! Time span must be within shape's time span!");
-    }
-    Transformation colorTransformation = new Transformation(this, TransformationType.COLOR,
-            red, green, blue, timeStart, timeEnd);
-
-    this.transformationList.add(colorTransformation);
-    return colorTransformation;
-  }
-
-  @Override
-  public Transformation move(double newX, double newY, int timeStart, int timeEnd) {
-    Transformation moveTransformation = new Transformation(this, TransformationType.MOVE,
-            newX, newY, timeStart, timeEnd);
-
-    this.transformationList.add(moveTransformation);
-    return moveTransformation;
   }
 
   @Override

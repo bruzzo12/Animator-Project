@@ -69,6 +69,39 @@ public class Circle extends AbstractShape {
     return sizeTransformation;
   }
 
+  @Override
+  public void copy() {
+
+  }
+
+  @Override
+  public Transformation changeColor(int newRed, int newGreen, int newBlue, int timeStart, int timeEnd) {
+    if (this.copy.getRed() == newRed && this.copy.getGreen() == newGreen
+            && this.copy.getBlue() == newBlue || newRed < 0 || newGreen < 0 || newBlue < 0) {
+      throw new IllegalArgumentException("Color values can't be less than zero or all the same as"
+              + "original values!");
+    }
+    Transformation colorTransformation = new Transformation(this, TransformationType.COLOR,
+            this.copy.getRed(), this.copy.getGreen(), this.copy.getBlue(), newRed, newGreen,
+            newBlue, timeStart, timeEnd);
+    this.copy.setColor(newRed, newGreen, newBlue);
+    this.copy.setTimeAppears(timeStart);
+    this.copy.setTimeDisappears(timeEnd);
+    this.transformationList.add(colorTransformation);
+    return colorTransformation;
+  }
+
+  @Override
+  public Transformation move(double newX, double newY, int timeStart, int timeEnd) {
+    Transformation moveTransformation = new Transformation(this, TransformationType.MOVE,
+            this.copy.getX(), this.copy.getY(),newX, newY, timeStart, timeEnd);
+    this.copy.setReference(newX, newY);
+    this.copy.setTimeAppears(timeStart);
+    this.copy.setTimeDisappears(timeEnd);
+    this.transformationList.add(moveTransformation);
+    return moveTransformation;
+  }
+
   /**
    * Creates a string representation of the circle.
    * @return string representation

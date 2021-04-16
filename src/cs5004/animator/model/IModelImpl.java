@@ -248,12 +248,14 @@ public final class IModelImpl implements IModel {
             case "ELLIPSE":
               Shape o = new Oval(w1 / 2, h1 / 2, x1, y1, r1, g1, b1, t1, t2, name);
               shape.addShape(o);
+              o.copy();
               model.addShape(o);
               break;
             case "RECTANGLE":
               Shape r = new Rectangle(w1, h1, x1, y1,
                       r1, g1, b1, t1, t2, name);
               shape.addShape(r);
+              r.copy();
               model.addShape(r);
               break;
           }
