@@ -147,8 +147,7 @@ public final class IModelImpl implements IModel {
       if (shape.getAppearance() <= ticker && ticker <= shape.getDisappearance()) {
         for (Transformation t : shape.getTransformationList()) {
           if (t.getStartTime() <= ticker && ticker <= t.getEndTime()) {
-
-
+              animation.add(tween(t, ticker));
           }
         }
       }
