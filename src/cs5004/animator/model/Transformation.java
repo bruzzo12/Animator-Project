@@ -1,5 +1,7 @@
 package cs5004.animator.model;
 
+import java.awt.*;
+
 /**
  * Class used to represent transformation of a specific shape.
  */
@@ -258,12 +260,42 @@ public class Transformation {
     return this.colorChangePeriod.getRangeEnd();
   }
 
+
+  /**
+   * Gets the new width.
+   * @return new width
+   */
+  public double getNewWidth() { return this.newWidth; }
+
+  /**
+   * Gets the new height.
+   * @return new height
+   */
+  public double getNewHeight() { return this.newHeight; }
+
+  /**
+   * Returns the radius X of an oval.
+   * @return radius x
+   */
+  public double getRadiusX() { return this.radiusX; }
+
+  /**
+   * Returns the radius Y of an oval.
+   * @return radius y
+   */
+  public double getRadiusY() { return this.radiusY; }
+
+  /**
+   * Returns the point2D start location.
+   * @return Start location
+   */
+  public Point2D getStartLocation() { return this.startLocation; }
+
   /**
    * Creates a string version of the transformation.
    *
    * @return string description of transformation.
    */
-
   @Override
   public String toString() {
     String string = "";

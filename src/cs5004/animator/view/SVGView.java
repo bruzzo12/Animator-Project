@@ -8,8 +8,6 @@ import cs5004.animator.util.AnimationBuilder;
 
 public class SVGView implements IView {
 
-  private AnimationBuilder input;
-  private String SVGtext;
 
   @Override
   public void makeVisible() {
@@ -43,7 +41,8 @@ public class SVGView implements IView {
 
   @Override
   public String getText(IModelImpl model) {
-    return null;
+    SVG.SVGBuilder svgBuilder = new SVG.SVGBuilder(700, 500, model);
+    return svgBuilder.toString();
   }
 
 }
