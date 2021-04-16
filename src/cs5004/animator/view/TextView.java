@@ -25,7 +25,6 @@ public class TextView implements IView {
   }
 
 
-
   @Override
   public void makeVisible() {
   }

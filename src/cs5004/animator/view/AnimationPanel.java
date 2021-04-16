@@ -18,6 +18,7 @@ class AnimationPanel extends JPanel {
     this.setBackground(Color.WHITE);
 
   }
+
   /**
    * Overrides the paintComponent method in the JPanel.
    *
@@ -27,7 +28,7 @@ class AnimationPanel extends JPanel {
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
     Graphics2D graphics = (Graphics2D) g;
-    }
-
   }
+
+}
 

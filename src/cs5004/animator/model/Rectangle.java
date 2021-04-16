@@ -4,8 +4,8 @@ package cs5004.animator.model;
 import java.util.ArrayList;
 
 /**
- * This class represents a rectangle.  It defines all the operations mandated by the cs5004.animator.model.Shape
- * interface
+ * This class represents a rectangle.  It defines all the operations mandated by the
+ * cs5004.animator.model.Shape interface
  */
 public class Rectangle extends AbstractShape {
   protected final double width;
@@ -67,9 +67,9 @@ public class Rectangle extends AbstractShape {
    * @param newHeight new height of rectangle
    * @param timeStart the time when the size transformation begins.
    * @param timeEnd   the time when the size transformation ends.
-   * @returns transformation object.
    * @throws IllegalArgumentException if width and height equal original values or either is less
    *                                  than zero.
+   * @returns transformation object.
    */
   public Transformation changeSize(double newWidth, double newHeight, int timeStart, int timeEnd) {
     if (newHeight == this.getHeight() && newWidth == this.getWidth()

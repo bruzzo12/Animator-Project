@@ -32,7 +32,7 @@ public class IModelImplTest {
             200, 200, 200,
             20, 50, "First Rectangle");
     Shape o = new Oval(10.5, 5.3, 100.0, 800, 0,
-            0,100,10, 20,"First Oval");
+            0, 100, 10, 20, "First Oval");
     t.addShape(c);
     t.addShape(r);
     t.addShape(o);
@@ -63,7 +63,7 @@ public class IModelImplTest {
             200, 200, 200,
             20, 50, "First Rectangle");
     Shape o = new Oval(10.5, 5.3, 100.0, 800, 0,
-            0,100,10, 20,"First Oval");
+            0, 100, 10, 20, "First Oval");
     t.addShape(c);
     t.addShape(r);
     t.addShape(o);
@@ -113,7 +113,7 @@ public class IModelImplTest {
             200, 200, 200,
             20, 50, "First Rectangle");
     Shape o = new Oval(10.5, 5.3, 100.0, 800, 0,
-            0,100,10, 20,"First Oval");
+            0, 100, 10, 20, "First Oval");
     t.addShape(c);
     t.addShape(r);
     t.addShape(o);
@@ -162,39 +162,39 @@ public class IModelImplTest {
       IModel t = new IModelImpl();
       Circle c = new Circle(3, 1, 2, 100, 100, 100,
               0, 100, "First Circle");
-      t.addCircleSizeTransformation(c, 4,1,2);
+      t.addCircleSizeTransformation(c, 4, 1, 2);
     } catch (NoSuchElementException e) {
       IModel t = new IModelImpl();
       Circle c = new Circle(3, 1, 2, 100, 100, 100,
               0, 100, "First Circle");
       t.addShape(c);
-      t.addCircleSizeTransformation(c,4,1,2);
+      t.addCircleSizeTransformation(c, 4, 1, 2);
     }
     try {
       IModel t = new IModelImpl();
       Rectangle r = new Rectangle(2, 3, 1, 1,
               200, 200, 200,
               20, 50, "First Rectangle");
-      t.addRectangleSizeTransformation(r, 3,4,25,30);
+      t.addRectangleSizeTransformation(r, 3, 4, 25, 30);
     } catch (NoSuchElementException e) {
       IModel t = new IModelImpl();
       Rectangle r = new Rectangle(2, 3, 1, 1,
               200, 200, 200,
               20, 50, "First Rectangle");
       t.addShape(r);
-      t.addRectangleSizeTransformation(r, 3,4,25,30);
+      t.addRectangleSizeTransformation(r, 3, 4, 25, 30);
     }
     try {
       IModel t = new IModelImpl();
       Oval o = new Oval(10.5, 5.3, 100.0, 800, 0,
               0, 100, 10, 20, "First Oval");
-      t.addOvalSizeTransformation(o, 9,10,11,17);
+      t.addOvalSizeTransformation(o, 9, 10, 11, 17);
     } catch (NoSuchElementException e) {
       IModel t = new IModelImpl();
       Oval o = new Oval(10.5, 5.3, 100.0, 800, 0,
               0, 100, 10, 20, "First Oval");
       t.addShape(o);
-      t.addOvalSizeTransformation(o, 9,10,11,17);
+      t.addOvalSizeTransformation(o, 9, 10, 11, 17);
     }
   }
 
@@ -208,13 +208,13 @@ public class IModelImplTest {
       Circle c = new Circle(3, 1, 2, 100, 100, 100,
               0, 100, "First Circle");
       t.addShape(c);
-      t.addCircleSizeTransformation(c,3,1,2);
+      t.addCircleSizeTransformation(c, 3, 1, 2);
     } catch (IllegalArgumentException e) {
       IModel t = new IModelImpl();
       Circle c = new Circle(3, 1, 2, 100, 100, 100,
               0, 100, "First Circle");
       t.addShape(c);
-      t.addCircleSizeTransformation(c,4,1,2);
+      t.addCircleSizeTransformation(c, 4, 1, 2);
     }
     try {
       IModel t = new IModelImpl();
@@ -222,27 +222,27 @@ public class IModelImplTest {
               200, 200, 200,
               20, 50, "First Rectangle");
       t.addShape(r);
-      t.addRectangleSizeTransformation(r, 2,3,20,50);
+      t.addRectangleSizeTransformation(r, 2, 3, 20, 50);
     } catch (IllegalArgumentException e) {
       IModel t = new IModelImpl();
       Rectangle r = new Rectangle(2, 3, 1, 1,
               200, 200, 200,
               20, 50, "First Rectangle");
       t.addShape(r);
-      t.addRectangleSizeTransformation(r, 3,4,25,30);
+      t.addRectangleSizeTransformation(r, 3, 4, 25, 30);
     }
     try {
       IModel t = new IModelImpl();
       Oval o = new Oval(10.5, 5.3, 100.0, 800, 0,
               0, 100, 10, 20, "First Oval");
       t.addShape(o);
-      t.addOvalSizeTransformation(o, 10.5,5.3,9,17);
+      t.addOvalSizeTransformation(o, 10.5, 5.3, 9, 17);
     } catch (IllegalArgumentException e) {
       IModel t = new IModelImpl();
       Oval o = new Oval(10.5, 5.3, 100.0, 800, 0,
               0, 100, 10, 20, "First Oval");
       t.addShape(o);
-      t.addOvalSizeTransformation(o, 9,10,11,17);
+      t.addOvalSizeTransformation(o, 9, 10, 11, 17);
     }
   }
 
@@ -255,7 +255,7 @@ public class IModelImplTest {
     Oval o = new Oval(10.5, 5.3, 100.0, 800, 0,
             0, 100, 10, 20, "First Oval");
     t.addShape(o);
-    t.addColorTransformation(o,101,0,250, 10,20);
+    t.addColorTransformation(o, 101, 0, 250, 10, 20);
     assertEquals(1, t.getShapeCount());
   }
 
@@ -268,13 +268,13 @@ public class IModelImplTest {
       IModel t = new IModelImpl();
       Oval o = new Oval(10.5, 5.3, 100.0, 800, 0,
               0, 100, 10, 20, "First Oval");
-      t.addColorTransformation(o,101,0,250, 10,20);
+      t.addColorTransformation(o, 101, 0, 250, 10, 20);
     } catch (NoSuchElementException e) {
       IModel t = new IModelImpl();
       Oval o = new Oval(10.5, 5.3, 100.0, 800, 0,
               0, 100, 10, 20, "First Oval");
       t.addShape(o);
-      t.addColorTransformation(o,101,0,250, 10,20);
+      t.addColorTransformation(o, 101, 0, 250, 10, 20);
     }
   }
 
@@ -288,13 +288,13 @@ public class IModelImplTest {
       Oval o = new Oval(10.5, 5.3, 100.0, 800, 0,
               0, 100, 10, 20, "First Oval");
       t.addShape(o);
-      t.addColorTransformation(o,0,0,100, 10,21);
+      t.addColorTransformation(o, 0, 0, 100, 10, 21);
     } catch (IllegalArgumentException e) {
       IModel t = new IModelImpl();
       Oval o = new Oval(10.5, 5.3, 100.0, 800, 0,
               0, 100, 10, 20, "First Oval");
       t.addShape(o);
-      t.addColorTransformation(o,101,0,250, 10,20);
+      t.addColorTransformation(o, 101, 0, 250, 10, 20);
     }
   }
 
@@ -307,7 +307,7 @@ public class IModelImplTest {
     Oval o = new Oval(10.5, 5.3, 100.0, 800, 0,
             0, 100, 10, 20, "First Oval");
     t.addShape(o);
-    t.addMoveTransformation(o,0,200,10, 11);
+    t.addMoveTransformation(o, 0, 200, 10, 11);
     assertEquals(1, t.getShapeCount());
   }
 
@@ -320,13 +320,13 @@ public class IModelImplTest {
       IModel t = new IModelImpl();
       Oval o = new Oval(10.5, 5.3, 100.0, 800, 0,
               0, 100, 10, 20, "First Oval");
-      t.addMoveTransformation(o,0,200,10, 11);
+      t.addMoveTransformation(o, 0, 200, 10, 11);
     } catch (NoSuchElementException e) {
       IModel t = new IModelImpl();
       Oval o = new Oval(10.5, 5.3, 100.0, 800, 0,
               0, 100, 10, 20, "First Oval");
       t.addShape(o);
-      t.addMoveTransformation(o,0,200,10, 11);
+      t.addMoveTransformation(o, 0, 200, 10, 11);
     }
   }
 
@@ -340,15 +340,16 @@ public class IModelImplTest {
       Oval o = new Oval(10.5, 5.3, 100.0, 800, 0,
               0, 100, 10, 20, "First Oval");
       t.addShape(o);
-      t.addMoveTransformation(o,-1,200,10, 20);
+      t.addMoveTransformation(o, -1, 200, 10, 20);
     } catch (IllegalArgumentException e) {
       IModel t = new IModelImpl();
       Oval o = new Oval(10.5, 5.3, 100.0, 800, 0,
               0, 100, 10, 20, "First Oval");
       t.addShape(o);
-      t.addMoveTransformation(o,0,200,10, 11);
+      t.addMoveTransformation(o, 0, 200, 10, 11);
     }
   }
+
   /**
    * Tests the toString() method.
    */
@@ -361,12 +362,12 @@ public class IModelImplTest {
             200, 200, 200,
             20, 50, "First Rectangle");
     Shape o = new Oval(10.5, 5.3, 100.0, 800, 0,
-            0,100,10, 20,"First Oval");
+            0, 100, 10, 20, "First Oval");
     t.addShape(c);
     t.addShape(r);
     t.addShape(o);
     t.addRectangleSizeTransformation(r, 5, 4, 25, 30);
-    t.addColorTransformation(c, 105,0,200, 10,60);
+    t.addColorTransformation(c, 105, 0, 200, 10, 60);
     t.addMoveTransformation(o, 105, 650, 15, 19);
     assertEquals("Shapes:\n"
             + "Name: First Circle\n"
@@ -386,12 +387,12 @@ public class IModelImplTest {
             + "Name: First Rectangle\n"
             + "Type: Rectangle\n"
             + "Min corner: (1.0,1.0) Width: 2.0, Height: 3.0\n"
-            +"Color: (200,200,200)\n"
+            + "Color: (200,200,200)\n"
             + "Appears at t=20\n"
             + "Disappears at t=50\n"
             + "\n"
             + "Shape First Circle changes color from (100, 100, 100) to (105, 0, 200) from"
-            +" t=10 to t=60\n"
+            + " t=10 to t=60\n"
             + "Shape First Oval moves from (100.0,800.0) to (105.0,650.0) from t=15 to"
             + " t=19\n"
             + "Shape First Rectangle scales from Width: 5.0, Height: 4.0 to from t=25 to"

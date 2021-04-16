@@ -68,7 +68,7 @@ public final class EasyAnimator {
       } else {
         BufferedWriter writer = null;
         try {
-          writer = new BufferedWriter(new FileWriter(output,true));
+          writer = new BufferedWriter(new FileWriter(output, true));
           writer.write(view.getText(model));
         } catch (Exception e) {
           e.printStackTrace();
@@ -79,7 +79,7 @@ public final class EasyAnimator {
             System.err.println(e);
           }
         }
-       }
+      }
     }
 
     if (viewType.equals("svg")) {
@@ -89,7 +89,7 @@ public final class EasyAnimator {
       } else {
         BufferedWriter writer = null;
         try {
-          writer = new BufferedWriter(new FileWriter(output,true));
+          writer = new BufferedWriter(new FileWriter(output, true));
           writer.write(view.getText(model));
         } catch (Exception e) {
           e.printStackTrace();

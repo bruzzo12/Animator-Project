@@ -8,8 +8,8 @@ import cs5004.animator.model.AbstractShape.ShapeType;
 import cs5004.animator.util.AnimationBuilder;
 
 /**
- * This class represents the cs5004.animator.model for an animation with shapes. The class implements all methods
- * from the cs5004.animator.model.IModel interface.
+ * This class represents the cs5004.animator.model for an animation with shapes. The class
+ * implements all methods from the cs5004.animator.model.IModel interface.
  */
 public final class IModelImpl implements IModel {
   protected ArrayList<Shape> shapes;
@@ -18,6 +18,7 @@ public final class IModelImpl implements IModel {
   protected Point2D upperLeft;
   protected int width;
   protected int height;
+
   /**
    * Constructs an animation cs5004.animator.model that starts with an empty animation screen.
    */
@@ -25,7 +26,7 @@ public final class IModelImpl implements IModel {
     this.shapes = new ArrayList<>();
     this.transformationList = new ArrayList<>();
     this.shapeCount = 0;
-    this.upperLeft = new Point2D(0,0);
+    this.upperLeft = new Point2D(0, 0);
   }
 
   @Override
@@ -156,10 +157,9 @@ public final class IModelImpl implements IModel {
 
 
   /**
-   * This class represents a Declared Shape that contains a shape name and type.
-   * Once a shape with the same name and type is instantiated by addMotion,
-   * a shape object is added to the DeclaredShape object and field declared is
-   * set as true.
+   * This class represents a Declared Shape that contains a shape name and type. Once a shape with
+   * the same name and type is instantiated by addMotion, a shape object is added to the
+   * DeclaredShape object and field declared is set as true.
    */
   public static final class DeclaredShape {
     private String name;
@@ -167,7 +167,9 @@ public final class IModelImpl implements IModel {
     private Shape shape;
     private boolean declared;
 
-    /** Constructs a DeclaredShape object.
+    /**
+     * Constructs a DeclaredShape object.
+     *
      * @param name name of shape
      * @param type the type of shape
      */
@@ -176,11 +178,11 @@ public final class IModelImpl implements IModel {
       this.type = type;
       this.declared = false;
     }
-    
+
     public String getName() {
       return this.name;
     }
-    
+
     public String getType() {
       return this.type;
     }
@@ -224,7 +226,7 @@ public final class IModelImpl implements IModel {
       if (x < 0 || y < 0 || width < 0 || height < 0) {
         throw new IllegalArgumentException("All values must be greater than 0.");
       }
-      this.model.setBounds(x,y,width,height);
+      this.model.setBounds(x, y, width, height);
       return this;
     }
 
@@ -241,7 +243,7 @@ public final class IModelImpl implements IModel {
     public AnimationBuilder<IModel> addMotion(String name, int t1, int x1, int y1, int w1, int h1,
                                               int r1, int g1, int b1, int t2, int x2, int y2,
                                               int w2, int h2, int r2, int g2, int b2) {
-      for (DeclaredShape shape:declaredShapeList) {
+      for (DeclaredShape shape : declaredShapeList) {
         if (shape.getName().equals(name)
                 && !shape.getDeclared()) {
           switch (shape.getType().toUpperCase()) {
@@ -264,10 +266,10 @@ public final class IModelImpl implements IModel {
           if (r1 != r2 || b1 != b2 || g1 != g2) {
             model.addColorTransformation(animatedShape, 2, b2, g2, t1, t2);
           }
-          if (y1 != y2 || x1 != x2 ) {
+          if (y1 != y2 || x1 != x2) {
             model.addMoveTransformation(animatedShape, x2, y2, t1, t2);
           }
-          if (w1 != w2 || h1 != h2 ) {
+          if (w1 != w2 || h1 != h2) {
             if (animatedShape.getShapeType() == ShapeType.RECTANGLE) {
               model.addRectangleSizeTransformation(((Rectangle) animatedShape), w2, h2, t1, t2);
             }
@@ -279,7 +281,7 @@ public final class IModelImpl implements IModel {
             animatedShape.setDisappearance(t2);
           }
         }
-    }
+      }
       return this;
     }
   }

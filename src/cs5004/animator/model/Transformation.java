@@ -200,7 +200,7 @@ public class Transformation {
    * @return start time of the transformation
    */
   public int getStartTime() {
-    if (this.sizeChangePeriod == null && this.colorChangePeriod == null)  {
+    if (this.sizeChangePeriod == null && this.colorChangePeriod == null) {
       return this.locationChangePeriod.getRangeStart();
     } else if (this.sizeChangePeriod == null && this.locationChangePeriod == null) {
       return this.colorChangePeriod.getRangeStart();
@@ -215,7 +215,7 @@ public class Transformation {
    * @return end time of the transformation change
    */
   public int getEndTime() {
-    if (this.sizeChangePeriod == null && this.colorChangePeriod == null)  {
+    if (this.sizeChangePeriod == null && this.colorChangePeriod == null) {
       return this.locationChangePeriod.getRangeEnd();
     } else if (this.sizeChangePeriod == null && this.locationChangePeriod == null) {
       return this.colorChangePeriod.getRangeEnd();
@@ -263,33 +263,48 @@ public class Transformation {
 
   /**
    * Gets the new width.
+   *
    * @return new width
    */
-  public double getNewWidth() { return this.newWidth; }
+  public double getNewWidth() {
+    return this.newWidth;
+  }
 
   /**
    * Gets the new height.
+   *
    * @return new height
    */
-  public double getNewHeight() { return this.newHeight; }
+  public double getNewHeight() {
+    return this.newHeight;
+  }
 
   /**
    * Returns the radius X of an oval.
+   *
    * @return radius x
    */
-  public double getRadiusX() { return this.radiusX; }
+  public double getRadiusX() {
+    return this.radiusX;
+  }
 
   /**
    * Returns the radius Y of an oval.
+   *
    * @return radius y
    */
-  public double getRadiusY() { return this.radiusY; }
+  public double getRadiusY() {
+    return this.radiusY;
+  }
 
   /**
    * Returns the point2D start location.
+   *
    * @return Start location
    */
-  public Point2D getStartLocation() { return this.startLocation; }
+  public Point2D getStartLocation() {
+    return this.startLocation;
+  }
 
   /**
    * Creates a string version of the transformation.
@@ -316,17 +331,17 @@ public class Transformation {
 
     if (this.type == TransformationType.SIZE
             && this.shape.getShapeType() == AbstractShape.ShapeType.RECTANGLE) {
-      Rectangle shape = (Rectangle)this.shape;
+      Rectangle shape = (Rectangle) this.shape;
       string = string + String.format("Shape %s scales from Width: %.1f, Height: %.1f to "
                       + "Width: %.1f, Height: %.1f "
-                      + "from t=%d to t=%d\n", this.shape.getName(),shape.getWidth(),
+                      + "from t=%d to t=%d\n", this.shape.getName(), shape.getWidth(),
               shape.getHeight(), newWidth, newHeight, sizeChangePeriod.getRangeStart(),
               sizeChangePeriod.getRangeEnd());
     }
 
     if (this.type == TransformationType.SIZE
             && this.shape.getShapeType() == AbstractShape.ShapeType.OVAL) {
-      Oval shape = (Oval)this.shape;
+      Oval shape = (Oval) this.shape;
       string = string + String.format("Shape %s scales from RadiusX: %.1f, RadiusY: %.1f to "
                       + "RadiusX: %.1f, RadiusY %.1f from t=%d to t=%d\n", this.shape.getName(),
               shape.radiusX, shape.radiusY, radiusX, radiusY, sizeChangePeriod.getRangeStart(),
@@ -335,7 +350,7 @@ public class Transformation {
 
     if (this.type == TransformationType.SIZE
             && this.shape.getShapeType() == AbstractShape.ShapeType.CIRCLE) {
-      Circle shape = (Circle)this.shape;
+      Circle shape = (Circle) this.shape;
       string = string + String.format("Shape %s scales from Radius: %.1f to "
                       + "Radius: %.1f from t=%d to t=%d\n", this.shape.getName(),
               shape.radius, radius, sizeChangePeriod.getRangeStart(),

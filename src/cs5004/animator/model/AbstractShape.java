@@ -105,7 +105,9 @@ public abstract class AbstractShape implements Shape {
   }
 
   @Override
-  public void setDisappearance(int newEnd) { this.time = new Ticker(timeAppears, newEnd); }
+  public void setDisappearance(int newEnd) {
+    this.time = new Ticker(timeAppears, newEnd);
+  }
 
   @Override
   public String getName() {

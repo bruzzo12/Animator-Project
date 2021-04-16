@@ -1,7 +1,8 @@
 package cs5004.animator.model;
 
 /**
- * Class used to store color value of cs5004.animator.model.Shape. Value of integers must be between 0 and 255.
+ * Class used to store color value of cs5004.animator.model.Shape. Value of integers must be between
+ * 0 and 255.
  */
 public class Color {
   public int red;
@@ -10,9 +11,10 @@ public class Color {
 
   /**
    * Constructor for cs5004.animator.model.Color Class. Three integers combined creates a color.
-   * @param red value of red.
+   *
+   * @param red   value of red.
    * @param green value of green.
-   * @param blue value of blue.
+   * @param blue  value of blue.
    * @throws IllegalArgumentException for integer values less than 0 and greater than 255
    */
   public Color(int red, int green, int blue) {
@@ -26,13 +28,13 @@ public class Color {
 
   /**
    * Returns string version of color.
+   *
    * @return string version of color.
    */
   @Override
   public String toString() {
     return String.format("(%d,%d,%d)", this.red, this.green, this.blue);
   }
-
 
 
 }
