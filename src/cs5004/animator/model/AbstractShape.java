@@ -140,4 +140,9 @@ public abstract class AbstractShape implements Shape {
     return moveTransformation;
   }
 
+  @Override
+  public ArrayList<Transformation> getTransformationList() {
+    return this.transformationList;
+  }
+
 }
