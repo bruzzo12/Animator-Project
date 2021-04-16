@@ -142,7 +142,41 @@ public final class IModelImpl implements IModel {
 
   @Override
   public ArrayList<Shape> getShapesAtTicker(int ticker) {
-    return null; //To be implemented in later weeks
+    ArrayList<Shape> animation = new ArrayList<>();
+    for (Shape shape:shapes) {
+      if (shape.getAppearance() <= ticker && ticker <= shape.getDisappearance()) {
+        for (Transformation t : shape.getTransformationList()) {
+          if (t.getStartTime() <= ticker && ticker <= t.getEndTime()) {
+
+
+          }
+        }
+      }
+    }
+    return animation;
+  }
+
+
+  /**
+   * Calculates the intermediate state of the shape being transformed at a specific tick
+   * @param object the transformation object to be tweened
+   * @param ticker the time at which the intermediate state is being calculated
+   * @return copy of the shape with the intermediate state values
+   */
+  public Shape tween(Transformation object, int ticker) {
+    if (object.type == TransformationType.MOVE) {
+      double newX = (object.getStartXCoordinate() * ((object.getEndTime() - ticker)
+              / (object.getEndTime() - object.getStartTime()))) + (object.getEndXCoordinate()
+              * ((ticker - object.getStartTime()) / (object.getEndTime() - object.getStartTime())));
+      double newY = (object.getStartYCoordinate() * ((object.getEndTime() - ticker)
+              / (object.getEndTime() - object.getStartTime()))) + (object.getEndYCoordinate()
+              * ((ticker - object.getStartTime()) / (object.getEndTime() - object.getStartTime())));
+      Shape copy = object.shape.getCopy();
+      copy.setReference(newX, newY);
+
+      return copy;
+    }
+
   }
 
   public int getShapeCount() {

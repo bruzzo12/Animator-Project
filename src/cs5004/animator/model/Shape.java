@@ -102,6 +102,12 @@ public interface Shape {
   void copy();
 
   /**
+   * Gets the copy of the shape.
+   * @return copy
+   */
+  Shape getCopy();
+
+  /**
    * Changes the color of the shape by adjusting the integer values of red, green and blue. Throws
    * an IllegalArgumentException when the integer values are less than zero or greater than 255.
    *

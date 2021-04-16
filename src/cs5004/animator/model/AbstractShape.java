@@ -71,6 +71,11 @@ public abstract class AbstractShape implements Shape {
   }
 
   @Override
+  public Shape getCopy() {
+    return this.copy;
+  }
+
+  @Override
   public double getX() {
     return this.reference.x;
   }
