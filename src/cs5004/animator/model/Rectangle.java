@@ -101,7 +101,9 @@ public class Rectangle extends AbstractShape {
               + "the same as original shape!");
     }
     Transformation sizeTransformation = new Transformation(this, TransformationType.SIZE,
-            this.copy.height, this.copy.width, newHeight, newWidth, new Ticker(timeStart, timeEnd));
+            this.copy.height, this.copy.width, newHeight, newWidth, new Ticker(timeStart, timeEnd),
+            new Point2D(this.copy.getX(), this.copy.getY()), new Color(this.copy.getRed(),
+            this.copy.getGreen(), this.copy.getBlue()));
     this.copy.setHeight(newHeight);
     this.copy.setWidth(newWidth);
     this.copy.setTimeAppears(timeStart);
@@ -118,8 +120,9 @@ public class Rectangle extends AbstractShape {
               + "original values!");
     }
     Transformation colorTransformation = new Transformation(this, TransformationType.COLOR,
-            this.copy.getRed(), this.copy.getGreen(), this.copy.getBlue(), newRed, newGreen,
-            newBlue, timeStart, timeEnd);
+            0, 0, this.copy.height, this.copy.width, new Point2D(this.copy.getX(),
+            this.copy.getY()), this.copy.getRed(), this.copy.getGreen(), this.copy.getBlue(),
+            newRed, newGreen, newBlue, timeStart, timeEnd);
     this.copy.setColor(newRed, newGreen, newBlue);
     this.copy.setTimeAppears(timeStart);
     this.copy.setTimeDisappears(timeEnd);
@@ -130,7 +133,9 @@ public class Rectangle extends AbstractShape {
   @Override
   public Transformation move(double newX, double newY, int timeStart, int timeEnd) {
     Transformation moveTransformation = new Transformation(this, TransformationType.MOVE,
-            this.copy.getX(), this.copy.getY(),newX, newY, timeStart, timeEnd);
+            this.copy.getX(), this.copy.getY(),newX, newY, this.copy.getRed(), this.copy.getGreen(),
+            this.copy.getBlue(),0,0, this.copy.height, this.copy.width, timeStart,
+            timeEnd);
     this.copy.setReference(newX, newY);
     this.copy.setTimeAppears(timeStart);
     this.copy.setTimeDisappears(timeEnd);

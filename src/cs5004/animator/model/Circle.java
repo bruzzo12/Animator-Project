@@ -84,6 +84,7 @@ public class Circle extends AbstractShape {
               + "original values!");
     }
     Transformation colorTransformation = new Transformation(this, TransformationType.COLOR,
+            0,0,0,0,new Point2D(0,0),
             this.copy.getRed(), this.copy.getGreen(), this.copy.getBlue(), newRed, newGreen,
             newBlue, timeStart, timeEnd);
     this.copy.setColor(newRed, newGreen, newBlue);
@@ -96,7 +97,8 @@ public class Circle extends AbstractShape {
   @Override
   public Transformation move(double newX, double newY, int timeStart, int timeEnd) {
     Transformation moveTransformation = new Transformation(this, TransformationType.MOVE,
-            this.copy.getX(), this.copy.getY(),newX, newY, timeStart, timeEnd);
+            this.copy.getX(), this.copy.getY(),newX, newY, this.copy.getRed(), this.copy.getGreen(),
+            this.copy.getBlue(), 0,0, 0, 0, timeStart, timeEnd);
     this.copy.setReference(newX, newY);
     this.copy.setTimeAppears(timeStart);
     this.copy.setTimeDisappears(timeEnd);

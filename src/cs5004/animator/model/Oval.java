@@ -81,7 +81,8 @@ public class Oval extends AbstractShape {
     }
     Transformation sizeTransformation = new Transformation(this, TransformationType.SIZE,
             new Ticker(timeStart, timeEnd), this.copy.radiusX, this.copy.radiusY,
-            newRadiusX, newRadiusY);
+            newRadiusX, newRadiusY, new Point2D(this.copy.getX(), this.copy.getY()),
+            new Color(this.copy.getRed(), this.copy.getGreen(), this.copy.getBlue()));
     this.copy.setRadiusX(radiusX);
     this.copy.setRadiusY(radiusY);
     this.copy.setTimeAppears(timeStart);
@@ -98,7 +99,9 @@ public class Oval extends AbstractShape {
               + "original values!");
     }
     Transformation colorTransformation = new Transformation(this, TransformationType.COLOR,
-            this.copy.getRed(), this.copy.getGreen(), this.copy.getBlue(), newRed, newGreen,
+            this.copy.getRX(), this.copy.getRY(), 0, 0, new Point2D(this.copy.getX(),
+            this.copy.getY()), this.copy.getRed(), this.copy.getGreen(), this.copy.getBlue(),
+            newRed, newGreen,
             newBlue, timeStart, timeEnd);
     this.copy.setColor(newRed, newGreen, newBlue);
     this.copy.setTimeAppears(timeStart);
@@ -110,7 +113,9 @@ public class Oval extends AbstractShape {
   @Override
   public Transformation move(double newX, double newY, int timeStart, int timeEnd) {
     Transformation moveTransformation = new Transformation(this, TransformationType.MOVE,
-            this.copy.getX(), this.copy.getY(),newX, newY, timeStart, timeEnd);
+            this.copy.getX(), this.copy.getY(),newX, newY, this.copy.getRed(), this.copy.getGreen(),
+            this.copy.getBlue(), this.copy.getRX(), this.copy.getRY(), 0, 0, timeStart,
+            timeEnd);
     this.copy.setReference(newX, newY);
     this.copy.setTimeAppears(timeStart);
     this.copy.setTimeDisappears(timeEnd);

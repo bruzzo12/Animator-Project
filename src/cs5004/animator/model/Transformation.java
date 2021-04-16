@@ -33,9 +33,13 @@ public class Transformation {
    * @param newHeight         the new height for the rectangle.
    * @param newWidth          the new width for the rectangle.
    * @param sizeChangePeriod  denotes time size transformation happens.
+   * @param startLocation     beginning transition coordinate.
+   * @param startColor        the starting color of shape.
+   *
    */
   public Transformation(Shape shape, TransformationType type, double height, double width,
-                        double newHeight, double newWidth, Ticker sizeChangePeriod) {
+                        double newHeight, double newWidth, Ticker sizeChangePeriod,
+                        Point2D startLocation, Color startColor) {
     if (newWidth < 0 || newHeight < 0) {
       throw new IllegalArgumentException("Width and height must be positive and not the same as"
               + "original values!");
@@ -47,6 +51,8 @@ public class Transformation {
     this.newHeight = newHeight;
     this.newWidth = newWidth;
     this.sizeChangePeriod = sizeChangePeriod;
+    this.startLocation = startLocation;
+    this.startColor = startColor;
 
   }
 
@@ -60,9 +66,12 @@ public class Transformation {
    * @param radiusY           original value for y radius.
    * @param newRadiusX           new value for the x radius.
    * @param newRadiusY           new value for the y radius.
+   * @param startLocation     beginning transition coordinate.
+   * @param startColor        the starting color of shape.
    */
   public Transformation(Shape shape, TransformationType type, Ticker sizeChangePeriod,
-                        double radiusX, double radiusY, double newRadiusX, double newRadiusY) {
+                        double radiusX, double radiusY, double newRadiusX, double newRadiusY,
+                        Point2D startLocation, Color startColor) {
     if (newRadiusX < 0 || newRadiusY < 0 || (newRadiusY == newRadiusY && newRadiusX == newRadiusX))
     {
       throw new IllegalArgumentException("RadiusX and radiusY must be positive and not the "
@@ -75,6 +84,8 @@ public class Transformation {
     this.newRadiusX = newRadiusX;
     this.newRadiusY = newRadiusY;;
     this.sizeChangePeriod = sizeChangePeriod;
+    this.startLocation = startLocation;
+    this.startColor = startColor;
   }
 
   /**
@@ -115,6 +126,11 @@ public class Transformation {
    *
    * @param shape     the shape being transformed.
    * @param type      the type of transformation as an Enum.
+   * @param radiusX           original value for x radius.
+   * @param radiusY           original value for y radius.
+   * @param height            the original height for the rectangle.
+   * @param width             the original width for the rectangle.
+   * @param startLocation     beginning transition coordinate.
    * @param red       red value of the original color.
    * @param green     green value of the original color.
    * @param blue      blue value of the original color.
@@ -124,10 +140,17 @@ public class Transformation {
    * @param timeStart beginning time interval of transformation.
    * @param timeEnd   end time interval of transformation.
    */
-  public Transformation(Shape shape, TransformationType type, int red, int green, int blue,
-                        int newRed, int newGreen, int newBlue, int timeStart, int timeEnd) {
+  public Transformation(Shape shape, TransformationType type, double radiusX, double radiusY,
+                        double height, double width, Point2D startLocation, int red, int green,
+                        int blue, int newRed, int newGreen, int newBlue, int timeStart, int timeEnd)
+  {
     this.shape = shape;
     this.type = type;
+    this.radiusX = radiusX;
+    this.radiusY = radiusY;
+    this.height = height;
+    this.width = width;
+    this.startLocation = startLocation;
     this.startColor = new Color(red, green, blue);
     this.endColor = new Color(newRed, newGreen, newBlue);
     this.colorChangePeriod = new Ticker(timeStart, timeEnd);
@@ -142,16 +165,29 @@ public class Transformation {
    * @param y         the original y coordinate of the shape.
    * @param newX      the new x coordinate of the shape.
    * @param newY      the new Y coordinate of the shape.
+   * @param red       red value of the original color.
+   * @param green     green value of the original color.
+   * @param blue      blue value of the original color.
+   * @param radiusX           original value for x radius.
+   * @param radiusY           original value for y radius.
+   * @param height            the original height for the rectangle.
+   * @param width             the original width for the rectangle.
    * @param timeStart beginning time interval of transformation.
    * @param timeEnd   end time interval of transformation.
    */
-  public Transformation(Shape shape, TransformationType type, double x, double y, double newX, double newY,
-                        int timeStart, int timeEnd) {
+  public Transformation(Shape shape, TransformationType type, double x, double y, double newX,
+                        double newY, int red, int green, int blue, double radiusX, double radiusY,
+                        double height, double width, int timeStart, int timeEnd) {
     this.shape = shape;
     this.type = type;
     this.startLocation = new Point2D(x,y);
     this.endLocation = new Point2D(newX, newY);
     this.locationChangePeriod = new Ticker(timeStart, timeEnd);
+    this.startColor = new Color(red, green, blue);
+    this.radiusX = radiusX;
+    this.radiusY = radiusY;
+    this.height = height;
+    this.width = width;
   }
 
   /**

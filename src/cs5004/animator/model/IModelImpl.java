@@ -164,20 +164,95 @@ public final class IModelImpl implements IModel {
    * @return copy of the shape with the intermediate state values
    */
   public Shape tween(Transformation object, int ticker) {
-    if (object.type == TransformationType.MOVE) {
+    if (object.type == TransformationType.MOVE
+            && object.shape.getShapeType() == ShapeType.RECTANGLE) {
       double newX = (object.getStartXCoordinate() * ((object.getEndTime() - ticker)
               / (object.getEndTime() - object.getStartTime()))) + (object.getEndXCoordinate()
               * ((ticker - object.getStartTime()) / (object.getEndTime() - object.getStartTime())));
       double newY = (object.getStartYCoordinate() * ((object.getEndTime() - ticker)
               / (object.getEndTime() - object.getStartTime()))) + (object.getEndYCoordinate()
               * ((ticker - object.getStartTime()) / (object.getEndTime() - object.getStartTime())));
-      Shape copy = object.shape.getCopy();
-      copy.setReference(newX, newY);
-
+      Rectangle copy = new Rectangle(object.width, object.height, newX, newY,
+              object.getStartColor().red, object.getStartColor().green,
+              object.getStartColor().blue, ticker, ticker, object.shape.getName());
       return copy;
     }
-
+    if (object.type == TransformationType.MOVE
+            && object.shape.getShapeType() == ShapeType.OVAL) {
+      double newX = (object.getStartXCoordinate() * ((object.getEndTime() - ticker)
+              / (object.getEndTime() - object.getStartTime()))) + (object.getEndXCoordinate()
+              * ((ticker - object.getStartTime()) / (object.getEndTime() - object.getStartTime())));
+      double newY = (object.getStartYCoordinate() * ((object.getEndTime() - ticker)
+              / (object.getEndTime() - object.getStartTime()))) + (object.getEndYCoordinate()
+              * ((ticker - object.getStartTime()) / (object.getEndTime() - object.getStartTime())));
+      Oval copy = new Oval(object.radiusX, object.radiusY, newX, newY, object.getStartColor().red,
+              object.getStartColor().green, object.getStartColor().blue, ticker, ticker,
+              object.shape.getName());
+      return copy;
+    }
+    if (object.type == TransformationType.SIZE && object.shape.getShapeType() == ShapeType.OVAL) {
+      double newRadiusX = (object.getRadiusX() * ((object.getEndTime() - ticker)
+              / (object.getEndTime() - object.getStartTime()))) + (object.newRadiusX)
+              * ((ticker - object.getStartTime()) / (object.getEndTime() - object.getStartTime()));
+      double newRadiusY = (object.getRadiusY() * ((object.getEndTime() - ticker)
+              / (object.getEndTime() - object.getStartTime()))) + (object.newRadiusY)
+              * ((ticker - object.getStartTime()) / (object.getEndTime() - object.getStartTime()));
+      Oval copy = new Oval(newRadiusX, newRadiusY, object.getStartXCoordinate(),
+              object.getStartYCoordinate(), object.getStartColor().red,
+              object.getStartColor().green, object.getStartColor().blue, ticker, ticker,
+              object.shape.getName());
+      return copy;
+    }
+    if (object.type == TransformationType.SIZE
+            && object.shape.getShapeType() == ShapeType.RECTANGLE) {
+      double newHeight = (object.height * ((object.getEndTime() - ticker)
+              / (object.getEndTime() - object.getStartTime()))) + (object.newHeight)
+              * ((ticker - object.getStartTime()) / (object.getEndTime() - object.getStartTime()));
+      double newWidth = (object.width * ((object.getEndTime() - ticker)
+              / (object.getEndTime() - object.getStartTime()))) + (object.newWidth)
+              * ((ticker - object.getStartTime()) / (object.getEndTime() - object.getStartTime()));
+      Rectangle copy = new Rectangle(newWidth, newHeight, object.getStartXCoordinate(),
+              object.getStartYCoordinate(), object.getStartColor().red,
+              object.getStartColor().green, object.getStartColor().blue, ticker, ticker,
+              object.shape.getName());
+      return copy;
+    }
+    if (object.type == TransformationType.COLOR
+            && object.shape.getShapeType() == ShapeType.RECTANGLE) {
+      int newRed = (object.startColor.red * ((object.getEndTime() - ticker)
+              / (object.getEndTime() - object.getStartTime()))) + (object.endColor.red)
+              * ((ticker - object.getStartTime()) / (object.getEndTime() - object.getStartTime()));
+      int newGreen = (object.startColor.green * ((object.getEndTime() - ticker)
+              / (object.getEndTime() - object.getStartTime()))) + (object.endColor.green)
+              * ((ticker - object.getStartTime()) / (object.getEndTime() - object.getStartTime()));
+      int newBlue = (object.startColor.blue * ((object.getEndTime() - ticker)
+              / (object.getEndTime() - object.getStartTime()))) + (object.endColor.blue)
+              * ((ticker - object.getStartTime()) / (object.getEndTime() - object.getStartTime()));
+      Rectangle copy = new Rectangle(object.width, object.height, object.getStartXCoordinate(),
+              object.getStartYCoordinate(), newRed, newGreen, newBlue, ticker, ticker,
+              object.shape.getName());
+      return copy;
+    }
+    if (object.type == TransformationType.COLOR
+            && object.shape.getShapeType() == ShapeType.OVAL) {
+      int newRed = (object.startColor.red * ((object.getEndTime() - ticker)
+              / (object.getEndTime() - object.getStartTime()))) + (object.endColor.red)
+              * ((ticker - object.getStartTime()) / (object.getEndTime() - object.getStartTime()));
+      int newGreen = (object.startColor.green * ((object.getEndTime() - ticker)
+              / (object.getEndTime() - object.getStartTime()))) + (object.endColor.green)
+              * ((ticker - object.getStartTime()) / (object.getEndTime() - object.getStartTime()));
+      int newBlue = (object.startColor.blue * ((object.getEndTime() - ticker)
+              / (object.getEndTime() - object.getStartTime()))) + (object.endColor.blue)
+              * ((ticker - object.getStartTime()) / (object.getEndTime() - object.getStartTime()));
+      Oval copy = new Oval(object.radiusX, object.radiusY, object.getStartXCoordinate(),
+              object.getStartYCoordinate(), newRed, newGreen, newBlue, ticker, ticker,
+              object.shape.getName());
+      return copy;
+    }
   }
+
+
+
 
   public int getShapeCount() {
     return shapes.size();
