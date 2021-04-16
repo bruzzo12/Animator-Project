@@ -25,7 +25,6 @@ public class Oval extends AbstractShape {
    * @param timeDisappears   The time the object is set to disappear on the display.
    * @param name             string shape of the shape.
    * @throws IllegalArgumentException if radiusX or radiusY are less than or equal to zero.
-   *
    */
   public Oval(double radiusX, double radiusY, double startXCoordinate, double startYCoordinate,
               int red, int green, int blue, int timeAppears, int timeDisappears, String name) {
@@ -121,6 +120,7 @@ public class Oval extends AbstractShape {
 
   /**
    * Returns radius X
+   *
    * @return radius x
    */
   public double getRX() {
@@ -129,6 +129,7 @@ public class Oval extends AbstractShape {
 
   /**
    * Returns radius Y
+   *
    * @return radius Y
    */
   public double getRY() {

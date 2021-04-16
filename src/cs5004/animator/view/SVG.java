@@ -23,36 +23,39 @@ public class SVG {
   private double lastHeight;
 
   /**
-   * This class builds the string for a shape in an SVG file
-   * including animations
-   * @param type of shape
-   * @param name of shape
-   * @param x start location (lower left if rectangle, center if ellipse)
-   * @param y start location (lower left if rectangle, center if ellipse)
-   * @param width of shape (or x radius)
+   * This class builds the string for a shape in an SVG file including animations
+   *
+   * @param type   of shape
+   * @param name   of shape
+   * @param x      start location (lower left if rectangle, center if ellipse)
+   * @param y      start location (lower left if rectangle, center if ellipse)
+   * @param width  of shape (or x radius)
    * @param height of shape (or y radius)
-   * @param r red value
-   * @param g green value
-   * @param b blue value
+   * @param r      red value
+   * @param g      green value
+   * @param b      blue value
    */
-  public SVG(String type, String name, double x, double y, double width, double height, int r, int g, int b) {
+  public SVG(String type, String name, double x, double y, double width, double height,
+             int r, int g, int b) {
     this.name = name;
     this.lastWidth = width;
     this.lastHeight = height;
     this.animations = new ArrayList<>();
     if (type.equals("Rectangle")) {
-      this.shapeDeclaration = "<rect id=\"" + name  + "\" x=\"%f\" y=\"%f\" width=\"%f\" height=\"%f\" fill=\"rgb(%d,%d,%d)\" visibility=\"visible\" >\n";
+      this.shapeDeclaration = "<rect id=\"" + name + "\" x=\"%f\" y=\"%f\" width=\"%f\" " +
+              "height=\"%f\" fill=\"rgb(%d,%d,%d)\" visibility=\"visible\" >\n";
       this.type = "rect";
-    }
-    else {
-      this.shapeDeclaration = "<ellipse id=\"" + name  + "\" cx=\"%f\" cy=\"%f\" rx=\"%f\" ry=\"%f\" fill=\"rgb(%d,%d,%d)\" visibility=\"visible\" >\n";
+    } else {
+      this.shapeDeclaration = "<ellipse id=\"" + name + "\" cx=\"%f\" cy=\"%f\" rx=\"%f\" " +
+              "ry=\"%f\" fill=\"rgb(%d,%d,%d)\" visibility=\"visible\" >\n";
       this.type = "ellipse";
     }
     this.shapeDeclaration = String.format(shapeDeclaration, x, y, width, height, r, g, b);
 
   }
 
-  public void addAnimation(int t1, int t2, double x1, double x2, double y1, double y2, double w1, double w2, double h1, double h2,
+  public void addAnimation(int t1, int t2, double x1, double x2, double y1, double y2
+          , double w1, double w2, double h1, double h2,
                            String startColor, String endColor) {
     this.lastWidth = w2;
     this.lastHeight = h2;
@@ -61,9 +64,11 @@ public class SVG {
     if (x1 != x2) {
       String animate;
       if (type.equals("Rectangle")) {
-        animate = "    <animate attributeType=\"xml\" begin=\"base.begin+%dms\" dur=\"%dms\" attributeName=\"x\" from=\"%f\" to=\"%f\" fill=\"freeze\" />\n";
+        animate = "    <animate attributeType=\"xml\" begin=\"base.begin+%dms\" dur=\"%dms\"" +
+                " attributeName=\"x\" from=\"%f\" to=\"%f\" fill=\"freeze\" />\n";
       } else {
-        animate = "    <animate attributeType=\"xml\" begin=\"base.begin+%dms\" dur=\"%dms\" attributeName=\"cx\" from=\"%f\" to=\"%f\" fill=\"freeze\" />\n";
+        animate = "    <animate attributeType=\"xml\" begin=\"base.begin+%dms\" dur=\"%dms\" " +
+                "attributeName=\"cx\" from=\"%f\" to=\"%f\" fill=\"freeze\" />\n";
       }
       animate = String.format(animate, start, dur, x1, x2);
       this.animations.add(animate);
@@ -71,9 +76,11 @@ public class SVG {
     if (y1 != y2) {
       String animate;
       if (type.equals("Rectangle")) {
-        animate = "    <animate attributeType=\"xml\" begin=\"base.begin+%dms\" dur=\"%dms\" attributeName=\"y\" from=\"%f\" to=\"%f\" fill=\"freeze\" />\n";
+        animate = "    <animate attributeType=\"xml\" begin=\"base.begin+%dms\" dur=\"%dms\" " +
+                "attributeName=\"y\" from=\"%f\" to=\"%f\" fill=\"freeze\" />\n";
       } else {
-        animate = "    <animate attributeType=\"xml\" begin=\"base.begin+%dms\" dur=\"%dms\" attributeName=\"cy\" from=\"%f\" to=\"%f\" fill=\"freeze\" />\n";
+        animate = "    <animate attributeType=\"xml\" begin=\"base.begin+%dms\" dur=\"%dms\" " +
+                "attributeName=\"cy\" from=\"%f\" to=\"%f\" fill=\"freeze\" />\n";
       }
       animate = String.format(animate, start, dur, y1, y2);
       this.animations.add(animate);
@@ -81,9 +88,11 @@ public class SVG {
     if (w1 != w2) {
       String animate;
       if (type.equals("Rectangle")) {
-        animate = "    <animate attributeType=\"xml\" begin=\"base.begin+%dms\" dur=\"%dms\" attributeName=\"width\" from=\"%f\" to=\"%f\" fill=\"freeze\" />\n";
+        animate = "    <animate attributeType=\"xml\" begin=\"base.begin+%dms\" dur=\"%dms\" " +
+                "attributeName=\"width\" from=\"%f\" to=\"%f\" fill=\"freeze\" />\n";
       } else {
-        animate = "    <animate attributeType=\"xml\" begin=\"base.begin+%dms\" dur=\"%dms\" attributeName=\"rx\" from=\"%f\" to=\"%f\" fill=\"freeze\" />\n";
+        animate = "    <animate attributeType=\"xml\" begin=\"base.begin+%dms\" dur=\"%dms\"" +
+                " attributeName=\"rx\" from=\"%f\" to=\"%f\" fill=\"freeze\" />\n";
       }
       animate = String.format(animate, start, dur, w1, w2);
       this.animations.add(animate);
@@ -91,15 +100,18 @@ public class SVG {
     if (h1 != h2) {
       String animate;
       if (type.equals("Rectangle")) {
-        animate = "    <animate attributeType=\"xml\" begin=\"base.begin+%dms\" dur=\"%dms\" attributeName=\"height\" from=\"%f\" to=\"%f\" fill=\"freeze\" />\n";
+        animate = "    <animate attributeType=\"xml\" begin=\"base.begin+%dms\" dur=\"%dms\" " +
+                "attributeName=\"height\" from=\"%f\" to=\"%f\" fill=\"freeze\" />\n";
       } else {
-        animate = "    <animate attributeType=\"xml\" begin=\"base.begin+%dms\" dur=\"%dms\" attributeName=\"ry\" from=\"%f\" to=\"%f\" fill=\"freeze\" />\n";
+        animate = "    <animate attributeType=\"xml\" begin=\"base.begin+%dms\" dur=\"%dms\" " +
+                "attributeName=\"ry\" from=\"%f\" to=\"%f\" fill=\"freeze\" />\n";
       }
       animate = String.format(animate, start, dur, h1, h2);
       this.animations.add(animate);
     }
     if (!startColor.equals(endColor)) {
-      String animate = "    <animate attributeType=\"xml\" begin=\"base.begin+%dms\" dur=\"%dms\" attributeName=\"fill\" from=\"rgb"
+      String animate = "    <animate attributeType=\"xml\" begin=\"base.begin+%dms\" dur=\"%dms\" " +
+              "attributeName=\"fill\" from=\"rgb"
               + startColor + "\" to=\"rgb" + endColor + "\" fill=\"freeze\" />\n";
       animate = String.format(animate, start, dur);
       this.animations.add(animate);
@@ -108,6 +120,7 @@ public class SVG {
 
   /**
    * This returns an SVG formatted string of a shape and its movements.
+   *
    * @return SVG string
    */
   public String toString() {
@@ -120,8 +133,8 @@ public class SVG {
   }
 
   /**
-   * This class takes in an animation builder argument and returns a formatted SVG string of
-   * the entire animation.
+   * This class takes in an animation builder argument and returns a formatted SVG string of the
+   * entire animation.
    */
   public static final class SVGBuilder {
     private ArrayList<SVG> shapes;
@@ -142,19 +155,20 @@ public class SVG {
                 .collect(Collectors.toList());
         if (notIn.size() == 0) {
           i++;
-        }
-        else {
-          for (Shape shape:notIn) {
+        } else {
+          for (Shape shape : notIn) {
             shapesIn.add(shape);
             i++;
           }
         }
       }
-      for (Shape currentShape:shapesIn) {
+      for (Shape currentShape : shapesIn) {
         if (currentShape.getClass() == Rectangle.class) {
-          SVG SVGRep = new SVG("Rectangle", currentShape.getName(), currentShape.getX(), currentShape.getY(),
-                  ((Rectangle) currentShape).getWidth(), ((Rectangle) currentShape).getHeight(), currentShape.getRed(), currentShape.getGreen(), currentShape.getBlue());
-          for (Transformation t:currentShape.getTransformationList()) {
+          SVG SVGRep = new SVG("Rectangle", currentShape.getName(), currentShape.getX(),
+                  currentShape.getY(),
+                  ((Rectangle) currentShape).getWidth(), ((Rectangle) currentShape).getHeight(),
+                  currentShape.getRed(), currentShape.getGreen(), currentShape.getBlue());
+          for (Transformation t : currentShape.getTransformationList()) {
             double startx;
             double endx;
             double starty;
@@ -199,9 +213,11 @@ public class SVG {
           this.shapes.add(SVGRep);
         }
         if (currentShape.getClass() == Oval.class) {
-          SVG SVGRep = new SVG("Oval", currentShape.getName(), currentShape.getX(), currentShape.getY(),
-                  ((Oval) currentShape).getRX(), ((Oval) currentShape).getRY(), currentShape.getRed(), currentShape.getGreen(), currentShape.getBlue());
-          for (Transformation t:currentShape.getTransformationList()) {
+          SVG SVGRep = new SVG("Oval", currentShape.getName(), currentShape.getX(),
+                  currentShape.getY(),
+                  ((Oval) currentShape).getRX(), ((Oval) currentShape).getRY(),
+                  currentShape.getRed(), currentShape.getGreen(), currentShape.getBlue());
+          for (Transformation t : currentShape.getTransformationList()) {
             double startx;
             double endx;
             double starty;
@@ -244,17 +260,18 @@ public class SVG {
                     newHeight, startColor, endColor);
           }
           this.shapes.add(SVGRep);
-      }
-      if (currentShape.getDisappearance() > this.duration) {
-        this.duration = currentShape.getDisappearance();
+        }
+        if (currentShape.getDisappearance() > this.duration) {
+          this.duration = currentShape.getDisappearance();
+        }
       }
     }
-  }
 
     public String toString() {
       String ret = "<svg width=\"%d\" height=\"%d\" version=\"1.1\"\n"
               + "     xmlns=\"http://www.w3.org/2000/svg\">\n\n"
-              + "<rect>\n    <animate id=\"base\" begin=\"0,base.end\" dur=\"%dms\" attributeName=\"visibility\" from=\"hide\" to=\"hide\"/>\n</rect>\n\n";
+              + "<rect>\n    <animate id=\"base\" begin=\"0,base.end\" dur=\"%dms\" " +
+              "attributeName=\"visibility\" from=\"hide\" to=\"hide\"/>\n</rect>\n\n";
       ret = String.format(ret, this.width, this.height, this.duration);
       for (SVG shape : shapes) {
         ret = ret.concat(shape.toString() + "\n\n");
@@ -262,6 +279,6 @@ public class SVG {
       ret = ret + "</svg>";
       return ret;
     }
-}
+  }
 
 }

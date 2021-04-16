@@ -25,12 +25,13 @@ public class VisualView extends JFrame implements IView {
     //file using the AnimationReader and then input them in new Dimension() (500 is temp for now)
     this.setLayout(new BorderLayout());
     shapePanel = new AnimationPanel();
-    shapePanel.setPreferredSize(new Dimension(500,500));
+    shapePanel.setPreferredSize(new Dimension(500, 500));
     this.add(shapePanel, BorderLayout.CENTER);
     this.add(new Scrollbar(), BorderLayout.SOUTH);
     this.add(new Scrollbar(), BorderLayout.WEST);
     pack();
   }
+
   @Override
   public void makeVisible() {
     this.setVisible(true);
@@ -43,7 +44,8 @@ public class VisualView extends JFrame implements IView {
 
   @Override
   public void showErrorMessage(String error) {
-    JOptionPane.showMessageDialog(this,error,"Error", JOptionPane.ERROR_MESSAGE);
+    JOptionPane.showMessageDialog(this, error,
+            "Error", JOptionPane.ERROR_MESSAGE);
   }
 
   @Override

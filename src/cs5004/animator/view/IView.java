@@ -6,30 +6,27 @@ import cs5004.animator.model.IModelImpl;
 
 
 /**
- * The view interface. To motivate the methods here
- * think about all the operations that the controller
- * would need to invoke on the view
- *
+ * The view interface. To motivate the methods here think about all the operations that the
+ * controller would need to invoke on the view
  */
 public interface IView {
   /**
-   * Make the view visible. This is usually called
-   * after the view is constructed
+   * Make the view visible. This is usually called after the view is constructed
    */
   void makeVisible();
 
   /**
-   * Provide the view with an action listener for
-   * the button that should cause the program to
-   * process a command. This is so that when the button
-   * is pressed, control goes to the action listener.
+   * Provide the view with an action listener for the button that should cause the program to
+   * process a command. This is so that when the button is pressed, control goes to the action
+   * listener.
+   *
    * @param actionEvent
    */
   void setCommandButtonListener(ActionListener actionEvent);
 
   /**
-   * Transmit an error message to the view, in case
-   * the command could not be processed correctly.
+   * Transmit an error message to the view, in case the command could not be processed correctly.
+   *
    * @param error
    */
   void showErrorMessage(String error);
@@ -51,6 +48,7 @@ public interface IView {
 
   /**
    * Gets the text of the animation.
+   *
    * @param model is the model who is being represented as text
    */
   String getText(IModelImpl model);

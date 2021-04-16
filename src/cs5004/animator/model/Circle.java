@@ -3,16 +3,16 @@ package cs5004.animator.model;
 import java.util.ArrayList;
 
 /**
- * This class represents a circle.  It offers all the operations mandated by the cs5004.animator.model.Shape
- * interface.
+ * This class represents a circle.  It offers all the operations mandated by the
+ * cs5004.animator.model.Shape interface.
  */
 public class Circle extends AbstractShape {
   protected final double radius;
 
   /**
-   * Constructs a cs5004.animator.model. Circle with a given center, radius, color, time of appearance and
-   * disappearance, shape, and shapeType. An IllegalArgumentException is thrown for radius size less
-   * than zero.
+   * Constructs a cs5004.animator.model. Circle with a given center, radius, color, time of
+   * appearance and disappearance, shape, and shapeType. An IllegalArgumentException is thrown for
+   * radius size less than zero.
    *
    * @param radius           the radius of the circle
    * @param startXCoordinate The x coordinate the object will originally be located.
@@ -40,6 +40,7 @@ public class Circle extends AbstractShape {
 
   /**
    * Returns the radius of the circle.
+   *
    * @return radius
    */
   public double getRadius() {
@@ -49,12 +50,13 @@ public class Circle extends AbstractShape {
   /**
    * Creates a transformation that changes the circle's size. An IllegalArgumentException is thrown
    * if the radius is equal to the original value or if it's less than zero.
+   *
    * @param newRadius new radius value.
    * @param timeStart Start interval of the transformation.
    * @param timeEnd   End interval of the transformation.
-   * @returns transformation object.
    * @throws IllegalArgumentException if the radius is equal to the original value or if it's less
    *                                  than zero
+   * @returns transformation object.
    */
   public Transformation changeSize(double newRadius, int timeStart, int timeEnd) {
     if (newRadius < 0 || this.radius == newRadius) {
@@ -104,13 +106,14 @@ public class Circle extends AbstractShape {
 
   /**
    * Creates a string representation of the circle.
+   *
    * @return string representation
    */
   public String toString() {
     return String.format("Name: %s\nType: circle\nCenter (%.1f,%.1f), radius: %.1f\n"
                     + "Color: %s\nAppears at t=%s\nDisappears at t=%s", this.name,
             this.reference.getX(), this.reference.getY(), this.radius,
-            this.color.toString(),this.time.getRangeStart(), this.time.getRangeEnd());
+            this.color.toString(), this.time.getRangeStart(), this.time.getRangeEnd());
   }
 
 }
