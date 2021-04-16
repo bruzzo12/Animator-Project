@@ -1,5 +1,7 @@
 package cs5004.animator.model;
 
+import java.util.ArrayList;
+
 /**
  * This interface contains all operations that all types of shapes should support.
  */
@@ -106,4 +108,9 @@ public interface Shape {
    */
   AbstractShape.ShapeType getShapeType();
 
-}
+  /**
+   * Returns the list of transformations.
+   * @return transformations as an ArrayList
+   */
+  ArrayList<Transformation> getTransformationList();
+ }
