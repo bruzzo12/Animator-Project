@@ -165,12 +165,14 @@ public final class IModelImpl implements IModel {
   public Shape tween(Transformation object, int ticker) {
     if (object.type == TransformationType.MOVE
             && object.shape.getShapeType() == ShapeType.RECTANGLE) {
-      double newX = (object.getStartXCoordinate() * ((object.getEndTime() - ticker)
+      double newX = (object.getStartXCoordinate() * ((object.getEndTime() - (double)ticker)
               / (object.getEndTime() - object.getStartTime()))) + (object.getEndXCoordinate()
-              * ((ticker - object.getStartTime()) / (object.getEndTime() - object.getStartTime())));
-      double newY = (object.getStartYCoordinate() * ((object.getEndTime() - ticker)
+              * (((double)ticker - object.getStartTime()) / (object.getEndTime()
+              - object.getStartTime())));
+      double newY = (object.getStartYCoordinate() * ((object.getEndTime() - (double)ticker)
               / (object.getEndTime() - object.getStartTime()))) + (object.getEndYCoordinate()
-              * ((ticker - object.getStartTime()) / (object.getEndTime() - object.getStartTime())));
+              * (((double)ticker - object.getStartTime()) / (object.getEndTime()
+              - object.getStartTime())));
       Rectangle copy = new Rectangle(object.width, object.height, newX, newY,
               object.getStartColor().red, object.getStartColor().green,
               object.getStartColor().blue, ticker, ticker, object.shape.getName());
@@ -178,24 +180,28 @@ public final class IModelImpl implements IModel {
     }
     if (object.type == TransformationType.MOVE
             && object.shape.getShapeType() == ShapeType.OVAL) {
-      double newX = (object.getStartXCoordinate() * ((object.getEndTime() - ticker)
+      double newX = (object.getStartXCoordinate() * ((object.getEndTime() - (double)ticker)
               / (object.getEndTime() - object.getStartTime()))) + (object.getEndXCoordinate()
-              * ((ticker - object.getStartTime()) / (object.getEndTime() - object.getStartTime())));
-      double newY = (object.getStartYCoordinate() * ((object.getEndTime() - ticker)
+              * (((double)ticker - object.getStartTime()) / (object.getEndTime()
+              - object.getStartTime())));
+      double newY = (object.getStartYCoordinate() * ((object.getEndTime() - (double)ticker)
               / (object.getEndTime() - object.getStartTime()))) + (object.getEndYCoordinate()
-              * ((ticker - object.getStartTime()) / (object.getEndTime() - object.getStartTime())));
+              * (((double)ticker - object.getStartTime()) / (object.getEndTime()
+              - object.getStartTime())));
       Oval copy = new Oval(object.radiusX, object.radiusY, newX, newY, object.getStartColor().red,
               object.getStartColor().green, object.getStartColor().blue, ticker, ticker,
               object.shape.getName());
       return copy;
     }
     if (object.type == TransformationType.SIZE && object.shape.getShapeType() == ShapeType.OVAL) {
-      double newRadiusX = (object.getRadiusX() * ((object.getEndTime() - ticker)
+      double newRadiusX = (object.getRadiusX() * ((object.getEndTime() - (double)ticker)
               / (object.getEndTime() - object.getStartTime()))) + (object.newRadiusX)
-              * ((ticker - object.getStartTime()) / (object.getEndTime() - object.getStartTime()));
-      double newRadiusY = (object.getRadiusY() * ((object.getEndTime() - ticker)
+              * (((double)ticker - object.getStartTime()) / (object.getEndTime()
+              - object.getStartTime()));
+      double newRadiusY = (object.getRadiusY() * ((object.getEndTime() - (double)ticker)
               / (object.getEndTime() - object.getStartTime()))) + (object.newRadiusY)
-              * ((ticker - object.getStartTime()) / (object.getEndTime() - object.getStartTime()));
+              * (((double)ticker - object.getStartTime()) / (object.getEndTime()
+              - object.getStartTime()));
       Oval copy = new Oval(newRadiusX, newRadiusY, object.getStartXCoordinate(),
               object.getStartYCoordinate(), object.getStartColor().red,
               object.getStartColor().green, object.getStartColor().blue, ticker, ticker,
@@ -204,12 +210,14 @@ public final class IModelImpl implements IModel {
     }
     if (object.type == TransformationType.SIZE
             && object.shape.getShapeType() == ShapeType.RECTANGLE) {
-      double newHeight = (object.height * ((object.getEndTime() - ticker)
+      double newHeight = (object.height * ((object.getEndTime() - (double)ticker)
               / (object.getEndTime() - object.getStartTime()))) + (object.newHeight)
-              * ((ticker - object.getStartTime()) / (object.getEndTime() - object.getStartTime()));
-      double newWidth = (object.width * ((object.getEndTime() - ticker)
+              * (((double)ticker - object.getStartTime()) / (object.getEndTime()
+              - object.getStartTime()));
+      double newWidth = (object.width * ((object.getEndTime() - (double)ticker)
               / (object.getEndTime() - object.getStartTime()))) + (object.newWidth)
-              * ((ticker - object.getStartTime()) / (object.getEndTime() - object.getStartTime()));
+              * (((double)ticker - object.getStartTime()) / (object.getEndTime()
+              - object.getStartTime()));
       Rectangle copy = new Rectangle(newWidth, newHeight, object.getStartXCoordinate(),
               object.getStartYCoordinate(), object.getStartColor().red,
               object.getStartColor().green, object.getStartColor().blue, ticker, ticker,
@@ -232,8 +240,7 @@ public final class IModelImpl implements IModel {
               object.shape.getName());
       return copy;
     }
-    if (object.type == TransformationType.COLOR
-            && object.shape.getShapeType() == ShapeType.OVAL) {
+    else {
       int newRed = (object.startColor.red * ((object.getEndTime() - ticker)
               / (object.getEndTime() - object.getStartTime()))) + (object.endColor.red)
               * ((ticker - object.getStartTime()) / (object.getEndTime() - object.getStartTime()));
