@@ -322,7 +322,7 @@ public final class IModelImpl implements IModel {
   /**
    * Builder class for ModelImpl.
    */
-  public static final class Builder implements AnimationBuilder<IModel> {
+  public static class Builder implements AnimationBuilder<IModel> {
     private final IModelImpl model;
     private final ArrayList<DeclaredShape> declaredShapeList;
 
