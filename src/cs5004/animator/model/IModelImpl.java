@@ -150,6 +150,9 @@ public final class IModelImpl implements IModel {
               animation.add(tween(t, ticker));
           }
         }
+        if (shapes.stream().allMatch(t->t.getAppearance() > ticker)) {
+          animation.add(shape);
+        }
       }
     }
     return animation;
