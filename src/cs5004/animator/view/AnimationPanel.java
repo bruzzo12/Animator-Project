@@ -6,10 +6,13 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import cs5004.animator.model.IModelImpl;
+
 /**
  * This Animation Panel represents the area where the animations of shapes will take place.
  */
 class AnimationPanel extends JPanel {
+  private IModelImpl model;
   private String ShapeType;
   private String transformationType;
   public int speedValue;
@@ -19,11 +22,14 @@ class AnimationPanel extends JPanel {
   public int startTime;
   public int endTime ;
   public int currentTime;
+  public int startLocation;
+  public int endLocation;
+  public int currentLocation;
   /**
    * Constructs an Animation Panel object.
    */
   public AnimationPanel(int speedValue, String ShapeType, int startValue, int endValue,
-                        int startTime, int endTime) {
+                        int startTime, int endTime, int startLocation, int endLocation) {
     super();
     this.speedValue = speedValue;
     this.startValue = startValue;
@@ -31,6 +37,8 @@ class AnimationPanel extends JPanel {
     this.endValue = endValue;
     this.startTime = startTime;
     this.endTime = endTime;
+    this.currentLocation = startLocation;
+    this.endLocation = endLocation;
     currentTime = 0;
 System.out.println(currentTime);
 
@@ -38,17 +46,17 @@ System.out.println(currentTime);
       //System.out.println(String.format("Current time is: %d\n", currentTime));
       @Override
       public void actionPerformed(ActionEvent actEvt) {
-        System.out.println(String.format("Current time is: %d\n", currentTime));
+        /*System.out.println(String.format("Current time is: %d\n", currentTime));
         if(currentTime >= startTime){
           System.out.println(String.format("Current time is: %d\n", currentTime));
           currentValue = tween(startValue, endValue, startTime, endTime, currentTime);
-
+          currentLocation = tween(currentLocation, endLocation, startTime, endTime, currentTime);
           repaint();
 
         }
         if(currentTime == endTime){
           ((Timer)actEvt.getSource()).stop();
-        }
+        }*/
         currentTime++;
       }
     }).start();
@@ -74,21 +82,26 @@ System.out.println(currentTime);
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
     Graphics2D g2d = (Graphics2D) g.create();
-    System.out.println(String.format("CurrentValue is :%d Current time is:%d",currentValue, currentTime));
+    System.out.println(String.format("CurrentValue is :%d Current time is:%d",currentValue,
+            currentTime));
       Color objectColor = new Color(currentValue, 12, 45);
       g2d.setColor(objectColor);
-      g2d.drawRect(currentTime, 300, currentValue, 12);
-      g2d.fillRect(currentTime, 300, currentValue, 12);
+      g2d.drawRect(currentLocation, currentLocation, currentValue, 12);
+      g2d.fillRect(currentLocation, currentLocation, currentValue, 12);
 
 
 
   }
   private static void setupGUI(){
-    AnimationPanel mainPanel = new AnimationPanel(30,"Rectangle",
-            11,30,0, 50);
+    AnimationPanel newPanel = new AnimationPanel(10, "Rectangle", 34,
+            100, 5, 300, 100, 500);
+    AnimationPanel mainPanel = new AnimationPanel(1000,"Rectangle",
+            11,30,0, 300, 50, 700);
     JFrame frame = new JFrame("Shapes");
     frame.setPreferredSize(new Dimension(700,700));
     mainPanel.getPreferredSize();
+    newPanel.getPreferredSize();
+    frame.getContentPane().add(newPanel);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.pack();
     frame.setLocationByPlatform(true);
