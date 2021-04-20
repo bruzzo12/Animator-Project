@@ -19,7 +19,7 @@ public class DrawPanel extends JPanel implements IView {
     frame.getContentPane().setLayout(null);
 
   }
-  protected void Tween()
+  //protected void Tween();
   @Override
   protected void paintComponent(Graphics g){
     super.paintComponent(g);

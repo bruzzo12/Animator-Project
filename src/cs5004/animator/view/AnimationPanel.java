@@ -11,12 +11,13 @@ import javax.swing.*;
  */
 class AnimationPanel extends JPanel {
   private String ShapeType;
-  private int speedValue;
-  private static int startValue;
-  private static int currentValue;
-  private static int endValue;
-  public static int startTime;
-  private static int endTime ;
+  private String transformationType;
+  public int speedValue;
+  public int startValue;
+  public int currentValue;
+  public int endValue;
+  public int startTime;
+  public int endTime ;
   private int currentTime;
   /**
    * Constructs an Animation Panel object.
@@ -26,18 +27,19 @@ class AnimationPanel extends JPanel {
     super();
     this.speedValue = speedValue;
     this.startValue = startValue;
-    this.currentValue = startValue;
+    currentValue = startValue;
     this.endValue = endValue;
     this.startTime = startTime;
     this.endTime = endTime;
-    this.currentTime = 0;
-    this.setBackground(Color.WHITE);
+    currentTime = 0;
 
-    new Timer(speedValue, new ActionListener() {
+
+    new Timer(this.speedValue, new ActionListener() {
 
       @Override
       public void actionPerformed(ActionEvent e) {
         if(currentTime >= startTime){
+          System.out.println(String.format("Current time is: %d\n", currentTime));
           currentValue = tween(startValue, endValue, startTime, endTime, currentTime);
           repaint();
 
@@ -50,11 +52,14 @@ class AnimationPanel extends JPanel {
     });
   }
 
-  protected int tween(int startValue, int endValue, int startTime, int endTime, int currentTime){
+  private int tween(int startValue, int endValue, int startTime, int endTime, int currentTime){
     return startValue*((endTime - currentTime)/(endTime-startTime)) +
             endValue*((currentTime - startTime)/(endTime-startTime));
   };
 
+  public Dimension getPreferredSize() {
+    return new Dimension(500, 500);
+  }
   /**
    * Overrides the paintComponent method in the JPanel.
    *
@@ -63,18 +68,32 @@ class AnimationPanel extends JPanel {
   @Override
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
-    if(ShapeType == "Rectangle"){
-      g.drawRect();
-    }
+      Color objectColor = new Color(currentValue, 12, 45);
+      g.setColor(objectColor);
+      g.drawRect(300, 300, currentValue, 12);
+      g.fillRect(300, 300, currentValue, 12);
+
+
+
   }
+  private static void setupGUI(){
+    AnimationPanel mainPanel = new AnimationPanel(1,"Rectangle",
+            11,30,0, 50);
+    JFrame frame = new JFrame("Shapes");
+    frame.setPreferredSize(new Dimension(700,700));
+    mainPanel.getPreferredSize();
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.pack();
+    frame.setLocationByPlatform(true);
+    frame.getContentPane().add(mainPanel);
+    frame.setVisible(true);
+
+  }
+
   public static void main(String[] args) {
     SwingUtilities.invokeLater(new Runnable() {
       public void run() {
-        AnimationPanel mainPanel = new AnimationPanel(30);
-        JFrame frame = new JFrame("Shapes");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(mainPanel);
-        frame.setVisible(true);
+        setupGUI();
       }
     });
   }
