@@ -148,8 +148,11 @@ public final class IModelImpl implements IModel {
 
   @Override
   public ArrayList<Shape> getShapesAtTicker(int ticker) {
+
     ArrayList<Shape> animation = new ArrayList<>();
-    for (Shape shape:shapes) {
+    sort(new ShapeTimeComparator());
+    sortTransformations(new TransformationTimeComparator());
+    for (Shape shape : shapes) {
       if (shape.getAppearance() <= ticker && ticker <= shape.getDisappearance()) {
         for (Transformation t : shape.getTransformationList()) {
           if (t.getStartTime() <= ticker && ticker <= t.getEndTime()) {

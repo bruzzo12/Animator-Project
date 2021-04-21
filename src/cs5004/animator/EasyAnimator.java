@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
-
+import cs5004.animator.model.Shape;
 import cs5004.animator.model.IModelImpl;
 import cs5004.animator.util.AnimationReader;
 import cs5004.animator.view.SVGView;
@@ -108,7 +108,11 @@ public final class EasyAnimator {
     if (viewType.equals("visual")) {
       VisualView view = new VisualView();
       if (output == null) {
-        System.out.println("Must specify output file");
+        int ticker;
+        ArrayList<ArrayList<Shape>> animationFrames = new ArrayList<> ();
+        for (ticker = 0; ticker < model.getMax(); ticker++) {
+          animationFrames.add(model.getShapesAtTicker(ticker));
+        }
       } else {
         System.out.println("No need for output file!");
       }

@@ -139,6 +139,12 @@ public interface IModel {
   String toString();
 
   /**
+   * Returns the end time of the transformation.
+   * @returns end time
+   */
+  int getMax();
+
+  /**
    * Returns a collection of copy of shapes at specific time.
    *
    * @param ticker instance of time.

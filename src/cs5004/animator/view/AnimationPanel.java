@@ -3,10 +3,15 @@ package cs5004.animator.view;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
 import cs5004.animator.model.IModelImpl;
+import cs5004.animator.model.Shape;
+import cs5004.animator.model.ShapeType;
+import cs5004.animator.model.Rectangle;
+import cs5004.animator.model.Oval;
 
 /**
  * This Animation Panel represents the area where the animations of shapes will take place.
@@ -14,6 +19,7 @@ import cs5004.animator.model.IModelImpl;
 class AnimationPanel extends JPanel {
   private IModelImpl model;
   private String transformationType;
+  private ArrayList<ArrayList<Shape>> frames;
   public int speedValue;
   private int counter = 0;
 
@@ -30,9 +36,10 @@ class AnimationPanel extends JPanel {
   /**
    * Constructs an Animation Panel object.
    */
-  public AnimationPanel(int speedValue, String ShapeType, int startValue, int endValue,
-                        int startTime, int endTime, int startLocation, int endLocation) {
+  public AnimationPanel(ArrayList<ArrayList<Shape>> frames, int speedValue, String ShapeType /*int startValue,
+                        int endValue, int startTime, int endTime, int startLocation, int endLocation*/) {
     super();
+    this.frames = frames;
     this.speedValue = speedValue;
 
     /* this.startValue = startValue;
@@ -45,7 +52,7 @@ class AnimationPanel extends JPanel {
     currentTime = 0;
 System.out.println(currentTime);*/
 
-    new Timer(this.speedValue, new ActionListener() {
+    new Timer(1000 / this.speedValue, new ActionListener() {
       //System.out.println(String.format("Current time is: %d\n", currentTime));
       @Override
       public void actionPerformed(ActionEvent actEvt) {
