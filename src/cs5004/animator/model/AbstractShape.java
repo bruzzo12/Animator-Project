@@ -19,7 +19,7 @@ public abstract class AbstractShape implements Shape {
   /**
    * Enum class used to identify Shape type for concrete instances of AbstractShape.
    */
-  protected enum ShapeType {
+  public enum ShapeType {
     CIRCLE, RECTANGLE, OVAL;
 
     /**

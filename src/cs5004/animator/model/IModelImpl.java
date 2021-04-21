@@ -141,16 +141,22 @@ public final class IModelImpl implements IModel {
   }
 
   @Override
+  public int getMax() {
+    Transformation max = Collections.max(transformationList, new EndTimeComparator());
+    return max.getEndTime();
+  }
+
+  @Override
   public ArrayList<Shape> getShapesAtTicker(int ticker) {
     ArrayList<Shape> animation = new ArrayList<>();
     for (Shape shape:shapes) {
       if (shape.getAppearance() <= ticker && ticker <= shape.getDisappearance()) {
         for (Transformation t : shape.getTransformationList()) {
           if (t.getStartTime() <= ticker && ticker <= t.getEndTime()) {
-              animation.add(tween(t, ticker));
+            animation.add(tween(t, ticker));
           }
         }
-        if (shapes.stream().allMatch(t->t.getAppearance() > ticker)) {
+        if (shapes.stream().allMatch(t -> t.getAppearance() > ticker)) {
           animation.add(shape);
         }
       }
@@ -161,6 +167,7 @@ public final class IModelImpl implements IModel {
 
   /**
    * Calculates the intermediate state of the shape being transformed at a specific tick
+   *
    * @param object the transformation object to be tweened
    * @param ticker the time at which the intermediate state is being calculated
    * @return copy of the shape with the intermediate state values
@@ -168,13 +175,13 @@ public final class IModelImpl implements IModel {
   public Shape tween(Transformation object, int ticker) {
     if (object.type == TransformationType.MOVE
             && object.shape.getShapeType() == ShapeType.RECTANGLE) {
-      double newX = (object.getStartXCoordinate() * ((object.getEndTime() - (double)ticker)
+      double newX = (object.getStartXCoordinate() * ((object.getEndTime() - (double) ticker)
               / (object.getEndTime() - object.getStartTime()))) + (object.getEndXCoordinate()
-              * (((double)ticker - object.getStartTime()) / (object.getEndTime()
+              * (((double) ticker - object.getStartTime()) / (object.getEndTime()
               - object.getStartTime())));
-      double newY = (object.getStartYCoordinate() * ((object.getEndTime() - (double)ticker)
+      double newY = (object.getStartYCoordinate() * ((object.getEndTime() - (double) ticker)
               / (object.getEndTime() - object.getStartTime()))) + (object.getEndYCoordinate()
-              * (((double)ticker - object.getStartTime()) / (object.getEndTime()
+              * (((double) ticker - object.getStartTime()) / (object.getEndTime()
               - object.getStartTime())));
       Rectangle copy = new Rectangle(object.width, object.height, newX, newY,
               object.getStartColor().red, object.getStartColor().green,
@@ -183,13 +190,13 @@ public final class IModelImpl implements IModel {
     }
     if (object.type == TransformationType.MOVE
             && object.shape.getShapeType() == ShapeType.OVAL) {
-      double newX = (object.getStartXCoordinate() * ((object.getEndTime() - (double)ticker)
+      double newX = (object.getStartXCoordinate() * ((object.getEndTime() - (double) ticker)
               / (object.getEndTime() - object.getStartTime()))) + (object.getEndXCoordinate()
-              * (((double)ticker - object.getStartTime()) / (object.getEndTime()
+              * (((double) ticker - object.getStartTime()) / (object.getEndTime()
               - object.getStartTime())));
-      double newY = (object.getStartYCoordinate() * ((object.getEndTime() - (double)ticker)
+      double newY = (object.getStartYCoordinate() * ((object.getEndTime() - (double) ticker)
               / (object.getEndTime() - object.getStartTime()))) + (object.getEndYCoordinate()
-              * (((double)ticker - object.getStartTime()) / (object.getEndTime()
+              * (((double) ticker - object.getStartTime()) / (object.getEndTime()
               - object.getStartTime())));
       Oval copy = new Oval(object.radiusX, object.radiusY, newX, newY, object.getStartColor().red,
               object.getStartColor().green, object.getStartColor().blue, ticker, ticker,
@@ -197,13 +204,13 @@ public final class IModelImpl implements IModel {
       return copy;
     }
     if (object.type == TransformationType.SIZE && object.shape.getShapeType() == ShapeType.OVAL) {
-      double newRadiusX = (object.getRadiusX() * ((object.getEndTime() - (double)ticker)
+      double newRadiusX = (object.getRadiusX() * ((object.getEndTime() - (double) ticker)
               / (object.getEndTime() - object.getStartTime()))) + (object.newRadiusX)
-              * (((double)ticker - object.getStartTime()) / (object.getEndTime()
+              * (((double) ticker - object.getStartTime()) / (object.getEndTime()
               - object.getStartTime()));
-      double newRadiusY = (object.getRadiusY() * ((object.getEndTime() - (double)ticker)
+      double newRadiusY = (object.getRadiusY() * ((object.getEndTime() - (double) ticker)
               / (object.getEndTime() - object.getStartTime()))) + (object.newRadiusY)
-              * (((double)ticker - object.getStartTime()) / (object.getEndTime()
+              * (((double) ticker - object.getStartTime()) / (object.getEndTime()
               - object.getStartTime()));
       Oval copy = new Oval(newRadiusX, newRadiusY, object.getStartXCoordinate(),
               object.getStartYCoordinate(), object.getStartColor().red,
@@ -213,13 +220,13 @@ public final class IModelImpl implements IModel {
     }
     if (object.type == TransformationType.SIZE
             && object.shape.getShapeType() == ShapeType.RECTANGLE) {
-      double newHeight = (object.height * ((object.getEndTime() - (double)ticker)
+      double newHeight = (object.height * ((object.getEndTime() - (double) ticker)
               / (object.getEndTime() - object.getStartTime()))) + (object.newHeight)
-              * (((double)ticker - object.getStartTime()) / (object.getEndTime()
+              * (((double) ticker - object.getStartTime()) / (object.getEndTime()
               - object.getStartTime()));
-      double newWidth = (object.width * ((object.getEndTime() - (double)ticker)
+      double newWidth = (object.width * ((object.getEndTime() - (double) ticker)
               / (object.getEndTime() - object.getStartTime()))) + (object.newWidth)
-              * (((double)ticker - object.getStartTime()) / (object.getEndTime()
+              * (((double) ticker - object.getStartTime()) / (object.getEndTime()
               - object.getStartTime()));
       Rectangle copy = new Rectangle(newWidth, newHeight, object.getStartXCoordinate(),
               object.getStartYCoordinate(), object.getStartColor().red,
@@ -242,8 +249,7 @@ public final class IModelImpl implements IModel {
               object.getStartYCoordinate(), newRed, newGreen, newBlue, ticker, ticker,
               object.shape.getName());
       return copy;
-    }
-    else {
+    } else {
       int newRed = (object.startColor.red * ((object.getEndTime() - ticker)
               / (object.getEndTime() - object.getStartTime()))) + (object.endColor.red)
               * ((ticker - object.getStartTime()) / (object.getEndTime() - object.getStartTime()));
@@ -259,8 +265,6 @@ public final class IModelImpl implements IModel {
       return copy;
     }
   }
-
-
 
 
   public int getShapeCount() {
