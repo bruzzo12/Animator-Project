@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
+import cs5004.animator.model.IModel;
 import cs5004.animator.model.IModelImpl;
 import cs5004.animator.model.Oval;
 import cs5004.animator.model.Point2D;
@@ -16,12 +17,13 @@ import cs5004.animator.model.Shape;
 /**
  * This Animation Panel represents the area where the animations of shapes will take place.
  */
-class AnimationPanel extends JPanel {
-  private IModelImpl model;
+class AnimationPanel extends JPanel implements ActionListener {
+  private IModel model;
   private String transformationType;
   private ArrayList<ArrayList<Shape>> frames;
+  private Timer timer;
   public int speedValue;
-  private int counter = 0;
+  private int counter;
   private double offsetX;
   private double offsetY;
 
@@ -38,41 +40,17 @@ class AnimationPanel extends JPanel {
   /**
    * Constructs an Animation Panel object.
    */
-  public AnimationPanel(/*ArrayList<ArrayList<Shape>> frames, int speedValue, String ShapeType int startValue,
+  public AnimationPanel(IModel m, int speedValue;/*ArrayList<ArrayList<Shape>> frames, int speedValue, String ShapeType int startValue,
                         int endValue, int startTime, int endTime, int startLocation, int endLocation*/) {
     super();
+    this.model = m;
+    this.speedValue = speedValue;
+    this.timer = new Timer(1000 / speedValue, this);
+    this.counter = 0;
     this.setBackground(Color.WHITE);
 
-
-    /* this.startValue = startValue;
-    currentValue = startValue;
-    this.endValue = endValue;
-    this.startTime = startTime;
-    this.endTime = endTime;
-    this.currentLocation = startLocation;
-    this.endLocation = endLocation;
-    currentTime = 0;
-System.out.println(currentTime);*/
-
-    Timer t = new Timer(1000 / this.speedValue, new ActionListener() {
-      //System.out.println(String.format("Current time is: %d\n", currentTime));
-      @Override
-      public void actionPerformed(ActionEvent actEvt) {
-       /* //System.out.println(String.format("Current time is: %d\n", currentTime));
-        if (currentTime >= startTime) {
-          System.out.println(String.format("Current time is: %d\n", currentTime));
-          currentValue = tween(startValue, endValue, startTime, endTime, currentTime);
-          currentLocation = tween(currentLocation, endLocation, startTime, endTime, currentTime);*/
-          repaint();
-
-        }
-        if (currentTime == endTime) {
-          ((Timer) actEvt.getSource()).stop();
-        }
-        counter++;
-      }
-    }).start();
   }
+
 
   public static int tween(int startValue, int endValue, int startTime, int endTime, int currentTime) {
     return (int) (startValue * (((double) endTime - (double) currentTime) /
@@ -123,30 +101,23 @@ System.out.println(currentTime);*/
   }
 
 
-  private static void setupGUI() {
-    //AnimationPanel newPanel = new AnimationPanel(100, "Rectangle", 34,
-    //       100, 5, 300, 100, 500);
-    AnimationPanel mainPanel = new AnimationPanel(100, "Rectangle",
-            11, 30, 0, 300, 50, 700);
-    JFrame frame = new JFrame("Shapes");
-    frame.setPreferredSize(new Dimension(700, 700));
-    mainPanel.getPreferredSize();
-    // newPanel.getPreferredSize();
-    // frame.getContentPane().add(newPanel);
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.pack();
-    frame.setLocationByPlatform(true);
-    frame.getContentPane().add(mainPanel);
-    frame.setVisible(true);
+  @Override
+  public void actionPerformed(ActionEvent e) {
+    this.counter++;
+    repaint();
 
   }
 
-  public static void main(String[] args) {
-    SwingUtilities.invokeLater(new Runnable() {
-      public void run() {
-        setupGUI();
-      }
-    });
+  public void beginTimer(){
+    this.timer.start();
+  }
+
+  public void pauseTimer(){
+    this.timer.stop();
+  }
+
+  public void resetTimer(){
+    counter = 0;
+    this.timer.restart();
   }
 }
-
