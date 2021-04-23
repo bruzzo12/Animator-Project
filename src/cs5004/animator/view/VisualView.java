@@ -2,10 +2,12 @@ package cs5004.animator.view;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
 import cs5004.animator.model.IModelImpl;
+import cs5004.animator.model.Point2D;
 
 /**
  * This class represents a visual view of the shape animation.
@@ -24,7 +26,7 @@ public class VisualView extends JFrame implements IView {
     //scrollbars on bottom and left side. Will need to somehow get the dimension size from text
     //file using the AnimationReader and then input them in new Dimension() (500 is temp for now)
     this.setLayout(new BorderLayout());
-   shapePanel = new AnimationPanel();
+    shapePanel = new AnimationPanel();
     shapePanel.setPreferredSize(new Dimension(500, 500));
     this.add(shapePanel, BorderLayout.CENTER);
     this.add(new Scrollbar(), BorderLayout.SOUTH);
@@ -61,6 +63,11 @@ public class VisualView extends JFrame implements IView {
   @Override
   public void getShapeType() {
 
+  }
+
+  @Override
+  public void setOffset(Point2D offset) {
+    shapePanel.setOffset(offset);
   }
 
   @Override

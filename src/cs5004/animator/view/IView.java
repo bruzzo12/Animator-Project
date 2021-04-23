@@ -3,6 +3,7 @@ package cs5004.animator.view;
 import java.awt.event.ActionListener;
 
 import cs5004.animator.model.IModelImpl;
+import cs5004.animator.model.Point2D;
 
 
 /**
@@ -45,6 +46,13 @@ public interface IView {
    * Gets the type of the shape so the view can draw it.
    */
   void getShapeType();
+
+  /**
+   * Sets the offset x and y values for all x and y coordinates.
+   * @param offset Point2D point
+   */
+  void setOffset(Point2D offset);
+
 
   /**
    * Gets the text of the animation.

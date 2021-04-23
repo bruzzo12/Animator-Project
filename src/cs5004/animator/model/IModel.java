@@ -9,6 +9,18 @@ import java.util.NoSuchElementException;
 public interface IModel {
 
   /**
+   * Returns the offset x value for all coordinates.
+   * @returns offset x value
+   */
+  double getX();
+
+  /**
+   * Returns the offset y value for all coordinates.
+   * @returns offset y value
+   */
+  double getY();
+
+  /**
    * Adds a given shape to the animation. The shape is in the animation for a set amount of time.
    * Throws an IllegalArgumentException if the shape already exists.
    *

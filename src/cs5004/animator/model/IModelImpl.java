@@ -15,7 +15,7 @@ public final class IModelImpl implements IModel {
   protected ArrayList<Shape> shapes;
   protected ArrayList<Transformation> transformationList;
   protected int shapeCount;
-  protected Point2D upperLeft;
+  protected Point2D offset;
   protected int width;
   protected int height;
 
@@ -26,7 +26,17 @@ public final class IModelImpl implements IModel {
     this.shapes = new ArrayList<>();
     this.transformationList = new ArrayList<>();
     this.shapeCount = 0;
-    this.upperLeft = new Point2D(0, 0);
+    this.offset = new Point2D(0, 0);
+  }
+
+  @Override
+  public double getX() {
+    return this.offset.getX();
+  }
+
+  @Override
+  public double getY() {
+    return this.offset.getY();
   }
 
   @Override
@@ -76,7 +86,8 @@ public final class IModelImpl implements IModel {
     if (!shapes.contains(shape)) {
       throw new NoSuchElementException("Shape not in the animation, please add the shape first!");
     }
-    transformationList.add(shape.move(newX, newY, timeStart, timeEnd));
+    transformationList.add(shape.move(newX ,
+            newY, timeStart, timeEnd));
   }
 
   @Override

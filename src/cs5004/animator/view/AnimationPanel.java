@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import cs5004.animator.model.IModelImpl;
-import cs5004.animator.model.Shape;
-import cs5004.animator.model.ShapeType;
-import cs5004.animator.model.Rectangle;
 import cs5004.animator.model.Oval;
+import cs5004.animator.model.Point2D;
+import cs5004.animator.model.Rectangle;
+import cs5004.animator.model.Shape;
 
 /**
  * This Animation Panel represents the area where the animations of shapes will take place.
@@ -22,6 +22,8 @@ class AnimationPanel extends JPanel {
   private ArrayList<ArrayList<Shape>> frames;
   public int speedValue;
   private int counter = 0;
+  private double offsetX;
+  private double offsetY;
 
   /* public int startValue;
   public int currentValue;
@@ -36,11 +38,11 @@ class AnimationPanel extends JPanel {
   /**
    * Constructs an Animation Panel object.
    */
-  public AnimationPanel(ArrayList<ArrayList<Shape>> frames, int speedValue, String ShapeType /*int startValue,
+  public AnimationPanel(/*ArrayList<ArrayList<Shape>> frames, int speedValue, String ShapeType int startValue,
                         int endValue, int startTime, int endTime, int startLocation, int endLocation*/) {
     super();
-    this.frames = frames;
-    this.speedValue = speedValue;
+    this.setBackground(Color.WHITE);
+
 
     /* this.startValue = startValue;
     currentValue = startValue;
@@ -84,6 +86,12 @@ System.out.println(currentTime);*/
     return new Dimension(500, 500);
   }
 
+
+  public void setOffset(Point2D offset) {
+    this.offsetX = offset.getX();
+    this.offsetY = offset.getY();
+  }
+
   /**
    * Overrides the paintComponent method in the JPanel.
    *
@@ -101,13 +109,15 @@ System.out.println(currentTime);*/
         Rectangle r = (Rectangle) shape;
         Color objectColor = new Color(shape.getRed(), shape.getGreen(), shape.getBlue());
         g2d.setColor(objectColor);
-        g2d.drawRect((int) r.getX(), (int) r.getY(), (int) r.getWidth(), (int) r.getHeight());
+        g2d.drawRect((int) (r.getX() - this.offsetX), (int) (r.getY() - this.offsetY),
+                (int) r.getWidth(), (int) r.getHeight());
       }
       if (shape.getShapeType().toString().equals("Oval")) {
         Oval o = (Oval) shape;
         Color objectColor = new Color(shape.getRed(), shape.getGreen(), shape.getBlue());
         g2d.setColor(objectColor);
-        g2d.drawOval((int) o.getX(), (int) o.getY(), (int) o.getRX(), (int) o.getRY());
+        g2d.drawOval((int) (o.getX() - this.offsetY), (int) (o.getY() - this.offsetY),
+                (int) o.getRX(), (int) o.getRY());
       }
     }
   }
