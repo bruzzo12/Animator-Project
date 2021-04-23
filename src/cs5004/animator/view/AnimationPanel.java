@@ -54,7 +54,7 @@ class AnimationPanel extends JPanel {
     currentTime = 0;
 System.out.println(currentTime);*/
 
-    new Timer(1000 / this.speedValue, new ActionListener() {
+    Timer t = new Timer(1000 / this.speedValue, new ActionListener() {
       //System.out.println(String.format("Current time is: %d\n", currentTime));
       @Override
       public void actionPerformed(ActionEvent actEvt) {
