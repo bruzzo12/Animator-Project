@@ -5,13 +5,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
-import cs5004.animator.model.Shape;
+import java.util.ArrayList;
+
 import cs5004.animator.model.IModelImpl;
+import cs5004.animator.model.Shape;
 import cs5004.animator.util.AnimationReader;
 import cs5004.animator.view.SVGView;
 import cs5004.animator.view.TextView;
 import cs5004.animator.view.VisualView;
-import java.util.ArrayList;
 
 public final class EasyAnimator {
 
@@ -113,6 +114,11 @@ public final class EasyAnimator {
         for (ticker = 0; ticker < model.getMax(); ticker++) {
           animationFrames.add(model.getShapesAtTicker(ticker));
         }
+        view.setDimensions(model.getWidth(), model.getHeight());
+        view.setOffset(model.getOffset());
+        view.setShapes(animationFrames);
+
+
       } else {
         System.out.println("No need for output file!");
       }

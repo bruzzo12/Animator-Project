@@ -3,6 +3,7 @@ package cs5004.animator.view;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -49,12 +50,22 @@ public class DrawPanel extends JPanel implements IView {
   }
 
   @Override
-  public void setShapes() {
+  public void setShapes(ArrayList<ArrayList<cs5004.animator.model.Shape>> frames) {
 
   }
 
   @Override
   public void getShapeType() {
+
+  }
+
+  @Override
+  public void setOffset(cs5004.animator.model.Point2D offset) {
+
+  }
+
+  @Override
+  public void setDimensions(double width, double height) {
 
   }
 

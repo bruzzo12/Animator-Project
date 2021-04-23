@@ -18,7 +18,6 @@ import cs5004.animator.model.Shape;
  */
 class AnimationPanel extends JPanel {
   private IModelImpl model;
-  private String transformationType;
   private ArrayList<ArrayList<Shape>> frames;
   public int speedValue;
   private int counter = 0;
@@ -54,7 +53,7 @@ class AnimationPanel extends JPanel {
     currentTime = 0;
 System.out.println(currentTime);*/
 
-    new Timer(1000 / this.speedValue, new ActionListener() {
+    ActionListener listener = new ActionListener() {
       //System.out.println(String.format("Current time is: %d\n", currentTime));
       @Override
       public void actionPerformed(ActionEvent actEvt) {
@@ -92,6 +91,9 @@ System.out.println(currentTime);*/
     this.offsetY = offset.getY();
   }
 
+  public void setShapes(ArrayList<ArrayList<Shape>> frames) {
+    this.frames = frames;
+  }
   /**
    * Overrides the paintComponent method in the JPanel.
    *

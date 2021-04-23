@@ -9,16 +9,23 @@ import java.util.NoSuchElementException;
 public interface IModel {
 
   /**
-   * Returns the offset x value for all coordinates.
-   * @returns offset x value
+   * Returns the offset values for all x and y coordinates.
+   * @returns offset values in Point2D form
    */
-  double getX();
+  Point2D getOffset();
+
 
   /**
-   * Returns the offset y value for all coordinates.
-   * @returns offset y value
+   * Returns the width of the model.
+   * @returns width
    */
-  double getY();
+  double getWidth();
+
+  /**
+   * Returns the height of the model.
+   * @returns height
+   */
+  double getHeight();
 
   /**
    * Adds a given shape to the animation. The shape is in the animation for a set amount of time.

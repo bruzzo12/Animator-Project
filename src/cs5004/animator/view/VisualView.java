@@ -15,6 +15,8 @@ import cs5004.animator.model.Point2D;
 public class VisualView extends JFrame implements IView {
   private AnimationPanel shapePanel;
   private ArrayList<ArrayList<Shape>> shapes;
+  private double width;
+  private double height;
   /**
    * Constructs a new VisualView object.
    */
@@ -27,7 +29,8 @@ public class VisualView extends JFrame implements IView {
     //file using the AnimationReader and then input them in new Dimension() (500 is temp for now)
     this.setLayout(new BorderLayout());
     shapePanel = new AnimationPanel();
-    shapePanel.setPreferredSize(new Dimension(500, 500));
+    shapePanel.setPreferredSize(new Dimension((int) width,
+            (int) height));
     this.add(shapePanel, BorderLayout.CENTER);
     this.add(new Scrollbar(), BorderLayout.SOUTH);
     this.add(new Scrollbar(), BorderLayout.WEST);
@@ -56,18 +59,20 @@ public class VisualView extends JFrame implements IView {
   }
 
   @Override
-  public void setShapes() {
-
+  public void setShapes(ArrayList<ArrayList<cs5004.animator.model.Shape>> frames) {
+    shapePanel.setShapes(frames);
   }
 
-  @Override
-  public void getShapeType() {
-
-  }
 
   @Override
   public void setOffset(Point2D offset) {
     shapePanel.setOffset(offset);
+  }
+
+  @Override
+  public void setDimensions(double width, double height) {
+    this.width = width;
+    this.height = height;
   }
 
   @Override
