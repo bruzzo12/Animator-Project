@@ -77,4 +77,10 @@ public interface IView {
    */
   void animate();
 
+  /**
+   * Sets the speed value based on user input.
+   * @param speed as an int
+   */
+  void setSpeedValue(int speed);
+
 }

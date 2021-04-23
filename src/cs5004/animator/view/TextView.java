@@ -31,6 +31,11 @@ public class TextView implements IView {
 
   }
 
+  @Override
+  public void setSpeedValue(int speed) {
+
+  }
+
 
   @Override
   public void makeVisible() {

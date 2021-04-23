@@ -118,6 +118,7 @@ public final class EasyAnimator {
         view.setOffset(model.getOffset());
         view.setShapes(animationFrames);
         view.setEndTime(model.getMax());
+        view.setSpeedValue(speedValue);
         view.setVisible(true);
         view.animate();
       } else {

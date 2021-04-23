@@ -84,6 +84,10 @@ class AnimationPanel extends JPanel {
     this.offsetY = offset.getY();
   }
 
+  public void setSpeedValue(int speed) {
+    this.speedValue = speed;
+  }
+
   public void setShapes(ArrayList<ArrayList<Shape>> frames) {
     this.frames = frames;
   }
