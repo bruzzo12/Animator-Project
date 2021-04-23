@@ -1,6 +1,7 @@
 package cs5004.animator.view;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
@@ -53,7 +54,7 @@ public class VisualView extends JFrame implements IView, ActionListener {
 
       radioButtons[i].setActionCommand("RB" + (i + 1));
       radioButtons[i].addActionListener(this);
-
+    }
   }
 
   @Override
@@ -89,6 +90,11 @@ public class VisualView extends JFrame implements IView, ActionListener {
   }
 
   @Override
+  public void setEndTime(double endTime) {
+    shapePanel.setEndTime(endTime);
+  }
+
+  @Override
   public void setDimensions(double width, double height) {
     this.width = width;
     this.height = height;
@@ -99,4 +105,14 @@ public class VisualView extends JFrame implements IView, ActionListener {
     return null;
   }
 
+  @Override
+  public void animate() {
+    shapePanel.animate();
+
+  }
+
+  @Override
+  public void actionPerformed(ActionEvent e) {
+
+  }
 }

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import cs5004.animator.model.IModelImpl;
 import cs5004.animator.model.Point2D;
-import cs5004.animator.model.Shape;
 import cs5004.animator.util.AnimationBuilder;
 
 /**
@@ -25,6 +24,11 @@ public class TextView implements IView {
   @Override
   public String getText(IModelImpl model) {
     return model.toString();
+  }
+
+  @Override
+  public void animate() {
+
   }
 
 
@@ -47,18 +51,20 @@ public class TextView implements IView {
 
   }
 
+
   @Override
-  public void setShapes(ArrayList<ArrayList<Shape>> frames) {
+  public void setShapes(ArrayList<ArrayList<cs5004.animator.model.Shape>> frames) {
 
   }
 
-  @Override
-  public void getShapeType() {
-
-  }
 
   @Override
   public void setOffset(Point2D offset) {
+
+  }
+
+  @Override
+  public void setEndTime(double endTime) {
 
   }
 

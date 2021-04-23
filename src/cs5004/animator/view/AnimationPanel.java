@@ -19,10 +19,11 @@ import cs5004.animator.model.Shape;
 class AnimationPanel extends JPanel {
   private IModelImpl model;
   private ArrayList<ArrayList<Shape>> frames;
-  public int speedValue;
+  public int speedValue = 1;
   private int counter = 0;
   private double offsetX;
   private double offsetY;
+  private double endTime;
 
   /* public int startValue;
   public int currentValue;
@@ -37,41 +38,30 @@ class AnimationPanel extends JPanel {
   /**
    * Constructs an Animation Panel object.
    */
-  public AnimationPanel(/*ArrayList<ArrayList<Shape>> frames, int speedValue, String ShapeType int startValue,
-                        int endValue, int startTime, int endTime, int startLocation, int endLocation*/) {
+  public AnimationPanel() {
     super();
     this.setBackground(Color.WHITE);
 
+  }
+    public void animate() {
+      final long start = System.currentTimeMillis();
+      Timer timer = new Timer(1000 / speedValue, null);
+      timer.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent actEvt) {
+          final long current = System.currentTimeMillis();
+          final long elapsed = current - start;
 
-    /* this.startValue = startValue;
-    currentValue = startValue;
-    this.endValue = endValue;
-    this.startTime = startTime;
-    this.endTime = endTime;
-    this.currentLocation = startLocation;
-    this.endLocation = endLocation;
-    currentTime = 0;
-System.out.println(currentTime);*/
-
-    ActionListener listener = new ActionListener() {
-      //System.out.println(String.format("Current time is: %d\n", currentTime));
-      @Override
-      public void actionPerformed(ActionEvent actEvt) {
-       /* //System.out.println(String.format("Current time is: %d\n", currentTime));
-        if (currentTime >= startTime) {
-          System.out.println(String.format("Current time is: %d\n", currentTime));
-          currentValue = tween(startValue, endValue, startTime, endTime, currentTime);
-          currentLocation = tween(currentLocation, endLocation, startTime, endTime, currentTime);*/
           repaint();
 
+          if (elapsed >= endTime) {
+            timer.stop();
+
+          }
         }
-        if (currentTime == endTime) {
-          ((Timer) actEvt.getSource()).stop();
-        }
-        counter++;
-      }
-    }).start();
-  }
+      });
+      timer.start();
+    }
 
   public static int tween(int startValue, int endValue, int startTime, int endTime, int currentTime) {
     return (int) (startValue * (((double) endTime - (double) currentTime) /
@@ -85,6 +75,9 @@ System.out.println(currentTime);*/
     return new Dimension(500, 500);
   }
 
+  public void setEndTime(double endTime) {
+    this.endTime = endTime;
+  }
 
   public void setOffset(Point2D offset) {
     this.offsetX = offset.getX();
@@ -124,31 +117,5 @@ System.out.println(currentTime);*/
     }
   }
 
-
-  private static void setupGUI() {
-    //AnimationPanel newPanel = new AnimationPanel(100, "Rectangle", 34,
-    //       100, 5, 300, 100, 500);
-    AnimationPanel mainPanel = new AnimationPanel(100, "Rectangle",
-            11, 30, 0, 300, 50, 700);
-    JFrame frame = new JFrame("Shapes");
-    frame.setPreferredSize(new Dimension(700, 700));
-    mainPanel.getPreferredSize();
-    // newPanel.getPreferredSize();
-    // frame.getContentPane().add(newPanel);
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.pack();
-    frame.setLocationByPlatform(true);
-    frame.getContentPane().add(mainPanel);
-    frame.setVisible(true);
-
-  }
-
-  public static void main(String[] args) {
-    SwingUtilities.invokeLater(new Runnable() {
-      public void run() {
-        setupGUI();
-      }
-    });
-  }
 }
 

@@ -117,12 +117,14 @@ public final class EasyAnimator {
         view.setDimensions(model.getWidth(), model.getHeight());
         view.setOffset(model.getOffset());
         view.setShapes(animationFrames);
-
-
+        view.setEndTime(model.getMax());
+        view.setVisible(true);
+        view.animate();
       } else {
         System.out.println("No need for output file!");
       }
     }
   }
+
 }
 

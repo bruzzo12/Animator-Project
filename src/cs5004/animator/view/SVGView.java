@@ -37,12 +37,12 @@ public class SVGView implements IView {
   }
 
   @Override
-  public void getShapeType() {
+  public void setOffset(Point2D offset) {
 
   }
 
   @Override
-  public void setOffset(Point2D offset) {
+  public void setEndTime(double endTime) {
 
   }
 
@@ -55,6 +55,11 @@ public class SVGView implements IView {
   public String getText(IModelImpl model) {
     SVG.SVGBuilder svgBuilder = new SVG.SVGBuilder(700, 500, model);
     return svgBuilder.toString();
+  }
+
+  @Override
+  public void animate() {
+
   }
 
 }

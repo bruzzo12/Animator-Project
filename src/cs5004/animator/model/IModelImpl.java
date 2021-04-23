@@ -291,7 +291,7 @@ public final class IModelImpl implements IModel {
   }
 
   public void setBounds(int x, int y, int width, int height) {
-    this.offset.setXandY((double) x, (double) y);
+    this.offset = new Point2D((double) x, (double) y);
     this.width = width;
     this.height = height;
   }

@@ -1,9 +1,11 @@
 package cs5004.animator.view;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import cs5004.animator.model.IModelImpl;
 import cs5004.animator.model.Point2D;
+import cs5004.animator.model.Shape;
 
 
 /**
@@ -38,14 +40,18 @@ public interface IView {
   void refresh();
 
   /**
-   * Sets the shapes on the screen.
+   * Sets the shapes for the animation.
+   * @param frames list of list of shapes at each ticker as they appear in the animation
+   *
    */
-  void setShapes();
+  void setShapes(ArrayList<ArrayList<Shape>> frames);
 
   /**
-   * Gets the type of the shape so the view can draw it.
+   * Sets the dimensions of the JFrame.
+   * @param width the width of the JFrame
+   * @param height the height of the JFrame
    */
-  void getShapeType();
+  void setDimensions(double width, double height);
 
   /**
    * Sets the offset x and y values for all x and y coordinates.
@@ -53,6 +59,11 @@ public interface IView {
    */
   void setOffset(Point2D offset);
 
+  /**
+   * Sets the end time of the animation.
+   * @param endTime the last time a shape exists in the animation
+   */
+  void setEndTime(double endTime);
 
   /**
    * Gets the text of the animation.
@@ -60,5 +71,10 @@ public interface IView {
    * @param model is the model who is being represented as text
    */
   String getText(IModelImpl model);
+
+  /**
+   * Begins the animation.
+   */
+  void animate();
 
 }
