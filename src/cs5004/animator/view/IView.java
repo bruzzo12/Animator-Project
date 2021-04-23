@@ -25,7 +25,7 @@ public interface IView {
    *
    * @param actionEvent
    */
-  void setCommandButtonListener(ActionListener actionEvent);
+  void setCommandButtonListeners(ActionListener actionEvent);
 
   /**
    * Transmit an error message to the view, in case the command could not be processed correctly.

@@ -17,7 +17,7 @@ public class SVGView implements IView {
   }
 
   @Override
-  public void setCommandButtonListener(ActionListener actionEvent) {
+  public void setCommandButtonListeners(ActionListener actionEvent) {
 
   }
 

@@ -18,12 +18,12 @@ import cs5004.animator.model.Shape;
  */
 class AnimationPanel extends JPanel {
   private IModelImpl model;
+  private String transformationType;
   private ArrayList<ArrayList<Shape>> frames;
-  public int speedValue = 1;
+  public int speedValue;
   private int counter = 0;
   private double offsetX;
   private double offsetY;
-  private double endTime;
 
   /* public int startValue;
   public int currentValue;
@@ -38,30 +38,41 @@ class AnimationPanel extends JPanel {
   /**
    * Constructs an Animation Panel object.
    */
-  public AnimationPanel() {
+  public AnimationPanel(/*ArrayList<ArrayList<Shape>> frames, int speedValue, String ShapeType int startValue,
+                        int endValue, int startTime, int endTime, int startLocation, int endLocation*/) {
     super();
     this.setBackground(Color.WHITE);
 
-  }
-    public void animate() {
-      final long start = System.currentTimeMillis();
-      Timer timer = new Timer(1000 / speedValue, null);
-      timer.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent actEvt) {
-          final long current = System.currentTimeMillis();
-          final long elapsed = current - start;
 
+    /* this.startValue = startValue;
+    currentValue = startValue;
+    this.endValue = endValue;
+    this.startTime = startTime;
+    this.endTime = endTime;
+    this.currentLocation = startLocation;
+    this.endLocation = endLocation;
+    currentTime = 0;
+System.out.println(currentTime);*/
+
+    Timer t = new Timer(1000 / this.speedValue, new ActionListener() {
+      //System.out.println(String.format("Current time is: %d\n", currentTime));
+      @Override
+      public void actionPerformed(ActionEvent actEvt) {
+       /* //System.out.println(String.format("Current time is: %d\n", currentTime));
+        if (currentTime >= startTime) {
+          System.out.println(String.format("Current time is: %d\n", currentTime));
+          currentValue = tween(startValue, endValue, startTime, endTime, currentTime);
+          currentLocation = tween(currentLocation, endLocation, startTime, endTime, currentTime);*/
           repaint();
 
-          if (elapsed >= endTime) {
-            timer.stop();
-
-          }
         }
-      });
-      timer.start();
-    }
+        if (currentTime == endTime) {
+          ((Timer) actEvt.getSource()).stop();
+        }
+        counter++;
+      }
+    }).start();
+  }
 
   public static int tween(int startValue, int endValue, int startTime, int endTime, int currentTime) {
     return (int) (startValue * (((double) endTime - (double) currentTime) /
@@ -75,22 +86,12 @@ class AnimationPanel extends JPanel {
     return new Dimension(500, 500);
   }
 
-  public void setEndTime(double endTime) {
-    this.endTime = endTime;
-  }
 
   public void setOffset(Point2D offset) {
     this.offsetX = offset.getX();
     this.offsetY = offset.getY();
   }
 
-  public void setSpeedValue(int speed) {
-    this.speedValue = speed;
-  }
-
-  public void setShapes(ArrayList<ArrayList<Shape>> frames) {
-    this.frames = frames;
-  }
   /**
    * Overrides the paintComponent method in the JPanel.
    *
@@ -121,5 +122,31 @@ class AnimationPanel extends JPanel {
     }
   }
 
+
+  private static void setupGUI() {
+    //AnimationPanel newPanel = new AnimationPanel(100, "Rectangle", 34,
+    //       100, 5, 300, 100, 500);
+    AnimationPanel mainPanel = new AnimationPanel(100, "Rectangle",
+            11, 30, 0, 300, 50, 700);
+    JFrame frame = new JFrame("Shapes");
+    frame.setPreferredSize(new Dimension(700, 700));
+    mainPanel.getPreferredSize();
+    // newPanel.getPreferredSize();
+    // frame.getContentPane().add(newPanel);
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.pack();
+    frame.setLocationByPlatform(true);
+    frame.getContentPane().add(mainPanel);
+    frame.setVisible(true);
+
+  }
+
+  public static void main(String[] args) {
+    SwingUtilities.invokeLater(new Runnable() {
+      public void run() {
+        setupGUI();
+      }
+    });
+  }
 }
 

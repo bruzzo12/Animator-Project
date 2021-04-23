@@ -42,7 +42,7 @@ public class TextView implements IView {
   }
 
   @Override
-  public void setCommandButtonListener(ActionListener actionEvent) {
+  public void setCommandButtonListeners(ActionListener actionEvent) {
 
   }
 
