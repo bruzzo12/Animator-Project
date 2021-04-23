@@ -112,6 +112,11 @@ public class VisualView extends JFrame implements IView, ActionListener {
   }
 
   @Override
+  public void setSpeedValue(int speed) {
+    shapePanel.setSpeedValue(speed);
+  }
+
+  @Override
   public void actionPerformed(ActionEvent e) {
 
   }
