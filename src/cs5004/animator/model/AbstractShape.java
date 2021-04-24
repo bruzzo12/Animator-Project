@@ -31,9 +31,6 @@ public abstract class AbstractShape implements Shape {
     public String toString() {
       String symbol;
       switch (this) {
-        case CIRCLE:
-          symbol = "Circle";
-          break;
         case RECTANGLE:
           symbol = "Rectangle";
           break;

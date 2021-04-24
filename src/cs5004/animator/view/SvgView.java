@@ -7,8 +7,10 @@ import cs5004.animator.model.IModelImpl;
 import cs5004.animator.model.Point2D;
 import cs5004.animator.model.Shape;
 
-
-public class SVGView implements IView {
+/**
+ * Class that represents an SVG view and implements IView but does implement all methods from IView.
+ */
+public final class SvgView implements IView {
 
 
   @Override
@@ -53,7 +55,7 @@ public class SVGView implements IView {
 
   @Override
   public String getText(IModelImpl model) {
-    SVG.SVGBuilder svgBuilder = new SVG.SVGBuilder(700, 500, model);
+    Svg.SvgBuilder svgBuilder = new Svg.SvgBuilder(700, 500, model);
     return svgBuilder.toString();
   }
 

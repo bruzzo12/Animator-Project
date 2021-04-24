@@ -1,24 +1,17 @@
 package cs5004.animator.view;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
-
-import cs5004.animator.model.Color;
-import cs5004.animator.model.IModel;
 import cs5004.animator.model.IModelImpl;
 import cs5004.animator.model.Oval;
 import cs5004.animator.model.Rectangle;
 import cs5004.animator.model.Shape;
-import cs5004.animator.model.Transformation;
 
 /**
  * This class represents the SVG view.
  */
 
-public class SVG {
+final class Svg {
   private String shapeDeclaration;
   private ArrayList<String> animations;
   private String type;
@@ -44,7 +37,7 @@ public class SVG {
    * @param g      green value
    * @param b      blue value
    */
-  public SVG(String type, String name, double x, double y, double width, double height,
+  public Svg(String type, String name, double x, double y, double width, double height,
              int r, int g, int b) {
     this.name = name;
     this.lastWidth = width;
@@ -94,10 +87,9 @@ public class SVG {
     this.lastR = r2;
     this.lastG = g2;
     this.lastB = b2;
-    String startColor = String.format("(%d, %d, %d)", r1, g1, b1);
-    String endColor = String.format("(%d, %d, %d)", r2, g2, b2);
     int start = t1 * 1000;
     int dur = (t2 - t1) * 1000;
+
     if (x1 != x2) {
       String animate;
       if (type.equals("Rectangle")) {
@@ -149,6 +141,8 @@ public class SVG {
       animate = String.format(animate, start, dur, h1, h2);
       this.animations.add(animate);
     }
+    String startColor = String.format("(%d, %d, %d)", r1, g1, b1);
+    String endColor = String.format("(%d, %d, %d)", r2, g2, b2);
     if (!startColor.equals(endColor)) {
       String animate = "    <animate attributeType=\"xml\" begin=\"base.begin+%dms\" dur=\"%dms\" "
               + "attributeName=\"fill\" from=\"rgb"
@@ -176,8 +170,8 @@ public class SVG {
    * This class takes in an animation builder argument and returns a formatted SVG string of the
    * entire animation.
    */
-  public static final class SVGBuilder {
-    private ArrayList<SVG> shapes;
+  public static final class SvgBuilder {
+    private ArrayList<Svg> shapes;
     private int width;
     private int height;
     private int duration;
@@ -188,7 +182,7 @@ public class SVG {
      * @param height of window
      * @param model to use
      */
-    public SVGBuilder(int width, int height, IModelImpl model) {
+    public SvgBuilder(int width, int height, IModelImpl model) {
       shapes = new ArrayList<>();
       this.width = width;
       this.height = height;
@@ -199,27 +193,30 @@ public class SVG {
         for (Shape currentShape : shapesAt) {
           if (!shapes.stream().anyMatch(s -> s.getName() == currentShape.getName())) {
             if (currentShape.getClass() == Rectangle.class) {
-              SVG svgRep = new SVG("Rectangle", currentShape.getName(), currentShape.getX(),
+              Svg svgRep = new Svg("Rectangle", currentShape.getName(), currentShape.getX(),
                       currentShape.getY(),
                       ((Rectangle) currentShape).getWidth(), ((Rectangle) currentShape).getHeight(),
                       currentShape.getRed(), currentShape.getGreen(), currentShape.getBlue());
               this.shapes.add(svgRep);
             }
             if (currentShape.getClass() == Oval.class) {
-              SVG svgRep = new SVG("Oval", currentShape.getName(), currentShape.getX(),
+              Svg svgRep = new Svg("Oval", currentShape.getName(), currentShape.getX(),
                       currentShape.getY(),
                       ((Oval) currentShape).getRX(), ((Oval) currentShape).getRY(),
                       currentShape.getRed(), currentShape.getGreen(), currentShape.getBlue());
-                this.shapes.add(svgRep);
-              }
+              this.shapes.add(svgRep);
             }
-          for (SVG extantshape : shapes) {
+          }
+          for (Svg extantshape : shapes) {
             if (extantshape.getName().equals(currentShape.getName())) {
               if (currentShape.getClass() == Rectangle.class) {
                 extantshape.addAnimation(i - 1, i, extantshape.lastX, currentShape.getX(),
-                        extantshape.lastY, currentShape.getY(), extantshape.lastWidth, ((Rectangle) currentShape).getWidth(),
-                        extantshape.lastHeight, ((Rectangle) currentShape).getHeight(), extantshape.lastR, currentShape.getRed(),
-                        extantshape.lastG, currentShape.getBlue(), extantshape.lastG, currentShape.getGreen());
+                        extantshape.lastY, currentShape.getY(), extantshape.lastWidth,
+                        ((Rectangle) currentShape).getWidth(),
+                        extantshape.lastHeight, ((Rectangle) currentShape).getHeight(),
+                        extantshape.lastR, currentShape.getRed(),
+                        extantshape.lastG, currentShape.getBlue(), extantshape.lastG,
+                        currentShape.getGreen());
 
               }
               }
@@ -242,7 +239,7 @@ public class SVG {
               + "attributeName=\"visibility\" from=\"hide\" to=\"hide\"/>\n</rect>\n\n";
       ret = String.format(ret, this.width, this.height, this.duration*1000);
       int i = 0;
-      for (SVG shape : shapes) {
+      for (Svg shape : shapes) {
         String istring = "";
         ret = ret.concat(istring);
         ret = ret.concat(shape.toString() + "\n\n");

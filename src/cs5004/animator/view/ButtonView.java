@@ -2,10 +2,17 @@ package cs5004.animator.view;
 
 import javax.swing.*;
 
-public class ButtonView extends VisualView{
+/**
+ * Class for the buttons to be displayed in the animation. It extends VisualView.
+ */
+public class ButtonView extends VisualView {
   private IView visualView;
 
-  public ButtonView(IView visualView){
+  /**
+   * Constructs a button view object that takes in a visual view.
+   * @param visualView  the VisualView to be used
+   */
+  public ButtonView(IView visualView) {
     super();
     this.visualView = visualView;
     //Add radio Buttons for start, pause, resume and restart functionality
@@ -29,7 +36,7 @@ public class ButtonView extends VisualView{
     this.add(radioPanel);
   }
 
-  public static void main(String args[]){
+  public static void main(String [] args) {
     IView ButtonView = new ButtonView(new VisualView());
 
 

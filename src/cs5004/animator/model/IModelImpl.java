@@ -30,11 +30,6 @@ public final class IModelImpl implements IModel {
   }
 
   @Override
-  public double getY() {
-    return 0;
-  }
-
-  @Override
   public Point2D getOffset() {
     return this.offset;
   }
@@ -197,7 +192,7 @@ public final class IModelImpl implements IModel {
 
 
   /**
-   * Calculates the intermediate state of the shape being transformed at a specific tick
+   * Calculates the intermediate state of the shape being transformed at a specific tick.
    *
    * @param object the transformation object to be tweened
    * @param ticker the time at which the intermediate state is being calculated
@@ -312,11 +307,13 @@ public final class IModelImpl implements IModel {
 
   }
 
-
-  public int getShapeCount() {
-    return shapes.size();
-  }
-
+  /**
+   * Sets the bounds fields to be used for the animation panel.
+   * @param x      the x coordinate of the topleft corner.
+   * @param y      the y coordinate of the topleft corner.
+   * @param width  the width of the canvas.
+   * @param height the height of the canvas.
+   */
   public void setBounds(int x, int y, int width, int height) {
     this.offset = new Point2D((double) x, (double) y);
     this.width = width;
@@ -355,6 +352,10 @@ public final class IModelImpl implements IModel {
       return this.type;
     }
 
+    /**
+     * Adds a shape by setting declared to true.
+     * @param shape the shape to be declared
+     */
     public void addShape(Shape shape) {
       this.shape = shape;
       this.declared = true;

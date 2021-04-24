@@ -19,16 +19,6 @@ public class Point2D {
   }
 
   /**
-   * Compute and return the Euclidean distance of this point to the origin.
-   *
-   * @return the euclidean distance.
-   */
-
-  public double distToOrigin() {
-    return Math.sqrt(x * x + y * y);
-  }
-
-  /**
    * Return the x-coordinate of this point.
    *
    * @return x-coordinate of this point.

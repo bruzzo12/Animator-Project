@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import cs5004.animator.model.IModelImpl;
 import cs5004.animator.model.Shape;
 import cs5004.animator.util.AnimationReader;
-import cs5004.animator.view.SVGView;
+import cs5004.animator.view.SvgView;
 import cs5004.animator.view.TextView;
 import cs5004.animator.view.VisualView;
 
@@ -86,7 +86,7 @@ public final class EasyAnimator {
     }
 
     if (viewType.equals("svg")) {
-      SVGView view = new SVGView();
+      SvgView view = new SvgView();
       if (output == null) {
         System.out.println("Must specify output file");
       } else {

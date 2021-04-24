@@ -8,8 +8,6 @@ import java.util.NoSuchElementException;
  */
 public interface IModel {
 
-  double getY();
-
   /**
    * Returns the offset values for all x and y coordinates.
    * @returns offset values in Point2D form
@@ -121,6 +119,7 @@ public interface IModel {
    */
   void addOvalSizeTransformation(Oval oval, double newRadiusX, double newRadiusY, int timeStart,
                                  int timeEnd);
+
   /**
    * Creates an oval that does not move, simply exists.
    * @param oval      the oval that exists.
@@ -173,12 +172,6 @@ public interface IModel {
    */
   ArrayList<Shape> getShapesAtTicker(int ticker);
 
-  /**
-   * Returns the count of shapes in the animation.
-   *
-   * @return count of shapes in the animation.
-   */
-  int getShapeCount();
 
   /**
    * Sets the bounds of the animation canvas.

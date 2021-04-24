@@ -72,8 +72,7 @@ public class Transformation {
   public Transformation(Shape shape, TransformationType type, Ticker sizeChangePeriod,
                         double radiusX, double radiusY, double newRadiusX, double newRadiusY,
                         Point2D startLocation, Color startColor) {
-    if (newRadiusX < 0 || newRadiusY < 0 || (newRadiusY == newRadiusY && newRadiusX == newRadiusX))
-    {
+    if (newRadiusX < 0 || newRadiusY < 0 || (radiusY == newRadiusY && radiusX == newRadiusX)) {
       throw new IllegalArgumentException("RadiusX and radiusY must be positive and not the "
               + "same as" + "original values!");
     }
@@ -142,8 +141,8 @@ public class Transformation {
    */
   public Transformation(Shape shape, TransformationType type, double radiusX, double radiusY,
                         double height, double width, Point2D startLocation, int red, int green,
-                        int blue, int newRed, int newGreen, int newBlue, int timeStart, int timeEnd)
-  {
+                        int blue, int newRed, int newGreen, int newBlue, int timeStart,
+                        int timeEnd) {
     this.shape = shape;
     this.type = type;
     this.radiusX = radiusX;
@@ -328,31 +327,41 @@ public class Transformation {
    * Gets the new width.
    * @return new width
    */
-  public double getNewWidth() { return this.newWidth; }
+  public double getNewWidth() {
+    return this.newWidth;
+  }
 
   /**
    * Gets the new height.
    * @return new height
    */
-  public double getNewHeight() { return this.newHeight; }
+  public double getNewHeight() {
+    return this.newHeight;
+  }
 
   /**
    * Returns the radius X of an oval.
    * @return radius x
    */
-  public double getRadiusX() { return this.radiusX; }
+  public double getRadiusX() {
+    return this.radiusX;
+  }
 
   /**
    * Returns the radius Y of an oval.
    * @return radius y
    */
-  public double getRadiusY() { return this.radiusY; }
+  public double getRadiusY() {
+    return this.radiusY;
+  }
 
   /**
    * Returns the point2D start location.
    * @return Start location
    */
-  public Point2D getStartLocation() { return this.startLocation; }
+  public Point2D getStartLocation() {
+    return this.startLocation;
+  }
 
   /**
    * Creates a string version of the transformation.
@@ -396,14 +405,6 @@ public class Transformation {
               sizeChangePeriod.getRangeEnd());
     }
 
-    if (this.type == TransformationType.SIZE
-            && this.shape.getShapeType() == AbstractShape.ShapeType.CIRCLE) {
-      Circle shape = (Circle)this.shape;
-      string = string + String.format("Shape %s scales from Radius: %.1f to "
-                      + "Radius: %.1f from t=%d to t=%d\n", shape.getName(),
-              radius, radius, sizeChangePeriod.getRangeStart(),
-              sizeChangePeriod.getRangeEnd());
-    }
     if (this.type == TransformationType.STATIC) {
       string = string + "";
     }

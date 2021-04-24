@@ -148,4 +148,5 @@ public interface Shape {
    * @return transformations as an ArrayList
    */
   ArrayList<Transformation> getTransformationList();
- }
+
+}

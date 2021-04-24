@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
 import javax.swing.*;
 
 import cs5004.animator.model.Oval;
@@ -48,17 +47,16 @@ class AnimationPanel extends JPanel implements ActionListener {
   public void setShapes(ArrayList<ArrayList<Shape>> frames) {
     this.frames = frames;
   }
+
   /**
    * Overrides the paintComponent method in the JPanel.
    *
-   * @param g;
+   * @param g   graphics
    */
   @Override
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
     Graphics2D g2d = (Graphics2D) g.create();
-    // System.out.println(String.format("CurrentValue is :%d Current time is:%d",currentValue,
-    //        currentTime));
     ArrayList<Shape> shapes = frames.get(ticks);
     for (Shape shape : shapes) {
       System.out.println(shape.toString());
