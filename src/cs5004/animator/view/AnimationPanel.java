@@ -91,6 +91,7 @@ class AnimationPanel extends JPanel implements ActionListener {
   public void actionPerformed(ActionEvent e) {
     ticks++;
     System.out.println(String.format("ticks: %d\n", ticks++));
+
     if (ticks > endTime) {
       ticks = 0;
     }
@@ -103,6 +104,12 @@ class AnimationPanel extends JPanel implements ActionListener {
 
   public void stopTimer() {
     this.timer.stop();
+  }
+
+  public void reset(){
+    this.timer.stop();
+    this.counter = 0;
+    this.repaint();
   }
 }
 
