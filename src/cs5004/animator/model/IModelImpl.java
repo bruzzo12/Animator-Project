@@ -309,6 +309,7 @@ public final class IModelImpl implements IModel {
 
   /**
    * Sets the bounds fields to be used for the animation panel.
+   *
    * @param x      the x coordinate of the topleft corner.
    * @param y      the y coordinate of the topleft corner.
    * @param width  the width of the canvas.
@@ -354,6 +355,7 @@ public final class IModelImpl implements IModel {
 
     /**
      * Adds a shape by setting declared to true.
+     *
      * @param shape the shape to be declared
      */
     public void addShape(Shape shape) {
@@ -459,7 +461,7 @@ public final class IModelImpl implements IModel {
               animatedShape.setDisappearance(t2);
             }
           }
-          if ( t1 != t2 ) {
+          if (t1 != t2) {
             animatedShape.setDisappearance(t2);
           }
 

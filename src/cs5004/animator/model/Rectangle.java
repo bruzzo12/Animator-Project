@@ -44,7 +44,7 @@ public class Rectangle extends AbstractShape {
   @Override
   public void copy() {
     this.copy = new Rectangle(this.width, this.height, this.getX(), this.getY(), this.getRed(),
-            this.getGreen(), this.getBlue(), this.timeAppears, this.timeDisappears,name);
+            this.getGreen(), this.getBlue(), this.timeAppears, this.timeDisappears, name);
   }
 
   /**
@@ -67,6 +67,7 @@ public class Rectangle extends AbstractShape {
 
   /**
    * Sets the width of the rectangle.
+   *
    * @param width the height value
    */
   public void setWidth(double width) {
@@ -75,6 +76,7 @@ public class Rectangle extends AbstractShape {
 
   /**
    * Sets the height of the rectangle.
+   *
    * @param height the height value
    */
   public void setHeight(double height) {
@@ -135,8 +137,8 @@ public class Rectangle extends AbstractShape {
     this.copy.setTimeAppears(timeStart);
     this.copy.setTimeDisappears(timeEnd);
     Transformation moveTransformation = new Transformation(this, TransformationType.MOVE,
-            this.copy.getX(), this.copy.getY(),newX, newY, this.copy.getRed(), this.copy.getGreen(),
-            this.copy.getBlue(),0,0, this.copy.height, this.copy.width, timeStart,
+            this.copy.getX(), this.copy.getY(), newX, newY, this.copy.getRed(), this.copy.getGreen(),
+            this.copy.getBlue(), 0, 0, this.copy.height, this.copy.width, timeStart,
             timeEnd);
     this.transformationList.add(moveTransformation);
     return moveTransformation;

@@ -10,6 +10,7 @@ public interface IModel {
 
   /**
    * Returns the offset values for all x and y coordinates.
+   *
    * @returns offset values in Point2D form
    */
   Point2D getOffset();
@@ -17,12 +18,14 @@ public interface IModel {
 
   /**
    * Returns the width of the model.
+   *
    * @returns width
    */
   double getWidth();
 
   /**
    * Returns the height of the model.
+   *
    * @returns height
    */
   double getHeight();
@@ -82,7 +85,7 @@ public interface IModel {
    * @param newY      the y coordinate of the location the shape will move to
    * @param timeStart time start interval of the move transformation.
    * @param timeEnd   time end interval of the move transformation.
-   * @throws NoSuchElementException   if shape is not in animation.
+   * @throws NoSuchElementException if shape is not in animation.
    */
   void addMoveTransformation(Shape shape, double newX, double newY, int timeStart, int timeEnd);
 
@@ -122,21 +125,23 @@ public interface IModel {
 
   /**
    * Creates an oval that does not move, simply exists.
+   *
    * @param oval      the oval that exists.
    * @param timeStart the start time.
    * @param timeEnd   the end time.
-   * @throws  IllegalArgumentException if the times are less than zero.
-   * @throws NoSuchElementException if the shape is not in the animation.
+   * @throws IllegalArgumentException if the times are less than zero.
+   * @throws NoSuchElementException   if the shape is not in the animation.
    */
   void addStaticOvalTransformation(Oval oval, int timeStart, int timeEnd);
 
   /**
    * Creates a rectangle that does not move, simply exists.
+   *
    * @param rect      the oval that exists.
    * @param timeStart the start time.
    * @param timeEnd   the end time.
-   * @throws  IllegalArgumentException if the times are less than zero.
-   * @throws NoSuchElementException if the shape is not in the animation.
+   * @throws IllegalArgumentException if the times are less than zero.
+   * @throws NoSuchElementException   if the shape is not in the animation.
    */
   void addStaticRectangleTransformation(Rectangle rect, int timeStart, int timeEnd);
 
@@ -161,6 +166,7 @@ public interface IModel {
 
   /**
    * Returns the end time of the transformation.
+   *
    * @returns end time
    */
   int getMax();

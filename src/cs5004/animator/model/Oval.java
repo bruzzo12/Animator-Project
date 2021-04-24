@@ -47,6 +47,7 @@ public class Oval extends AbstractShape {
 
   /**
    * Sets the radiusX for the oval.
+   *
    * @param radiusX the radiusX of the oval
    */
   public void setRadiusX(double radiusX) {
@@ -55,6 +56,7 @@ public class Oval extends AbstractShape {
 
   /**
    * Sets the radiusY for the oval.
+   *
    * @param radiusY the radiusX of the oval
    */
   public void setRadiusY(double radiusY) {
@@ -65,13 +67,13 @@ public class Oval extends AbstractShape {
    * Creates a transformation that changes the Oval's size. An IllegalArgumentException is thrown if
    * the radius is equal to the original value or if it's less than zero.
    *
-   * @param newRadiusX   new radiusX value.
-   * @param newRadiusY   new radiusY value.
-   * @param timeStart Start interval of the transformation.
-   * @param timeEnd   End interval of the transformation.
-   * @returns transformation object.
+   * @param newRadiusX new radiusX value.
+   * @param newRadiusY new radiusY value.
+   * @param timeStart  Start interval of the transformation.
+   * @param timeEnd    End interval of the transformation.
    * @throws IllegalArgumentException if the radius is equal to the original value or if it's less
    *                                  than zero
+   * @returns transformation object.
    */
   public Transformation changeSize(double newRadiusX, double newRadiusY, int timeStart,
                                    int timeEnd) {
@@ -119,7 +121,7 @@ public class Oval extends AbstractShape {
     this.copy.setTimeAppears(timeStart);
     this.copy.setTimeDisappears(timeEnd);
     Transformation moveTransformation = new Transformation(this, TransformationType.MOVE,
-            this.copy.getX(), this.copy.getY(),newX, newY, this.copy.getRed(), this.copy.getGreen(),
+            this.copy.getX(), this.copy.getY(), newX, newY, this.copy.getRed(), this.copy.getGreen(),
             this.copy.getBlue(), this.copy.getRX(), this.copy.getRY(), 0, 0, timeStart,
             timeEnd);
     this.transformationList.add(moveTransformation);
@@ -136,7 +138,7 @@ public class Oval extends AbstractShape {
   public Transformation staticShape(int timeStart, int timeEnd) {
     Transformation staticTransformation = new Transformation(this, this.copy.getX(),
             this.copy.getY(), this.copy.getRed(), this.copy.getGreen(), this.copy.getBlue(),
-            this.copy.getRX(), this.copy.getRY(),0, 0, timeStart, timeEnd);
+            this.copy.getRX(), this.copy.getRY(), 0, 0, timeStart, timeEnd);
     this.copy.setTimeAppears(timeStart);
     this.copy.setTimeDisappears(timeEnd);
     this.transformationList.add(staticTransformation);

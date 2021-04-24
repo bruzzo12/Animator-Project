@@ -74,4 +74,14 @@ public final class SvgView implements IView {
 
   }
 
+  @Override
+  public void stopTimer() {
+    
+  }
+
+  @Override
+  public void setText(String text) {
+
+  }
+
 }

@@ -13,6 +13,7 @@ public class ControllerImpl implements IController, ActionListener {
     view.setCommandButtonListeners(this);
 
   }
+
   @Override
   public void initView() {
 
@@ -20,10 +21,32 @@ public class ControllerImpl implements IController, ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    switch(e.getActionCommand()){
-    case "start":
-    view.startTimer();
-    view.se
-}
+
+    switch (e.getActionCommand()) {
+      case "start":
+        view.setSpeedValue(view.getSpeed());
+        view.startTimer();
+        view.setText("Start");
+        break;
+      case "pause":
+        view.stopTimer();
+        view.setText("Paused");
+        break;
+      case "resume":
+        view.startTimer();
+        view.setText("Resumed");
+        break;
+      case "restart":
+        view.reset();
+        view.setText("Restarting Animation");
+        break;
+      case "change speed":
+        view.setSpeed();
+        break;
+      case "toggle loop":
+        view.setToggleLabel("Toggled the loop");
+    }
   }
+
 }
+

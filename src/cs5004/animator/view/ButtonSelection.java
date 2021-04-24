@@ -56,7 +56,6 @@ public class ButtonSelection extends JPanel {
     changeSpeed.setActionCommand("change speed");
 
     this.add(visualText);
-    this.add(speedLabel);
     this.add(start);
     this.add(pause);
     this.add(resume);

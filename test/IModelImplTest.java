@@ -30,7 +30,7 @@ public class IModelImplTest {
             0, 100, 10, 20, "First Oval");
     t.addShape(r);
     t.addShape(o);
-    assertEquals(2, t.getShapeCount());
+    assertEquals(2, ((IModelImpl) t).getShapeCount());
   }
 
   /**

@@ -84,8 +84,17 @@ public interface IView {
   void setSpeedValue(int speed);
 
   /**
-   * Starts the timer
+   * Starts the timer.
    */
   void startTimer();
 
+  /**
+   * Stops the timer.
+   */
+  void stopTimer();
+
+  /**
+   * Sets the visual text.
+   */
+  void setText(String text);
 }
