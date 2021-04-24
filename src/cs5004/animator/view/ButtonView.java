@@ -1,6 +1,10 @@
 package cs5004.animator.view;
 
+import java.awt.*;
+
 import javax.swing.*;
+
+import cs5004.animator.model.IModelImpl;
 
 /**
  * Class for the buttons to be displayed in the animation. It extends VisualView.
@@ -12,7 +16,9 @@ public class ButtonView extends VisualView {
 
   /**
    * Constructs a button view object that takes in a visual view.
-   * @param visualView  the VisualView to be used
+   *
+   * @param model the model to be used
+   * @param speed the speed of the animation
    */
   public ButtonView(IModelImpl model, int speed) {
     super();

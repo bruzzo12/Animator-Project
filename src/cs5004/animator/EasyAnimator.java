@@ -7,9 +7,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
+import cs5004.animator.controller.ControllerImpl;
 import cs5004.animator.model.IModelImpl;
 import cs5004.animator.model.Shape;
 import cs5004.animator.util.AnimationReader;
+import cs5004.animator.view.ButtonSelection;
+import cs5004.animator.view.ButtonView;
 import cs5004.animator.view.SvgView;
 import cs5004.animator.view.TextView;
 import cs5004.animator.view.VisualView;
@@ -43,6 +46,9 @@ public final class EasyAnimator {
             break;
           case "svg":
             viewType = "svg";
+            break;
+          case "playback":
+            viewType = "playback";
             break;
           default:
             throw new IllegalArgumentException("View-type must be declared.");
@@ -124,6 +130,22 @@ public final class EasyAnimator {
       } else {
         System.out.println("No need for output file!");
       }
+    }
+
+    if (viewType.equals("playback")) {
+      int ticker;
+      ArrayList<ArrayList<Shape>> animationFrames = new ArrayList<> ();
+      for (ticker = 0; ticker < model.getMax(); ticker++) {
+        animationFrames.add(model.getShapesAtTicker(ticker));
+      }
+      ButtonView buttonView = new ButtonView(model, speedValue );
+      buttonView.setDimensions(model.getWidth(), model.getHeight());
+      buttonView.setOffset(model.getOffset());
+      buttonView.setShapes(animationFrames);
+      buttonView.setEndTime(model.getMax());
+      buttonView.setSpeedValue(speedValue);
+      ControllerImpl controller = new ControllerImpl(buttonView);
+      controller.animate();
     }
   }
 

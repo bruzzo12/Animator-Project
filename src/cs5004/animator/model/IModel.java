@@ -15,6 +15,12 @@ public interface IModel {
    */
   Point2D getOffset();
 
+  /**
+   * Returns the shape count in the animation.
+   *
+   * @return count of shapes
+   */
+  int getShapeCount();
 
   /**
    * Returns the width of the model.

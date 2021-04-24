@@ -14,7 +14,7 @@ import cs5004.animator.model.Point2D;
  * This class represents a visual view of the shape animation.
  */
 public class VisualView extends JFrame implements IView, ActionListener {
-  private AnimationPanel shapePanel;
+  protected AnimationPanel shapePanel;
   private double width;
   private double height;
 
@@ -37,24 +37,6 @@ public class VisualView extends JFrame implements IView, ActionListener {
     this.add(new Scrollbar(), BorderLayout.WEST);
     pack();
 
-    //Add radio Buttons for start, pause, resume and restart functionality
-    JPanel radioPanel = new JPanel();
-    radioPanel.setBorder(BorderFactory.createTitledBorder("Radio buttons"));
-
-    radioPanel.setLayout(new BoxLayout(radioPanel, BoxLayout.PAGE_AXIS));
-
-    JRadioButton[] radioButtons = new JRadioButton[4];
-
-    //buttons groups are used to combine radio buttons. Only one radio
-    // button in each group can be selected.
-    ButtonGroup rGroup1 = new ButtonGroup();
-    for (int i = 0; i < radioButtons.length; i++) {
-      radioButtons[i] = new JRadioButton("Option " + (i + 1));
-      //radioButtons[i].setSelected(false);
-
-      radioButtons[i].setActionCommand("RB" + (i + 1));
-      radioButtons[i].addActionListener(this);
-    }
   }
 
   @Override
@@ -123,4 +105,17 @@ public class VisualView extends JFrame implements IView, ActionListener {
   public void startTimer() {
     shapePanel.startTimer();
   }
+
+  @Override
+  public void stopTimer() {
+    shapePanel.stopTimer();
+
+  }
+
+
+  @Override
+  public void setText(String text) {
+
+  }
+
 }

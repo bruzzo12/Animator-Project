@@ -32,8 +32,6 @@ public class ButtonSelection extends JPanel {
     visualText = new JTextField("");
     visualText.setPreferredSize(new Dimension(150, 20));
 
-    speedLabel = new JLabel("Speed: 0");
-
     start = new JButton("Start");
     start.setActionCommand("start");
 
@@ -63,6 +61,7 @@ public class ButtonSelection extends JPanel {
     this.add(loop);
     this.add(speedField);
     this.add(changeSpeed);
+
   }
 
   /**
@@ -101,10 +100,10 @@ public class ButtonSelection extends JPanel {
   /**
    * Changes speed label's text to update user on most recent action.
    *
-   * @param str the text the speed label should be set to.
+   * @param speed the text the speed label should be set to.
    */
-  public void setSpeedLabel(String str) {
-    this.speedLabel.setText(str);
+  public void setSpeedLabel(String speed) {
+    this.speedField.setText(speed);
   }
 
   /**

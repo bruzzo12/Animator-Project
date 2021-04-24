@@ -24,6 +24,7 @@ class AnimationPanel extends JPanel implements ActionListener {
   private int ticks;
   private double endTime;
   private Timer timer;
+  private boolean loop = false;
 
   /**
    * Constructs an Animation Panel object.
@@ -83,6 +84,10 @@ class AnimationPanel extends JPanel implements ActionListener {
     }
   }
 
+  /**
+   * Sets the end time for the animation.
+   * @param endTime  the end time of the animation.
+   */
   public void setEndTime(double endTime) {
     this.endTime = endTime;
   }
@@ -90,20 +95,37 @@ class AnimationPanel extends JPanel implements ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
     ticks++;
-    System.out.println(String.format("ticks: %d\n", ticks++));
 
-    if (ticks > endTime) {
+    if (this.loop == true && ticks > endTime) {
       ticks = 0;
     }
+
     this.repaint();
   }
 
+  /**
+   * Starts the timer.
+   */
   public void startTimer() {
     this.timer.start();
   }
 
+  /**
+   * Stops the timer.
+   */
   public void stopTimer() {
+
     this.timer.stop();
+  }
+
+  /**
+   * Sets the loop to on or off.
+   */
+  public void setLoop() {
+    if (this.loop == false) {
+      this.loop = true;
+    }
+    this.loop = false;
   }
 
   public void reset(){

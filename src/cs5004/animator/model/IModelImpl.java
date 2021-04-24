@@ -163,6 +163,11 @@ public final class IModelImpl implements IModel {
     return str.toString();
   }
 
+
+  public int getShapeCount() {
+    return this.shapes.size();
+  }
+
   @Override
   public int getMax() {
     Transformation max = Collections.max(transformationList, new EndTimeComparator());
@@ -306,6 +311,7 @@ public final class IModelImpl implements IModel {
     }
 
   }
+
 
   /**
    * Sets the bounds fields to be used for the animation panel.

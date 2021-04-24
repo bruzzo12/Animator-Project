@@ -3,20 +3,22 @@ package cs5004.animator.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import cs5004.animator.view.ButtonView;
 import cs5004.animator.view.IView;
 
 public class ControllerImpl implements IController, ActionListener {
-  private IView view;
+  private ButtonView view;
 
-  ControllerImpl(IView view){
+  public ControllerImpl(ButtonView view) {
     this.view = view;
     view.setCommandButtonListeners(this);
 
   }
 
   @Override
-  public void initView() {
-
+  public void animate() {
+    view.setSpeed();
+    view.animate();
   }
 
   @Override
