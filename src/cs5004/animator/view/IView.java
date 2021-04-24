@@ -83,4 +83,9 @@ public interface IView {
    */
   void setSpeedValue(int speed);
 
+  /**
+   * Starts the timer
+   */
+  void startTimer();
+
 }

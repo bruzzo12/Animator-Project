@@ -190,6 +190,37 @@ public class Transformation {
     this.width = width;
   }
 
+
+  /**
+   * Constructs a static shape. One that does not transform.
+   * @param shape     the shape being transformed.
+   * @param x         the original x coordinate of the shape.
+   * @param y         the original y coordinate of the shape.
+   * @param red       red value of the original color.
+   * @param green     green value of the original color.
+   * @param blue      blue value of the original color.
+   * @param radiusX           original value for x radius.
+   * @param radiusY           original value for y radius.
+   * @param height            the original height for the rectangle.
+   * @param width             the original width for the rectangle.
+   * @param startTime         time it appears.
+   * @param endTime           time it disappears.
+   */
+  public Transformation(Shape shape, double x, double y, int red, int green, int blue,
+                        double radiusX, double radiusY, double height, double width, int startTime,
+                        int endTime) {
+    this.shape = shape;
+    this.type = TransformationType.STATIC;
+    this.startLocation = new Point2D(x,y);
+    this.endLocation = new Point2D(x, y);
+    this.locationChangePeriod = new Ticker(startTime, endTime);
+    this.startColor = new Color(red, green, blue);
+    this.radiusX = radiusX;
+    this.radiusY = radiusY;
+    this.height = height;
+    this.width = width;
+  }
+
   /**
    * Gets the start x coordinate point where the shape's transformation begins.
    *
@@ -372,6 +403,9 @@ public class Transformation {
                       + "Radius: %.1f from t=%d to t=%d\n", shape.getName(),
               radius, radius, sizeChangePeriod.getRangeStart(),
               sizeChangePeriod.getRangeEnd());
+    }
+    if (this.type == TransformationType.STATIC) {
+      string = string + "";
     }
     return string;
   }

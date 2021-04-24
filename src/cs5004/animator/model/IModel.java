@@ -8,6 +8,8 @@ import java.util.NoSuchElementException;
  */
 public interface IModel {
 
+  double getY();
+
   /**
    * Returns the offset values for all x and y coordinates.
    * @returns offset values in Point2D form
@@ -82,8 +84,6 @@ public interface IModel {
    * @param newY      the y coordinate of the location the shape will move to
    * @param timeStart time start interval of the move transformation.
    * @param timeEnd   time end interval of the move transformation.
-   * @throws IllegalArgumentException if the location is the same, a negative value, or the period
-   *                                  of ticks is not at the current time or in the future.
    * @throws NoSuchElementException   if shape is not in animation.
    */
   void addMoveTransformation(Shape shape, double newX, double newY, int timeStart, int timeEnd);
@@ -121,22 +121,25 @@ public interface IModel {
    */
   void addOvalSizeTransformation(Oval oval, double newRadiusX, double newRadiusY, int timeStart,
                                  int timeEnd);
+  /**
+   * Creates an oval that does not move, simply exists.
+   * @param oval      the oval that exists.
+   * @param timeStart the start time.
+   * @param timeEnd   the end time.
+   * @throws  IllegalArgumentException if the times are less than zero.
+   * @throws NoSuchElementException if the shape is not in the animation.
+   */
+  void addStaticOvalTransformation(Oval oval, int timeStart, int timeEnd);
 
   /**
-   * Creates a transformation that changes the Circle's size. An IllegalArgumentException is thrown
-   * if the radius is equal to the original value or if it's less than zero. Throws
-   * NoSuchElementException if shape is not in the animation.
-   *
-   * @param circle    the circle that changes size.
-   * @param newRadius new radius value.
-   * @param timeStart Start interval of the transformation.
-   * @param timeEnd   End interval of the transformation.
-   * @throws IllegalArgumentException if the radius is equal to the original value or if it's less
-   *                                  than zero.
-   * @throws NoSuchElementException   if shape is not in animation.
+   * Creates a rectangle that does not move, simply exists.
+   * @param rect      the oval that exists.
+   * @param timeStart the start time.
+   * @param timeEnd   the end time.
+   * @throws  IllegalArgumentException if the times are less than zero.
+   * @throws NoSuchElementException if the shape is not in the animation.
    */
-  void addCircleSizeTransformation(Circle circle, double newRadius, int timeStart,
-                                   int timeEnd);
+  void addStaticRectangleTransformation(Rectangle rect, int timeStart, int timeEnd);
 
   /**
    * Sorts the list of shapes by time.

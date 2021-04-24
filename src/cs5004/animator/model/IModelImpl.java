@@ -30,13 +30,23 @@ public final class IModelImpl implements IModel {
   }
 
   @Override
-  public double getX() {
-    return this.offset.getX();
+  public double getY() {
+    return 0;
   }
 
   @Override
-  public double getY() {
-    return this.offset.getY();
+  public Point2D getOffset() {
+    return this.offset;
+  }
+
+  @Override
+  public double getWidth() {
+    return this.width;
+  }
+
+  @Override
+  public double getHeight() {
+    return this.height;
   }
 
   @Override
@@ -80,13 +90,10 @@ public final class IModelImpl implements IModel {
   @Override
   public void addMoveTransformation(Shape shape, double newX, double newY, int timeStart,
                                     int timeEnd) {
-    if (newX < 0 || newY < 0) {
-      throw new IllegalArgumentException("Coordinates must be a positive!");
-    }
     if (!shapes.contains(shape)) {
       throw new NoSuchElementException("Shape not in the animation, please add the shape first!");
     }
-    transformationList.add(shape.move(newX ,
+    transformationList.add(shape.move(newX,
             newY, timeStart, timeEnd));
   }
 
@@ -115,15 +122,25 @@ public final class IModelImpl implements IModel {
   }
 
   @Override
-  public void addCircleSizeTransformation(Circle circle, double newRadius, int timeStart,
-                                          int timeEnd) {
-    if (newRadius < 0) {
-      throw new IllegalArgumentException("new Radius must be a positive number!");
+  public void addStaticOvalTransformation(Oval oval, int timeStart, int timeEnd) {
+    if (timeStart < 0 || timeEnd < 0) {
+      throw new IllegalArgumentException("newRadiusX and newRadiusY must be positive numbers!");
     }
-    if (!shapes.contains(circle)) {
+    if (!shapes.contains(oval)) {
       throw new NoSuchElementException("Shape not in the animation, please add the shape first!");
     }
-    transformationList.add(circle.changeSize(newRadius, timeStart, timeEnd));
+    transformationList.add(oval.staticShape(timeStart, timeEnd));
+  }
+
+  @Override
+  public void addStaticRectangleTransformation(Rectangle rect, int timeStart, int timeEnd) {
+    if (timeStart < 0 || timeEnd < 0) {
+      throw new IllegalArgumentException("newRadiusX and newRadiusY must be positive numbers!");
+    }
+    if (!shapes.contains(rect)) {
+      throw new NoSuchElementException("Shape not in the animation, please add the shape first!");
+    }
+    transformationList.add(rect.staticShape(timeStart, timeEnd));
   }
 
   @Override
@@ -263,7 +280,8 @@ public final class IModelImpl implements IModel {
               object.getStartYCoordinate(), newRed, newGreen, newBlue, ticker, ticker,
               object.shape.getName());
       return copy;
-    } else {
+    } else if (object.type == TransformationType.COLOR
+            && object.shape.getShapeType() == ShapeType.OVAL) {
       int newRed = (object.startColor.red * ((object.getEndTime() - ticker)
               / (object.getEndTime() - object.getStartTime()))) + (object.endColor.red)
               * ((ticker - object.getStartTime()) / (object.getEndTime() - object.getStartTime()));
@@ -277,7 +295,21 @@ public final class IModelImpl implements IModel {
               object.getStartYCoordinate(), newRed, newGreen, newBlue, ticker, ticker,
               object.shape.getName());
       return copy;
+    } else if (object.type == TransformationType.STATIC
+            && object.shape.getShapeType() == ShapeType.OVAL) {
+      Oval copy = new Oval(object.getRadiusX(), object.getRadiusY(), object.getStartXCoordinate(),
+              object.getStartYCoordinate(), object.getStartColor().red,
+              object.getStartColor().green, object.getStartColor().blue, ticker, ticker,
+              object.shape.getName());
+      return copy;
+    } else {
+      Rectangle copy = new Rectangle(object.width, object.height, object.getStartXCoordinate(),
+              object.getStartYCoordinate(), object.getStartColor().red,
+              object.getStartColor().green, object.getStartColor().blue, ticker, ticker,
+              object.shape.getName());
+      return copy;
     }
+
   }
 
 
@@ -286,7 +318,7 @@ public final class IModelImpl implements IModel {
   }
 
   public void setBounds(int x, int y, int width, int height) {
-    this.upperLeft.setXandY((double) x, (double) y);
+    this.offset = new Point2D((double) x, (double) y);
     this.width = width;
     this.height = height;
   }
@@ -359,7 +391,7 @@ public final class IModelImpl implements IModel {
 
     @Override
     public AnimationBuilder<IModel> setBounds(int x, int y, int width, int height) {
-      if (x < 0 || y < 0 || width < 0 || height < 0) {
+      if (width < 0 || height < 0) {
         throw new IllegalArgumentException("All values must be greater than 0.");
       }
       this.model.setBounds(x, y, width, height);
@@ -415,13 +447,21 @@ public final class IModelImpl implements IModel {
               model.addOvalSizeTransformation(((Oval) animatedShape), w2 / 2,
                       h2 / 2, t1, t2);
             }
-          } else if (t1 != t2) {
-            animatedShape.setDisappearance(t2);
+          } else if (r1 == r2 && b1 == b2 && g1 == g2 && y1 == y2 && x1 == x2
+                  && w1 == w2 && h1 == h2) {
+            if (animatedShape.getShapeType() == ShapeType.RECTANGLE) {
+              model.addStaticRectangleTransformation((Rectangle) animatedShape, t1, t2);
+              animatedShape.setDisappearance(t2);
+            }
+            if (animatedShape.getShapeType() == ShapeType.OVAL) {
+              model.addStaticOvalTransformation((Oval) animatedShape, t1, t2);
+              animatedShape.setDisappearance(t2);
+            }
           }
         }
       }
       return this;
     }
   }
-
 }
+

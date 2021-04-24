@@ -20,8 +20,8 @@ public class ControllerImpl implements IController, ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-switch(e.getActionCommand()){
-  case "play":
+    switch(e.getActionCommand()){
+    case "play":
     view.startTimer();
 }
   }

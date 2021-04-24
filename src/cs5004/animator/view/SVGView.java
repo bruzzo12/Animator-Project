@@ -67,4 +67,9 @@ public class SVGView implements IView {
 
   }
 
+  @Override
+  public void startTimer() {
+
+  }
+
 }

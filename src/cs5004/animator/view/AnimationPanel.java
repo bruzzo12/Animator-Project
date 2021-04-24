@@ -18,7 +18,7 @@ import cs5004.animator.model.Shape;
 class AnimationPanel extends JPanel implements ActionListener {
 
   private ArrayList<ArrayList<Shape>> frames;
-  public int speedValue = 1;
+  public int speedValue = 5;
   private int counter = 0;
   private double offsetX;
   private double offsetY;
@@ -66,6 +66,8 @@ class AnimationPanel extends JPanel implements ActionListener {
         Rectangle r = (Rectangle) shape;
         Color objectColor = new Color(shape.getRed(), shape.getGreen(), shape.getBlue());
         g2d.setColor(objectColor);
+        g2d.fillRect((int) (r.getX() - this.offsetX), (int) (r.getY() - this.offsetY),
+                (int) r.getWidth(), (int) r.getHeight());
         g2d.drawRect((int) (r.getX() - this.offsetX), (int) (r.getY() - this.offsetY),
                 (int) r.getWidth(), (int) r.getHeight());
         System.out.println(r.toString());
@@ -74,6 +76,8 @@ class AnimationPanel extends JPanel implements ActionListener {
         Oval o = (Oval) shape;
         Color objectColor = new Color(shape.getRed(), shape.getGreen(), shape.getBlue());
         g2d.setColor(objectColor);
+        g2d.fillOval((int) (o.getX() - this.offsetY), (int) (o.getY() - this.offsetY),
+                (int) o.getRX(), (int) o.getRY());
         g2d.drawOval((int) (o.getX() - this.offsetY), (int) (o.getY() - this.offsetY),
                 (int) o.getRX(), (int) o.getRY());
         System.out.println(o.toString());

@@ -114,11 +114,7 @@ public class Rectangle extends AbstractShape {
 
   @Override
   public Transformation changeColor(int newRed, int newGreen, int newBlue, int timeStart, int timeEnd) {
-    if (this.copy.getRed() == newRed && this.copy.getGreen() == newGreen
-            && this.copy.getBlue() == newBlue || newRed < 0 || newGreen < 0 || newBlue < 0) {
-      throw new IllegalArgumentException("Color values can't be less than zero or all the same as"
-              + "original values!");
-    }
+
     Transformation colorTransformation = new Transformation(this, TransformationType.COLOR,
             0, 0, this.copy.height, this.copy.width, new Point2D(this.copy.getX(),
             this.copy.getY()), this.copy.getRed(), this.copy.getGreen(), this.copy.getBlue(),
@@ -141,6 +137,23 @@ public class Rectangle extends AbstractShape {
     this.copy.setTimeDisappears(timeEnd);
     this.transformationList.add(moveTransformation);
     return moveTransformation;
+  }
+
+  /**
+   * Allows the rectangle to stay in one position.
+   *
+   * @param timeStart beginning time interval of transformation.
+   * @param timeEnd   end time interval of transformation.
+   * @throws IllegalArgumentException if any of the fields except the times are the same.
+   */
+  public Transformation staticShape(int timeStart, int timeEnd) {
+    Transformation staticTransformation = new Transformation(this, this.copy.getX(),
+            this.copy.getY(), this.copy.getRed(), this.copy.getGreen(), this.copy.getBlue(),
+            0, 0, this.copy.height, this.copy.width, timeStart, timeEnd);
+    this.copy.setTimeAppears(timeStart);
+    this.copy.setTimeDisappears(timeEnd);
+    this.transformationList.add(staticTransformation);
+    return staticTransformation;
   }
 
   /**

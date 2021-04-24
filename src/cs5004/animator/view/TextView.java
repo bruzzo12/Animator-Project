@@ -36,6 +36,11 @@ public class TextView implements IView {
 
   }
 
+  @Override
+  public void startTimer() {
+
+  }
+
 
   @Override
   public void makeVisible() {

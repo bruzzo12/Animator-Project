@@ -124,6 +124,23 @@ public class Oval extends AbstractShape {
   }
 
   /**
+   * Allows the oval to stay in one position.
+   *
+   * @param timeStart beginning time interval of transformation.
+   * @param timeEnd   end time interval of transformation.
+   * @throws IllegalArgumentException if any of the fields except the times are the same.
+   */
+  public Transformation staticShape(int timeStart, int timeEnd) {
+    Transformation staticTransformation = new Transformation(this, this.copy.getX(),
+            this.copy.getY(), this.copy.getRed(), this.copy.getGreen(), this.copy.getBlue(),
+            this.copy.getRX(), this.copy.getRY(),0, 0, timeStart, timeEnd);
+    this.copy.setTimeAppears(timeStart);
+    this.copy.setTimeDisappears(timeEnd);
+    this.transformationList.add(staticTransformation);
+    return staticTransformation;
+  }
+
+  /**
    * Returns radius X
    *
    * @return radius x

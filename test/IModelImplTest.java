@@ -11,7 +11,6 @@ import cs5004.animator.model.Rectangle;
 import cs5004.animator.model.Shape;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 
 
 public class IModelImplTest {
@@ -147,7 +146,6 @@ public class IModelImplTest {
     t.addShape(c);
     t.addShape(r);
     t.addShape(o);
-    t.addCircleSizeTransformation(c, 10, 10, 11);
     t.addOvalSizeTransformation(o, 5.5, 10.1, 15, 18);
     t.addRectangleSizeTransformation(r, 10, 100, 28, 50);
     assertEquals(3, t.getShapeCount());
@@ -162,13 +160,12 @@ public class IModelImplTest {
       IModel t = new IModelImpl();
       Circle c = new Circle(3, 1, 2, 100, 100, 100,
               0, 100, "First Circle");
-      t.addCircleSizeTransformation(c, 4, 1, 2);
     } catch (NoSuchElementException e) {
       IModel t = new IModelImpl();
       Circle c = new Circle(3, 1, 2, 100, 100, 100,
               0, 100, "First Circle");
       t.addShape(c);
-      t.addCircleSizeTransformation(c, 4, 1, 2);
+
     }
     try {
       IModel t = new IModelImpl();
@@ -208,13 +205,13 @@ public class IModelImplTest {
       Circle c = new Circle(3, 1, 2, 100, 100, 100,
               0, 100, "First Circle");
       t.addShape(c);
-      t.addCircleSizeTransformation(c, 3, 1, 2);
+
     } catch (IllegalArgumentException e) {
       IModel t = new IModelImpl();
       Circle c = new Circle(3, 1, 2, 100, 100, 100,
               0, 100, "First Circle");
       t.addShape(c);
-      t.addCircleSizeTransformation(c, 4, 1, 2);
+
     }
     try {
       IModel t = new IModelImpl();

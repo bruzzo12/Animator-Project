@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-import cs5004.animator.model.IModel;
 import cs5004.animator.model.IModelImpl;
 import cs5004.animator.model.Point2D;
 
@@ -30,7 +29,7 @@ public class VisualView extends JFrame implements IView, ActionListener {
     //scrollbars on bottom and left side. Will need to somehow get the dimension size from text
     //file using the AnimationReader and then input them in new Dimension() (500 is temp for now)
     this.setLayout(new BorderLayout());
-    shapePanel = new AnimationPanel(IModel m, );
+    shapePanel = new AnimationPanel();
     shapePanel.setPreferredSize(new Dimension((int) width,
             (int) height));
     this.add(shapePanel, BorderLayout.CENTER);
@@ -52,7 +51,7 @@ public class VisualView extends JFrame implements IView, ActionListener {
     for (int i = 0; i < radioButtons.length; i++) {
       radioButtons[i] = new JRadioButton("Option " + (i + 1));
       //radioButtons[i].setSelected(false);
-    }
+
       radioButtons[i].setActionCommand("RB" + (i + 1));
       radioButtons[i].addActionListener(this);
     }
