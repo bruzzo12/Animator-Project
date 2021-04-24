@@ -451,6 +451,7 @@ public final class IModelImpl implements IModel {
                   && w1 == w2 && h1 == h2) {
             if (animatedShape.getShapeType() == ShapeType.RECTANGLE) {
               model.addStaticRectangleTransformation((Rectangle) animatedShape, t1, t2);
+              animatedShape.setDisappearance(t2);
             }
             if (animatedShape.getShapeType() == ShapeType.OVAL) {
               model.addStaticOvalTransformation((Oval) animatedShape, t1, t2);
