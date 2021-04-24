@@ -16,9 +16,9 @@ import cs5004.animator.model.Point2D;
  */
 public class VisualView extends JFrame implements IView, ActionListener {
   private AnimationPanel shapePanel;
-  private ArrayList<ArrayList<Shape>> shapes;
   private double width;
   private double height;
+
   /**
    * Constructs a new VisualView object.
    */
@@ -76,7 +76,7 @@ public class VisualView extends JFrame implements IView, ActionListener {
 
   @Override
   public void refresh() {
-    this.repaint();
+
   }
 
   @Override
@@ -108,7 +108,6 @@ public class VisualView extends JFrame implements IView, ActionListener {
 
   @Override
   public void animate() {
-    shapePanel.animate();
 
   }
 
@@ -120,5 +119,9 @@ public class VisualView extends JFrame implements IView, ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
 
+  }
+
+  public void startTimer() {
+    shapePanel.startTimer();
   }
 }

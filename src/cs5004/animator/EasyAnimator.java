@@ -120,7 +120,7 @@ public final class EasyAnimator {
         view.setEndTime(model.getMax());
         view.setSpeedValue(speedValue);
         view.setVisible(true);
-        view.animate();
+        view.startTimer();
       } else {
         System.out.println("No need for output file!");
       }

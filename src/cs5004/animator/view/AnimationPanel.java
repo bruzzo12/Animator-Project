@@ -7,8 +7,6 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-import cs5004.animator.model.IModel;
-import cs5004.animator.model.IModelImpl;
 import cs5004.animator.model.Oval;
 import cs5004.animator.model.Point2D;
 import cs5004.animator.model.Rectangle;
@@ -18,58 +16,38 @@ import cs5004.animator.model.Shape;
  * This Animation Panel represents the area where the animations of shapes will take place.
  */
 class AnimationPanel extends JPanel implements ActionListener {
-  private IModel model;
-  private String transformationType;
+
   private ArrayList<ArrayList<Shape>> frames;
-  private Timer timer;
-  public int speedValue;
-  private int counter;
+  public int speedValue = 1;
+  private int counter = 0;
   private double offsetX;
   private double offsetY;
-
-  /* public int startValue;
-  public int currentValue;
-  public int endValue;
-  public int startTime;
-  public int endTime ;
-  public int currentTime;
-  public int startLocation;
-  public int endLocation;
-  public int currentLocation; */
+  private int ticks;
+  private double endTime;
+  private Timer timer;
 
   /**
    * Constructs an Animation Panel object.
    */
-  public AnimationPanel(IModel m, int speedValue;/*ArrayList<ArrayList<Shape>> frames, int speedValue, String ShapeType int startValue,
-                        int endValue, int startTime, int endTime, int startLocation, int endLocation*/) {
+  public AnimationPanel() {
     super();
-    this.model = m;
-    this.speedValue = speedValue;
-    this.timer = new Timer(1000 / speedValue, this);
-    this.counter = 0;
     this.setBackground(Color.WHITE);
-
+    this.ticks = 0;
+    this.timer = new Timer(1000 / speedValue, this);
   }
-
-
-  public static int tween(int startValue, int endValue, int startTime, int endTime, int currentTime) {
-    return (int) (startValue * (((double) endTime - (double) currentTime) /
-            ((double) endTime - (double) startTime))) +
-            (int) (endValue * (((double) currentTime - (double) startTime) /
-                    ((double) endTime - (double) startTime)));
-  }
-
-
-  public Dimension getPreferredSize() {
-    return new Dimension(500, 500);
-  }
-
 
   public void setOffset(Point2D offset) {
     this.offsetX = offset.getX();
     this.offsetY = offset.getY();
   }
 
+  public void setSpeedValue(int speed) {
+    this.speedValue = speed;
+  }
+
+  public void setShapes(ArrayList<ArrayList<Shape>> frames) {
+    this.frames = frames;
+  }
   /**
    * Overrides the paintComponent method in the JPanel.
    *
@@ -81,14 +59,16 @@ class AnimationPanel extends JPanel implements ActionListener {
     Graphics2D g2d = (Graphics2D) g.create();
     // System.out.println(String.format("CurrentValue is :%d Current time is:%d",currentValue,
     //        currentTime));
-    ArrayList<Shape> shapes = frames.get(counter);
+    ArrayList<Shape> shapes = frames.get(ticks);
     for (Shape shape : shapes) {
+      System.out.println(shape.toString());
       if (shape.getShapeType().toString().equals("Rectangle")) {
         Rectangle r = (Rectangle) shape;
         Color objectColor = new Color(shape.getRed(), shape.getGreen(), shape.getBlue());
         g2d.setColor(objectColor);
         g2d.drawRect((int) (r.getX() - this.offsetX), (int) (r.getY() - this.offsetY),
                 (int) r.getWidth(), (int) r.getHeight());
+        System.out.println(r.toString());
       }
       if (shape.getShapeType().toString().equals("Oval")) {
         Oval o = (Oval) shape;
@@ -96,28 +76,31 @@ class AnimationPanel extends JPanel implements ActionListener {
         g2d.setColor(objectColor);
         g2d.drawOval((int) (o.getX() - this.offsetY), (int) (o.getY() - this.offsetY),
                 (int) o.getRX(), (int) o.getRY());
+        System.out.println(o.toString());
       }
     }
   }
 
+  public void setEndTime(double endTime) {
+    this.endTime = endTime;
+  }
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    this.counter++;
-    repaint();
-
+    ticks++;
+    System.out.println(String.format("ticks: %d\n", ticks++));
+    if (ticks > endTime) {
+      ticks = 0;
+    }
+    this.repaint();
   }
 
-  public void beginTimer(){
+  public void startTimer() {
     this.timer.start();
   }
 
-  public void pauseTimer(){
+  public void stopTimer() {
     this.timer.stop();
   }
-
-  public void resetTimer(){
-    counter = 0;
-    this.timer.restart();
-  }
 }
+
